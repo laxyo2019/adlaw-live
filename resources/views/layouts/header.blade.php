@@ -62,7 +62,7 @@
                 </ul> --}}
             </li>
             <li class="nav-item">
-                <a href="{{route('/')}}"  class="nav-link p-4">WHY ADLAW</a>
+                <a href="{{url('/why_adlaw')}}"  class="nav-link p-4">WHY ADLAW</a>
             </li>
             <li class="nav-item {{Request()->segment(1) == 'lawyer_lawfirm' ? 'active_class' : '' }}">
                 <a class="nav-link p-4 " href="{{url('lawyer_lawfirm')}}">LAWYERS/LAW FIRMS </a>
@@ -98,7 +98,7 @@
                 <img src="{{asset('storage/profile_photo/default.png')}}"  style="width: 33px; height: 20px;" class="rounded-circle" />
                 @endif
               </a>
-              <ul class="dropdown-menu " style="left: -20px;">
+              <ul class="dropdown-menu " style="left: -40px;">
                 <li class="nav-item">
                   <a class="nav-link p-3"  href="{{route('login')}}">{{ __('Dashboard') }}</a>
                 </li>

@@ -62,6 +62,8 @@ Route::view('/contact_us','pages.contact_us');
 Route::view('/court','pages.court');
 Route::view('/faq','pages.faq');
 Route::view('/lawyer_lawfirm','pages.subpages.lawyer_features');
+Route::view('/why_adlaw','pages.why_adlaw');
+
 
 // Route::resource('/admin/users', 'Admin\UsersController');
 // Route::get('/admin/send-credentials/{id}','UsersController@sendCredentials');

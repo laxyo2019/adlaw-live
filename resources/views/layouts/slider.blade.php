@@ -9,21 +9,21 @@
       <!-- Slide One - Set the background image for this slide in the line below -->
       <div class="carousel-item active" style="background-image: url('images/slider1.jpg')">
         <div class="carousel-caption d-none d-md-block">
-          <h2 class="display-4">First Slide</h2>
+          <h2 class="display-4">Lawyer / Law Firms</h2>
           <p class="lead">This is a description for the first slide.</p>
         </div>
       </div>
       <!-- Slide Two - Set the background image for this slide in the line below -->
       <div class="carousel-item" style="background-image: url('images/slider2.jpg')">
         <div class="carousel-caption d-none d-md-block">
-          <h2 class="display-4">Second Slide</h2>
+          <h2 class="display-4">Guest / Users</h2>
           <p class="lead">This is a description for the second slide.</p>
         </div>
       </div>
       <!-- Slide Three - Set the background image for this slide in the line below -->
       <div class="carousel-item" style="background-image: url('images/banner3.png')">
         <div class="carousel-caption d-none d-md-block">
-          <h2 class="display-4">Third Slide</h2>
+          <h2 class="display-4">Law Schools</h2>
           <p class="lead">This is a description for the third slide.</p>
         </div>
       </div>

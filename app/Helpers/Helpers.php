@@ -34,7 +34,8 @@ class Helpers
 			        }])->with('city', 'state')
 			        
 			        ->where('status','A')
-			        ->where('user_catg_id',2);
+			        ->where('user_catg_id',2)
+			        ->whereNull('parent_id');
 
 
 		if($court_id != 0 && $speciality_code !=0){

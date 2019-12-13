@@ -15,6 +15,9 @@
     font-size: 16px;
     line-height: 23px;
   }
+  .select2{
+    width: 100% !important;
+  }
 
 
 
@@ -25,15 +28,7 @@ font-family: 'Open Sans',sans-serif;
     letter-spacing: 3px;"
 }
 
-@media(max-width: 360px) {
- .radio-group{
-  display: block!important;
-  }
-  .d-inline-flex{
-    display: block!important;
-  }
-  
-}
+
 .radio-group{
     border-radius: 6px;
     font-size: 15px;
@@ -59,19 +54,38 @@ font-family: 'Open Sans',sans-serif;
   .w3-modal .w3-animate-right {
     margin-right:13px;
   }
+  .radio-group{
+    display: block!important;
+  }
+  .d-inline-flex{
+    display: block!important;
+  }
 
   #search_field{
     margin: 2px;
   }
-}
-
-@media screen and (max-width:360px) {
-   .find{
+  .menunav{
+    padding: .5rem!important;
+  }
+  .find{
     border-bottom: 1px solid #dee2e6!important;
     margin-bottom: 20px;
     line-height: 20px;
 
     border-right:0px solid !important ;
+  }
+}
+
+@media screen and (max-width:768px) {
+  .menunav{
+    padding: .5rem!important;
+  }
+  
+}
+
+@media(max-width: 600px) {
+  .menunav{
+    padding: .5rem!important;
   }
   
 }
@@ -82,5 +96,5 @@ font-family: 'Open Sans',sans-serif;
 .navbar ul {
    font-family: "Times New Roman", Times, serif;
  }
-}
+
 

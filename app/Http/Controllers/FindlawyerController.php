@@ -58,10 +58,7 @@ class FindlawyerController extends Controller
     $days = array_combine($day, $date);
    
     if($searchfield == 'lawyer'){
-
-
       $lawyers =  $this->query->paginate(5);
-
     }
     else if($searchfield == 'lawcompany'){
        $result = Helpers::lawcompanyDetails();

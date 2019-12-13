@@ -20,7 +20,7 @@ p.stars  i
 }
 </style>
 
-<div class="wrapper">
+<div class="wrapper py-4">
 
     <!-- Sidebar -->
     <nav id="sidebar">
@@ -134,9 +134,9 @@ p.stars  i
         
         <div class="row">
           
-            <div class="col-sm-3 col-md-2 col-xs-3 col-xl-2 col-lg-2">  @if($lawyer->photo !='')<img style="width:150px;height:200px;border: 2px solid black;: 13px;padding: 7px;border-radius: 10%;" title="{{$lawyer->name}}" src="{{asset('storage/app/public/profile_photo/'.$lawyer->photo)}}" alt="image" class="img-responsive"> 
+            <div class="col-sm-3 col-md-2 col-xs-3 col-xl-2 col-lg-2">  @if($lawyer->photo !='')<img style="width:150px;height:200px;border: 2px solid black;: 13px;padding: 7px;border-radius: 10%;" title="{{$lawyer->name}}" src="{{asset('storage/profile_photo/'.$lawyer->photo)}}" alt="image" class="img-responsive"> 
             @else
-            <img style="width:150px;height:200px;border: 2px solid black;: 13px;padding: 7px;border-radius: 10%;" title="{{$lawyer->name}}" src="{{asset('storage/app/public/profile_photo/default.png')}}" alt="image" class="img-responsive"> 
+            <img style="width:150px;height:200px;border: 2px solid black;: 13px;padding: 7px;border-radius: 10%;" title="{{$lawyer->name}}" src="{{asset('storage/profile_photo/default.png')}}" alt="image" class="img-responsive"> 
             @endif
             </div>
 
@@ -509,7 +509,7 @@ p.stars  i
     </div> <!-- row -->
 
   </div> <!-- container-fluid -->
-  <br><br>
+
   </div> <!-- content -->
 
 </div> <!-- wrapper -->

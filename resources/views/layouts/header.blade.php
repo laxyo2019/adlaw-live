@@ -51,7 +51,7 @@
       </button>
     <div class="collapse navbar-collapse " id="collapsibleNavbar">
         <ul class="nav navbar-nav ml-auto">
-            <li class="nav-item ">
+            <li class="nav-item {{Request()->segment(1) == '' ? 'active_class' : '' }}">
                 <a href="{{route('/')}}"  class="nav-link p-4">HOME</a>
             </li> 
             <li class="nav-item {{Request()->segment(1) == 'about_us' ? 'active_class' : '' }}">
@@ -61,18 +61,18 @@
                     <li class="nav-item"><a href="#" class="nav-link p-3">More</a></li>
                 </ul> --}}
             </li>
-            <li class="nav-item">
+            <li class="nav-item {{Request()->segment(1) == 'why_adlaw' ? 'active_class' : '' }}">
                 <a href="{{url('/why_adlaw')}}"  class="nav-link p-4">WHY ADLAW</a>
             </li>
-            <li class="nav-item {{Request()->segment(1) == 'lawyer_lawfirm' ? 'active_class' : '' }}">
-                <a class="nav-link p-4 " href="{{url('lawyer_lawfirm')}}">LAWYERS/LAW FIRMS </a>
+            <li class="nav-item {{Request()->segment(2) == 'lawfirms' ? 'active_class' : '' }}">
+                <a class="nav-link p-4 " href="{{route('lawfirms')}}">LAWYERS/LAW FIRMS </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link p-4" href="">USERS/GUEST</a>
+            <li class="nav-item {{Request()->segment(2) == 'guest' ? 'active_class' : '' }}">
+                <a class="nav-link p-4" href="{{route('guest')}}">USERS/GUEST</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link p-4" href="">LAW SCHOOLS</a>
+            <li class="nav-item {{Request()->segment(2) == 'lawschools' ? 'active_class' : '' }}">
+                <a class="nav-link p-4" href="{{route('lawschools')}}">LAW SCHOOLS</a>
             </li>
             <li class="nav-item {{Request()->segment(1) == 'contact' ? 'active_class' : '' }}">
                 <a href="{{route('contact.index')}}" class="nav-link p-4">CONTACT US</a>

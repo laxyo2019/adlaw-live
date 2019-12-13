@@ -61,7 +61,12 @@ Route::view('/contact_us','pages.contact_us');
 
 Route::view('/court','pages.court');
 Route::view('/faq','pages.faq');
-Route::view('/lawyer_lawfirm','pages.subpages.lawyer_features');
+Route::group(['prefix' => 'features'] ,function(){	
+	Route::view('/lawfirms','pages.subpages.lawfirms_features')->name('lawfirms');
+	Route::view('/guest','pages.subpages.guest_features')->name('guest');
+	Route::view('/lawschools','pages.subpages.lawschools_features')->name('lawschools');
+
+});
 Route::view('/why_adlaw','pages.why_adlaw');
 
 

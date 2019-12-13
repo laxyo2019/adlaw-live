@@ -167,7 +167,7 @@ class RegisterController extends Controller
 
   public function showRegistrationForm()
     {
-        $user_catgs = Role::where('id','>', 1)->get();
+        $user_catgs = Role::whereNotIn('id',['1','6','7'])->get();
 
         return view('auth.register', compact('user_catgs', 'states'));
     }

@@ -12,23 +12,23 @@ use App\Models\Blog;
 use App\Models\CourtType;
 use App\Models\CourtMast;
 use App\Models\SubCatgMast;
-class HomeController extends FindlawyerController 
+class HomeController extends Search\SearchController 
 {
     public function index(){
-        $blogs = Blog::where('status','A')->limit(5)->get();
-        $blog_id =array();
-        foreach($blogs as $blog){
-        $blog_id[] = $blog->id;
-        }
+        // $blogs = Blog::where('status','A')->limit(5)->get();
+        // $blog_id =array();
+        // foreach($blogs as $blog){
+        // $blog_id[] = $blog->id;
+        // }
 
-        $blogs1 = Blog::whereNotIn('id',$blog_id)->where('status','A')->limit(5)->get();
-        $blog_id1 =array();
-        foreach($blogs1 as $blog1){
-        $blog_id1[] = $blog1->id;
-        }
-        $blog_id2 = array_merge($blog_id,$blog_id1);
+        // $blogs1 = Blog::whereNotIn('id',$blog_id)->where('status','A')->limit(5)->get();
+        // $blog_id1 =array();
+        // foreach($blogs1 as $blog1){
+        // $blog_id1[] = $blog1->id;
+        // }
+        // $blog_id2 = array_merge($blog_id,$blog_id1);
 
-        return view('layouts.home',compact('blogs','blogs1'));
+        return view('layouts.home');
     }
     public function getStateList(Request $request)
     {
@@ -36,7 +36,7 @@ class HomeController extends FindlawyerController
                     ->get();
         return response()->json($states);
     }
-    
+        
     public function getCityList()
     {
       
@@ -44,11 +44,8 @@ class HomeController extends FindlawyerController
       return response()->json($cities);
     }
 
-
-
     public function getCityListDropDown(Request $request)
-    {
-        
+    {        
       $data['cities'] = City::where("state_code",$request->state_code)->get();
 
       $data['cityCode'] = auth()->user()->city_code;
@@ -58,8 +55,6 @@ class HomeController extends FindlawyerController
 
     }
     public function getCityListClientDropDown(Request $request){
-         
-
       $data['cities'] = City::where("state_code",$request->state_code)->get();
       $city = Customer::select('city_code')->where('cust_id',$request->cust_id)->first();
 
@@ -77,10 +72,10 @@ class HomeController extends FindlawyerController
     }
 
     public function case_subcategory(){
-
       $subcategories = SubCatgMast::where('catg_code',request()->catg_code)->get(); 
       return response()->json($subcategories);
     }
+
     public function all_notifications(){
       return view('notifications.all_notifications');
     }

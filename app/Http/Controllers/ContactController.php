@@ -14,15 +14,10 @@ use App\Models\ContactUs;
 
 class ContactController extends Controller
 {
- /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-	   $country_list=Country::all();
-		return view('pages.contact_us',['country_list'=>$country_list]);
+	  return view('pages.subpages.contact_us');
     }
 
     public function store(Request $request){

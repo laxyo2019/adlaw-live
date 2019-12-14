@@ -31,8 +31,7 @@ class Helpers
 	public static function lawyerDetails($court_id, $speciality_code){
 		$query = User::with(['reviews'=>function ($query) {
 			           $query->where('review_status','A');
-			        }])->with('city', 'state')
-			        
+			        }])->with('city', 'state')			        
 			        ->where('status','A')
 			        ->where('user_catg_id',2)
 			        ->whereNull('parent_id');
@@ -71,17 +70,34 @@ class Helpers
         return $result;
 	}
 	
-	public static function lawcompanyDetails(){
+	public static function lawcompanyDetails($court_id = null){
 		$query = User::with(['reviews'=>function ($query) {
 			           $query->where('review_status','A');
 			        }])->with('city', 'state')			        
 			        ->where('status','A')
-			        ->where('user_catg_id',3)
-			        ->with(['user_courts'=>function($query){
+			        ->where('user_catg_id',3);
+
+		if($court_id == null){
+			$result = $query->with(['user_courts'=>function($query){
 			          			$query->with('court_catg');
 			        }]);
+		}else{
+			$result = $query->with(['user_courts'=>function($query) use($court_id){
+                          $query->with('court_catg')->where('user_courts.court_code',$court_id);
+                        }]);
+		}
+			      
+		return $result;
+	}
+	public static function lawschools(){
+		$query = User::with(['reviews'=>function ($query) {
+		            $query->where('review_status','A');
+		    }])->with('city', 'state')
+		    ->where('user_catg_id',4)
+		    ->where('status','A');
 		return $query;
 	}
+
 
 	public static function valid_email($email) {
          return (!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $email)) ? FALSE : TRUE;

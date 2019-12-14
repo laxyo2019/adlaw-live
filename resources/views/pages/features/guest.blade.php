@@ -4,8 +4,8 @@
     <h2 class="font-weight-bold text-center text-captialize">Guest / Users Features</h2>
     <p class="text-muted text-center" >
     Everything you need to manage your account.
-    <br>
-    Solo Lawyer, Small Firms, Medium and Large Law Firm manage!
+{{--     <br>
+    Solo Lawyer, Small Firms, Medium and Large Law Firm manage! --}}
     </p>
   {{--   <p class="text-muted text-center"></p> --}}
     <div class="container">

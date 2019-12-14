@@ -4,7 +4,7 @@
     <p class="text-muted text-center" >
     Everything you need to manage your Lawschools.
     <br>
-    Solo Lawyer, Small Firms, Medium and Large Law Firm manage!
+    Law Schools manage!
     </p>
   {{--   <p class="text-muted text-center"></p> --}}
     <div class="container">

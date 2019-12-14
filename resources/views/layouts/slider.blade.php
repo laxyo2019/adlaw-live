@@ -10,7 +10,7 @@
       <div class="carousel-item active" style="background-image: url('images/slider1.jpg')">
         <div class="carousel-caption d-none d-md-block">
           <h2 class="display-4">Lawyer / Law Firms</h2>
-          <p class="lead">This is a description for the first slide.</p>
+          <p class="lead ">Solo Lawyer, Small Firms, Medium and Large Law Firm manage.</p>
         </div>
       </div>
       <!-- Slide Two - Set the background image for this slide in the line below -->

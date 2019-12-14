@@ -98,3 +98,44 @@ font-family: 'Open Sans',sans-serif;
  }
 
 
+@media only screen and (max-width: 360px) {
+ /*.profile-div{
+    height: 470px;
+  }*/
+}
+@media only screen and (max-width: 600px) {
+  /* For mobile phones: */
+  .col-xm-12{
+    margin-top: 10px;
+  }
+/*  .profile-div{
+    height: 490px;
+  }*/
+
+}
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .col-xm-12{
+    margin-top: 10px;
+  }
+
+}
+@media only screen and (min-width: 992px) {
+  .book{
+    padding-right: 1px;
+
+  }
+  .viewP{
+    padding-left: 0px;
+  }
+  /*.profile-div{
+    height: 210px;
+  }*/
+} 
+
+.activebtn{
+  background: #b4ddf3;
+}
+.profile-div{
+  min-height: 210px;
+}

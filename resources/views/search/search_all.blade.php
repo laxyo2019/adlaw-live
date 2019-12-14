@@ -340,17 +340,6 @@ function loginChecked($user_id){
 		$("#city").empty();
 		}
 
-
-
-
-	$.ajaxSetup({
-	      headers: {
-	          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-	      }
-	});
-	
-
-
 $(".filteBtn").on('click',function(e){
 	
 	e.preventDefault();
@@ -361,7 +350,6 @@ $(".filteBtn").on('click',function(e){
 	var gender = $("input[name='gender']:checked").val();
 	var searchfield = $("input[name='searchfield1']:checked").val();
 	var court_id = $('#court_id').val();
-
 
 // alert(searchfield);
 	$.ajax({
@@ -380,8 +368,6 @@ $(".filteBtn").on('click',function(e){
 	           	
 		
 		});
-
-
 });
 
 	$('.right-button').click(function() {
@@ -456,16 +442,11 @@ $(".filteBtn").on('click',function(e){
 
 	});
 
-	$('body').on('click','.bookBtn' ,function(){				
-		
-			$user_id = $(this).attr('id');
-			$('#BtnViewModal .modal-body ').find("input[name='user_id']").val($user_id);
-			$('#BtnViewModal').modal('show');
-		
-
+	$('body').on('click','.bookBtn' ,function(){	
+		$user_id = $(this).attr('id');
+		$('#BtnViewModal .modal-body ').find("input[name='user_id']").val($user_id);
+		$('#BtnViewModal').modal('show');
 	});
-	
-
 });
 
  // $(window).on('hashchange', function() {

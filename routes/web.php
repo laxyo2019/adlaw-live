@@ -41,34 +41,33 @@ Route::get('/notifications','HomeController@all_notifications')->name('all_notif
 
 /*Start Pages View */
 
-Route::view('/law_data_mining','pages.law_data_mining');
-Route::view('/law_data_warehousing','pages.law_data_warehousing');
-Route::view('/law_data_analytics','pages.law_data_analytics');
+// Route::view('/law_data_mining','pages.law_data_mining');
+// Route::view('/law_data_warehousing','pages.law_data_warehousing');
+// Route::view('/law_data_analytics','pages.law_data_analytics');
+// Route::view('/online_appointment','pages.online_appointment');
+// Route::view('/advance_dms','pages.advance_dms');
+// Route::view('/law_crm','pages.law_crm');
+// Route::view('/case_law_analysis','pages.case_law_analysis');
+// Route::view('/integrated_law_research','pages.integrated_law_research');
+// Route::view('/legal_article_written','pages.legal_article_written');\
+// Route::view('/court','pages.court');
+// Route::view('/faq','pages.faq');
 
-Route::view('/online_appointment','pages.online_appointment');
-Route::view('/advance_dms','pages.advance_dms');
-Route::view('/law_crm','pages.law_crm');
+Route::view('/tos','pages.subpages.tos');
+Route::view('/about_us','pages.subpages.about_us');
+Route::view('/disclaimer','pages.subpages.disclaimer');
+Route::view('/privacy_policy','pages.subpages.privacy_policy');
+Route::view('/why_adlaw','pages.subpages.why_adlaw');
 
-Route::view('/case_law_analysis','pages.case_law_analysis');
-Route::view('/integrated_law_research','pages.integrated_law_research');
-Route::view('/legal_article_written','pages.legal_article_written');
-
-Route::view('/about_us','pages.about_us');
-Route::view('/tos','pages.tos');
-Route::view('/disclaimer','pages.disclaimer');
-Route::view('/privacy_policy','pages.privacy_policy');
-Route::view('/contact_us','pages.contact_us');
-
-Route::view('/court','pages.court');
-Route::view('/faq','pages.faq');
 Route::group(['prefix' => 'features'] ,function(){	
 	Route::get('/lawfirms','Search\SearchController@lawfirms')->name('lawfirms');
-	// Route::view('/lawfirms','pages.subpages.lawfirms_features')->name('lawfirms');
+	Route::get('/lawfirms/search','Search\SearchController@lawfirmsSearch')->name('lawfirms.search');
+	Route::get('/lawfirms/profile/{id}', 'Search\SearchController@lawyerProfileShow')->name('lawyerProfile.show');	
+	Route::post('lawfirms/review','Search\SearchController@writeReview')->name('lawfirms.writeReview');
+	Route::get('/lawschools','Search\SearchController@lawSchools')->name('lawschools');
+	Route::get('/lawschools/search','Search\SearchController@lawschoolsSearch')->name('lawschools.search');
 	Route::view('/guest','pages.subpages.guest_features')->name('guest');
-	Route::view('/lawschools','pages.subpages.lawschools_features')->name('lawschools');
-
 });
-Route::view('/why_adlaw','pages.why_adlaw');
 
 
 // Route::resource('/admin/users', 'Admin\UsersController');
@@ -76,15 +75,6 @@ Route::view('/why_adlaw','pages.why_adlaw');
 
 
 /*End Pages View */
-
-
-/* -----------------Find Lawyer-------------------------------- */
-Route::get('lawyer_profile/{lawyer_id}', 'FindlawyerController@show')->name('find_lawyer.show');
-Route::get('find_lawyer/specialist', 'FindlawyerController@find_lawyer_specialist')->name('find_lawyer.specialist');
-Route::get('/search','FindlawyerController@index')->name('find_lawyer.index');
-Route::post('lawyer/review','FindlawyerController@writeReview')->name('find_lawyer.writeReview');
-/* -----------------Find Lawyer------------------------------------- */
-
 
 /* ---------------------Admin--------------------------------- */
 Route::group(['middleware' => ['role:admin']], function() {

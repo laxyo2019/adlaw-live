@@ -1,16 +1,22 @@
 @extends('layouts.default')
 @section('content')
 <style type="text/css">
-
+.profile-img{
+  width:100%;
+  height:100%;
+  border: 2px solid;
+  padding: 7px;
+  border-radius: 6%;
+}
 
 #sidebar ul li a{
-    color:#fff;
+  color:#fff;
 
-  }
-   .animated {
-    -webkit-transition: height 0.2s;
-    -moz-transition: height 0.2s;
-    transition: height 0.2s;
+}
+.animated {
+-webkit-transition: height 0.2s;
+-moz-transition: height 0.2s;
+transition: height 0.2s;
 }
 
 p.stars  i
@@ -24,30 +30,30 @@ p.stars  i
 
     <!-- Sidebar -->
     <nav id="sidebar">
-      <div class="sidebar-header text-center">
+      <div class="sidebar-header text-center bg-light border-bottom pb-3">
       <!--   <h4 class=" text-center font-weight-bold"><b>O</b>ther <b>D</b>etails</h4> -->
-        <span class="navbar-brand font-weight-bold mt-4 ">OTHER DETAILS</span>
+        <span class="navbar-brand font-weight-bold mt-4 text-dark ">OTHER DETAILS</span>
     </div>
-    <hr>
     <ul class="list-unstyled components">
-       <div class="sidebar-search ml-2 d-flex">
+       <div class="sidebar-search ml-2 mt-4 d-flex">
         <span>
-          <a href="javascript:void(0)" class="btn btn-md btn-success bookBtn" id="{{$lawyer->id}}" title="Book an Appointmnet"><i class="fa fa-calendar fa-1x " > Book an Appointment</i></a>
+          <a href="javascript:void(0)" class="btn btn-md text-success border-success bookBtn text-uppercase" id="{{$userData->id}}"> Book an Appointment</a>
         </span>
-        <span class="ml-2">
+        {{-- <span class="ml-2">
          @if(Auth::user())
             @if(Auth::user()->user_catg_id ==3 || Auth::user()->user_catg_id ==4)
             
             @else
-              <a onclick="loginChecked('{{ $lawyer->id }}')" style="text-decoration: none" class="btn btn-md btn-primary" title="Message"><i class="fa fa-envelope"></i> </a>
+              <a onclick="loginChecked('{{ $userData->id }}')" style="text-decoration: none" class="btn btn-md btn-primary" title="Message"><i class="fa fa-envelope"></i> </a>
             @endif
             @else
-              <a onclick="loginChecked('{{ $lawyer->id }}')" style="text-decoration: none" class="btn btn-md btn-primary" title="Message"><i class="fa fa-envelope"></i> </a>
+              <a onclick="loginChecked('{{ $userData->id }}')" style="text-decoration: none" class="btn btn-md btn-primary" title="Message"><i class="fa fa-envelope"></i> </a>
           
           @endif
-        </span>
+        </span> --}}
        </div>
        <hr>
+       @if($userData->user_catg_id == '2')
         <li class="active " id="educa">
           <a href="" data-toggle="collapse" aria-expanded="false" id="edu" style="text-decoration: none">
             <span>
@@ -55,9 +61,9 @@ p.stars  i
            </a>
             <ul class="collapse list-unstyled ml-4" id="Education">
              
-              @foreach($lawyer->qualifications as $quali)
+              @foreach($userData->qualifications as $quali)
               <li>
-                <a href="#" style="text-decoration:none"> {{$quali->qual_desc}}</a>
+                <i class="fa fa-circle-o text-dark" style="font-size: 15px;"></i><a href="#" class="text-dark" style="text-decoration:none; font-size: 16px;"> {{$quali->qual_desc}}</a>
               </li>
               @endforeach
             </ul>
@@ -68,106 +74,71 @@ p.stars  i
                 <span style="margin: -3px;"><i class="fa fa-graduation-cap" aria-hidden="true"></i>&nbsp;Specialization<i class="fa fa-plus float-right" aria-hidden="true" id="splus"></i></span>
               </a>
               <ul class="collapse list-unstyled ml-4" id="Specialization">
-                @foreach($lawyer->specialities as $spec)
+                @foreach($userData->specialities as $spec)
                 <li>
-                  <a href="#" style="text-decoration:none">{{$spec->specialization_catgs->catg_desc}}</a>
+                  <i class="fa fa-circle-o text-dark" style="font-size: 15px;"></i><a href="#" class="text-dark" style="text-decoration:none;font-size: 16px;"> {{$spec->specialization_catgs->catg_desc}}</a>
                 </li>
                 @endforeach
               </ul>
             </li>
-
+        @endif
             <li class="">
               <a href="" data-toggle="collapse" aria-expanded="false" style="text-decoration: none;" id="pract">
                 <span style="margin: -3px;"><i class="fa fa-university" aria-hidden="true"></i>&nbsp;Practicing In Courts<i class="fa fa-plus float-right" aria-hidden="true" id="pplus"></i></span>
               </a>
               <ul class="collapse list-unstyled ml-4" id="Practicing">
-                  @foreach($lawyer->user_courts as $courts )
+                  @foreach($userData->user_courts as $courts )
                 <li>
-                  <a href="#" style="text-decoration:none">{{ $courts->court_catg->court_name }}</a>
+                  <i class="fa fa-circle-o text-dark" style="font-size: 15px;"></i><a href="#" class="text-dark" style="text-decoration:none;font-size: 16px;">{{ $courts->court_catg->court_name }}</a>
                 </li>
                 @endforeach
               </ul>
             </li>    
-
-          <li class=" ">
-             <a  data-toggle="collapse" aria-expanded="false" style="text-decoration: none;" id="land">
-              <span><i class="fa fa-bookmark" aria-hidden="true"></i> &nbsp;Landmark Case<i class="fa fa-plus float-right" id="lplus"></i></span>
-              </a>
-              <ul class="collapse list-unstyled ml-4" id="Landmark">
-                {{-- <li>
-                  <a href="#">page 1</a>
-                </li>
-                <li>
-                  <a href="#">Page 2</a>
-                </li>
-                <li>
-                  <a href="#">Page 3</a>
-                </li> --}}
-              </ul>
-            </li>
     </ul>
 </nav>
 
   <div id="content" >
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
-
-        <button type="button" id="sidebarCollapse" class="btn btn-info">
-        <i class="fa fa-align-left"></i>
-        <span>More Info</span>
-        </button>
-
-
+          <button type="button" id="sidebarCollapse" class="btn text-info border-info">
+            <i class="fa fa-align-left"></i> More Info 
+          </button>
         </nav>
-        @if($message = Session::get('success'))
-                <div class="alert alert-success mt-4">
-                    {{$message}}
-                </div>
-              @endif
-              @if($message = Session::get('warning'))
-                <div class="alert alert-warning mt-4">
-                    {{$message}}
-                </div>
-              @endif
-        <br>
-        
         <div class="row">
-          
-            <div class="col-sm-3 col-md-2 col-xs-3 col-xl-2 col-lg-2">  @if($lawyer->photo !='')<img style="width:150px;height:200px;border: 2px solid black;: 13px;padding: 7px;border-radius: 10%;" title="{{$lawyer->name}}" src="{{asset('storage/profile_photo/'.$lawyer->photo)}}" alt="image" class="img-responsive"> 
-            @else
-            <img style="width:150px;height:200px;border: 2px solid black;: 13px;padding: 7px;border-radius: 10%;" title="{{$lawyer->name}}" src="{{asset('storage/profile_photo/default.png')}}" alt="image" class="img-responsive"> 
-            @endif
+            <div class="col-sm-12 col-xs-12 col-md-3 col-xl-3 col-lg-3"> 
+                @if($userData->photo !='')<img  title="{{$userData->name}}" src="{{asset('storage/profile_photo/'.$userData->photo)}}" alt="image" class="img-responsive w-100 h-100 profile-img"> 
+                @else
+                <img title="{{$userData->name}}" src="{{asset('storage/profile_photo/default.png')}}" alt="image" class="img-responsive profile-img"> 
+                @endif
             </div>
 
-            <div class="col-sm-9 col-md-9 col-xs-9">
-              <div class="name">
-                <h2 style="font-size:24px; margin-bottom:10px;"><b>{{$lawyer->name}}</b>
-                  <span class="chat_icon text-primary " style="font-size:18px;float:right;">
+            <div class="col-sm-12 col-md-8 col-xs-12">
+                <h2 class="font-weight-bold" style="margin-top: 12px !important ">{{$userData->name}} </h2>
+                {{--   <span class="chat_icon text-primary " style="font-size:18px;float:right;">
                     @if(Auth::user())
 
                       @if(Auth::user()->user_catg_id ==3 || Auth::user()->user_catg_id ==4)
 
                       @else
-                        <a onclick="loginChecked('{{ $lawyer->id }}')" style="text-decoration: none" ><i class="fa fa-envelope"></i> Message</a>
+                        <a onclick="loginChecked('{{ $userData->id }}')" style="text-decoration: none" ><i class="fa fa-envelope"></i> Message</a>
                       @endif
                       @else
-                        <a onclick="loginChecked('{{ $lawyer->id }}')" style="text-decoration: none" ><i class="fa fa-envelope"></i> Message</a>
+                        <a onclick="loginChecked('{{ $userData->id }}')" style="text-decoration: none" ><i class="fa fa-envelope"></i> Message</a>
                     
                     @endif
 
-                  </span>
-                </h2>
-              </div>
+                  </span> --}}
+            
+            
             <!-- Start Rating-->
             <div class="rating">
               <span class="star-rating">
                  <?php  
-                        if($lawyer->reviews->count()==0){
+                        if($userData->reviews->count()==0){
                         $no_of_reviews = 0;
                         }
                         else{
-                        $no_of_reviews = $lawyer->reviews->sum('review_rate')/$lawyer->reviews->count();
+                        $no_of_reviews = $userData->reviews->sum('review_rate')/$userData->reviews->count();
                         }
 
                  $ratings = $no_of_reviews; 
@@ -199,7 +170,7 @@ p.stars  i
               </span> 
               <span class="score"><i>
                       <?php $a=array();
-                        foreach($lawyer->reviews as $review){
+                        foreach($userData->reviews as $review){
                           $a[] = $review->review_rate ;
                         }                      
                            echo count($a);
@@ -220,17 +191,17 @@ p.stars  i
                       <span class="icon-holder"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
                       <span class="item-label">Location: </span>
                       <span class="value">
-                        @if($lawyer->state == '') 
+                        @if($userData->state == '') 
                           {{ '' }}
                         @else 
-                          {{$lawyer->city->city_name.', '. $lawyer->state->state_name.', '.$lawyer->zip_code}}
+                          {{$userData->city->city_name.', '. $userData->state->state_name.', '.$userData->zip_code}}
                         @endif
                       </span>
                   </div>
                   <div class="item-info">
                     <span class="icon-holder"><i class="fa fa-briefcase" aria-hidden="true"></i></span>
                     <span class="item-label">Experience: </span>
-                    <span class="value">{{$lawyer->estd_year. ' years'}}</span>
+                    <span class="value">{{$userData->estd_year. ' years'}}</span>
                   </div>
               </div>
               <div class="col-sm-8">
@@ -239,14 +210,17 @@ p.stars  i
                     <span class="item-label">Languages: </span>
                     <span class="value">English, Hindi</span>
                   </div>
-                  <div class="item-info">
+                 
+                 @if($userData->user_catg_id == 2) <div class="item-info">
                     <span class="icon-holder"><i class="fa fa-balance-scale" aria-hidden="true"></i></span>
                     <span class="item-label">Practice areas:</span>
-                    @foreach($lawyer->specialities as $spec)
+                    
+                    @foreach($userData->specialities as $spec)
 
                     <span class="value">{{$spec->specialization_catgs->catg_desc.','}}</span>
                     @endforeach
                   </div>
+                  @endif
               </div>
             </div>
      
@@ -254,12 +228,12 @@ p.stars  i
 
           <div class="col-md-12 text-justify mt-2" style=" line-height: 30px;">
             <hr>
-            <?php echo $lawyer->detl_profile ?> 
+            <?php echo $userData->detl_profile ?> 
 
           </div>
           <div class="col-md-12 text-justify mt-2" style=" line-height: 30px;">
             <hr class="m-0">
-            <h6>Practicing In Courts :  @foreach($lawyer->user_courts as $courts)
+            <h6>Practicing In Courts :  @foreach($userData->user_courts as $courts)
                  <span class="value" style="font-size: 15px;">{{$courts->court_catg->court_name.','}}</span>
               @endforeach</h6>
           
@@ -274,7 +248,7 @@ p.stars  i
                        <h3>Top Reviews</h3>
                     </div>
                     <div class="col-sm-6 col-md-6 col-xs-6 col-lg-6 text-right">
-                       <a class="btn btn-primary font-weight-bold text-white">Write A Reviews</a> 
+                       <a class="btn text-primary border-primary font-weight-bold text-white">Write A Reviews</a> 
                     </div>
                    </div>
                     <hr>
@@ -284,7 +258,7 @@ p.stars  i
                           @csrf
                       <div class="row form-group">
                         <div class="col-md-12" >
-                            <input type="hidden" name="user_id" value = "{{$lawyer->id}}">
+                            <input type="hidden" name="user_id" value = "{{$userData->id}}">
                             <input type="hidden" name="guest_id" value = "{{Auth::user() ? Auth::user()->id:''}}">
                         <!--  <input id="ratings-hidden" name="rating" type="hidden">  -->
                             <textarea class="form-control animated" cols="40" rows="5" id="review_text" name="review_text" placeholder="{{Auth::user() ? 'Enter your review here...' :'If want to write here so login first'}} " required   {{Auth::user() ? '' :'readonly'}}></textarea>
@@ -296,16 +270,16 @@ p.stars  i
                         </div>
                         <div class="col-md-12 mt-2">
                           <div class="my-rating mb-2">
-                            <span>Working Star Ratings for {{$lawyer->name}}</span>&nbsp;&nbsp;&nbsp;
+                            <span>Working Star Ratings for {{$userData->name}}</span>&nbsp;&nbsp;&nbsp;
                             <span class="my-rating-9"></span>
                             <span class="live-rating"></span>
                           </div>
                           @if(Auth::user()) 
-                          <button class="btn btn-primary btn-sm font-weight-bold" type="submit" style="font-size: 12px" id="review_submit">Submit</button>
+                          <button class="btn text-primary border-primary btn-sm font-weight-bold" type="submit" style="font-size: 12px" id="review_submit">Submit</button>
                           @else
-                                <button type="button" class="btn btn-primary btn-sm font-weight-bold" id="writeReview" >Submit</button>
+                            <button type="button" class="btn text-primary border-primary btn-sm font-weight-bold" id="writeReview" >Submit</button>
                           @endif
-                          <a class="btn btn-danger btn-sm font-weight-bold"  id="cancelWR" style="margin-right: 10px; color: #fff;font-size: 12px">
+                          <a class="btn text-danger border-danger btn-sm font-weight-bold"  id="cancelWR" style="margin-right: 10px; color: #fff;font-size: 12px">
                           Cancel <i class="fa fa-remove"></i></a>
                        </div>
 
@@ -322,10 +296,10 @@ p.stars  i
                       <div class="review-item">
                         <div class="media">
                           <a class="pull-left" href="#">
-                            <span class="d-inline-block bg-primary text-white text-center font-weight-bold p-4 text-large">{{$review->customers->name[0]}}</span>
+                            <span class="d-inline-block text-info border-info text-center font-weight-bold p-4" style="border:1px solid;">{{$review->customers->name[0]}}</span>
                           </a>
-                          <i class="fa fa-caret-left fa-4x text-light mt-2" style=""></i>
-                          <div class="media-body bg-light d-table-cell p-4" style="border-radius: 20px;">
+                          <i class="fa fa-caret-left fa-4x mt-2" style="color: #ececec!important;"></i>
+                          <div class="media-body d-table-cell p-4" style="background-color: #ececec!important; border-radius: 20px;">
                             <div class="author mb-2" >
                               <span class="name"><b>{{$review->customers->name}} - </b></span>
                               <span class="verified"><i class="text-info">Verified Client</i></span>
@@ -472,7 +446,7 @@ p.stars  i
                           <h3 class="card-title"><i class="fa fa-meetup " aria-hidden="true"></i> Online Appointment</h3> 
                         </div>
                         <div class="card-body ">
-                           <h6 class="text-center mt-0">Advocate {{$lawyer->name}}</h6>
+                           <h6 class="text-center mt-0">Advocate {{$userData->name}}</h6>
                            <div class="table-responsive-xs">
                                 <table class="table table-bordered ">
                                     <thead class="text-center bg-secondary text-white">
@@ -513,14 +487,31 @@ p.stars  i
   </div> <!-- content -->
 
 </div> <!-- wrapper -->
-  @if(Session::has('errors'))
-    <script>
-      $(document).ready(function(){
-          $('.login_modal').modal({show: true});
-      });
-      </script>
-  @endif
-
+<script type="text/javascript">
+  @php
+    if(Session::has('errors')){
+  @endphp
+    $(document).ready(function(){
+        $('.login_modal').modal({show: true});
+    });
+  @php 
+    }
+  @endphp
+  
+  @php
+     if($message = Session::get('success')) {
+  @endphp
+    alert("{{$message}}");
+  @php 
+    }
+    if($message = Session::get('warning')) {
+  @endphp
+    alert("{{$message}}");
+  @php 
+    }
+  @endphp
+</script>
+{{-- 
 <script >
 function loginChecked($user_id){
   var AuthUser = "{{{ (Auth::user()) ? Auth::user() : null }}}";
@@ -540,7 +531,7 @@ function loginChecked($user_id){
     }
 } 
 
-</script>
+</script> --}}
 <script>
 
 $(document).ready(function(){
@@ -642,7 +633,7 @@ $('#review_submit').on('click',function(e){
          
             $.ajax({
                 type:'POST',
-                url: "{{route('find_lawyer.writeReview')}}",
+                url: "{{route('lawfirms.writeReview')}}",
                 data:{user_id:user_id, guest_id:guest_id, review_text:review_text, review_rate:review_rate },
                 success:function(data){
                   swal({
@@ -685,18 +676,18 @@ $('#review_submit').on('click',function(e){
   });
 
 $('body').on('click','.bookBtn' ,function(){        
-    // var AuthUser = "{{ (Auth::user()) ? Auth::user() : null }}";
-    // if(AuthUser == false){
-    //   $user_id = $(this).attr('id');
-    //   $('#BtnViewModal .modal-body ').find("input[name='user_id']").val($user_id);
-    //   $('#BtnViewModal').modal('show');
-    // }
-    // else{
-    //      $('.login_modal').modal({"backdrop": "static"});
-    //   }
-     $user_id = $(this).attr('id');
-     $('#BtnViewModal .modal-body ').find("input[name='user_id']").val($user_id);
-     $('#BtnViewModal').modal('show');
+    var AuthUser = "{{ (Auth::user()) ? Auth::user() : null }}";
+    if(AuthUser){
+      $user_id = $(this).attr('id');
+      $('#BtnViewModal .modal-body ').find("input[name='user_id']").val($user_id);
+      $('#BtnViewModal').modal('show');
+    }
+    else{
+         $('.login_modal').modal({"backdrop": "static"});
+      }
+     // $user_id = $(this).attr('id');
+     // $('#BtnViewModal .modal-body ').find("input[name='user_id']").val($user_id);
+     // $('#BtnViewModal').modal('show');
 
   });
   

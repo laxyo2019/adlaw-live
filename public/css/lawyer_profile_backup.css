@@ -8,9 +8,9 @@
     min-width: 250px;
     max-width: 250px;
     min-height: 100vh;
-    background:#444343;
+    background:#fff;
+    border-right: 1px solid #d2d6de;
     color: #fff;
-   
 }
 
 #sidebar.active {
@@ -30,7 +30,8 @@
 
 ul.components li a span{
     padding: 10px;
-    font-size: 20px;
+    font-size: 17px;
+    color:black;
     display: block;
 }
 

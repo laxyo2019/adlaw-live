@@ -34,8 +34,7 @@
           
             <input type="hidden" name="user_id" value="">
             <input type="hidden" name="client_id" value="{{(Auth::user()) ? Auth::user()->id : null }}">
-             @if(Auth::user()) 
-                
+             @if(Auth::user())                 
                 <button type="submit" class="btn btn-info">Submit</button>
              @else
                 <button type="button" class="btn btn-info" data-dismiss="modal" id="submitBtn" >Submit</button>

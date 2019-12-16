@@ -1,20 +1,20 @@
 @extends('lawschools.main')
-
 @section('content')
 <section class="content">
 <div class="row">
+  @role('lawcollege')
 	 <div class="col-lg-3 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>{{ count($comp_teacher) }}</h3>
+              <h3>{{ count($user->members) }}</h3>
 
               <p>Total Teachers</p>
             </div>
             <div class="icon">
               <i class="fa fa-user"></i>
             </div>
-            <a href="" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{route('teams.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -22,14 +22,14 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>0</h3>
+              <h3>{{count($user->students)}}</h3>
 
               <p>Total Students</p>
             </div>
             <div class="icon">
               <i class="fa fa-graduation-cap"></i>
             </div>
-            <a href="" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{route('student.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -37,14 +37,14 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>{{count($pending_teacher)}}</h3>
+              <h3>{{count($user->teams)}}</h3>
 
               <p>Total Teams</p>
             </div>
             <div class="icon">
               <i class="fa fa-group"></i>
             </div>
-            <a href="" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{route('teams.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -53,7 +53,7 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>{{count($courses)}}</h3>
+              <h3>{{count($user->courses)}}</h3>
 
               <p>Total Courses</p>
             </div>
@@ -65,6 +65,23 @@
         </div>
         <!-- ./col -->
  </div>	
+ <div class="row">
+   <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-blue">
+            <div class="inner">
+              <h3>{{count($user->batches)}}</h3>
+
+              <p>Total Batches</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-book"></i>
+            </div>
+            <a href="{{route('batches.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+ </div>
+ @endrole
 	<div class="row">
     <div class="col-md-12">
       <div class="box">

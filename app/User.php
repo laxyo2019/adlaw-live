@@ -107,4 +107,13 @@ class User extends Authenticatable
     //     return $this->hasMany('App\Models\Todo','user_id1');
     // }
 
+    public function courses(){
+        return $this->hasMany('App\Models\CollegeCourse','user_id');
+    }
+    public function students(){
+        return $this->hasMany('App\Models\StudentMast','user_id');
+    }
+    public function batches(){
+        return $this->hasMany('App\Models\BatchMast','user_id');
+    }
 }

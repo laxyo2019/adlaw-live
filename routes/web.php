@@ -198,8 +198,18 @@ Route::group(['middleware' => ['role:lawyer|lawcompany|guest']], function(){
 /* --------------Lawcollege--------Teacher-----------Student---------- */
 Route::group(['middleware' => ['role:lawcollege|teacher|student']], function() {
 	Route::resource('/lawschools', 'LawSchools\LawSchoolsController');
+
+// Route::group(['prefix' => 'features'] ,function(){	});
 	Route::resource('/student', 'Student\StudentDashboardController');
 	Route::resource('/student_detail', 'Student\StudentDetailController');
+	Route::resource('/student_manage', 'Student\StudentManageController');
+	Route::post('/forward_student', 'Student\StudentManageController@forward_tranfer_student')->name('forward_student');
+
+	Route::post('/passout_student', 'Student\StudentManageController@passout_student')->name('passout_student');
+	Route::post('/dropout_student', 'Student\StudentManageController@dropout_student')->name('dropout_student');
+
+	Route::get('/student_record', 'Student\StudentManageController@student_record')->name('student_record');
+	
 	// Route::post('/temporary_save', 'Student\StudentDetailController@temp_data');
 
 	Route::post('/student_filter', 'Student\StudentDetailController@student_filter')->name('student_filter');

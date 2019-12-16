@@ -221,10 +221,13 @@
                 <a href="{{route('student_detail.index')}}" ><i class="fa fa-circle-o"></i>Student Details</a>
               </li>
               <li class="nav-item {{Request()->segment(1) == 'manage_student' ? 'active' : ''}}">
-                <a href="" ><i class="fa fa-circle-o"></i>Manage Student</a>
+                <a href="{{route('student_manage.index')}}" ><i class="fa fa-circle-o"></i>Manage Student</a>
               </li>
               <li class="nav-item {{Request()->segment(1) == 'upload_student' ? 'active' : ''}}">
                 <a href="{{route('upload_student')}}" ><i class="fa fa-circle-o"></i>Upload Student</a>
+              </li>
+              <li class="nav-item {{Request()->segment(1) == 'student_record' ? 'active' : ''}}">
+                <a href="{{route('student_record')}}" ><i class="fa fa-circle-o"></i>Records</a>
               </li>
             </ul>
           </li>

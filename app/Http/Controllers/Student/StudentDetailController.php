@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Student;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use App\Models\QualCatg;
 use App\Models\ProfessionMast;
@@ -21,15 +22,23 @@ use App\Models\GuardianMast;
 use App\Models\StudentAddress;
 use App\Models\StudentDocs;
 use App\Models\BatchMast;
+use App\User;
+use App\VerifyUser;
+use Mail;
 use Auth;
+use App\Mail\UserMail;
 use App\Imports\StudentsImport;
 use Maatwebsite\Excel\Facades\Excel;
 class StudentDetailController extends Controller
 {
     public function index(){
+      
         $batches = BatchMast::where('user_id',Auth::user()->id)->orderBy('name','DESC')->get();
-        $students = StudentMast::with('qual_course','batch')->where('user_id',Auth::user()->id)->get();
-    	return view('student.student_detail.index',compact('students','batches'));
+        $qual_catgs = QualCatg::where('qual_catg_code', '!=',4)->get();
+        $students = array();
+        $page = 'student_detail';
+        // $students = StudentMast::with('qual_course','batch')->where('user_id',Auth::user()->id)->get();
+    	return view('student.student_detail.index',compact('students','batches','qual_catgs','page'));
     }
     public function create(){
         $qual_catgs = QualCatg::where('qual_catg_code', '!=',4)->get();
@@ -62,13 +71,12 @@ class StudentDetailController extends Controller
                 $image = $request->doc_url[$i]->storeAs('public/colleges/college_'.Auth::user()->id.'/documents/'.$data['batch_name'].'', $filename);
                 $stud_docs['doc_url'] = 'colleges/college_'.Auth::user()->id.'/documents/'.$data['batch_name'].'/'.$filename;
             }
-          
             StudentDocs::create($stud_docs);
         }
        
+        //$this->create_account($data);
+
         return redirect()->route('student_detail.create')->with('success','Student created successfully');
-	   
-    	
     }
 
     // public function temp_data(Request $request){  // session data store in future  this functionn used 
@@ -203,7 +211,8 @@ class StudentDetailController extends Controller
             'account_no'          => $request->account_no,
             'ifsc_code'           => $request->ifsc_code,
         ]; 
-
+        
+  
         if($data['status'] == 'P'){
             $data['passout_date'] = $request->passout_date;
         }
@@ -385,10 +394,38 @@ class StudentDetailController extends Controller
     public function student_filter(){
 
         $students = StudentMast::with('qual_course','batch')
+                                ->where('qual_catg_code',request()->qual_catg_code)
+                                ->where('qual_code',request()->qual_code)
                                 ->where('batch_id',request()->batch_id)
                                 ->where('qual_year',request()->qual_year)
                                 ->where('semester',request()->semester)
+                                ->where('status','R')
                                 ->where('user_id',Auth::user()->id)->get();
-        return view('student.student_detail.table',compact('students'));
+        $page = request()->page; 
+        return view('student.student_detail.table',compact('students','page'));
+    }
+
+    public function create_account($data){
+        $password = str_limit($data['f_name'],3,'@845');
+        $student_data = [
+            'name' => $data['f_name'] .' '. $data['l_name'],
+            'email' => $data['email'],
+            'password'=> Hash::Make($password),
+            'status' => 'A',
+            'user_catg_id' => '7',
+            'parent_id' => Auth::user()->id,
+            'mobile' => $data['mobile']
+        ]; 
+
+        $user = User::create($student_data);
+        $user->attachRole($user->user_catg_id);
+
+        $verifyUser = VerifyUser::create([
+            'user_id' => $user->id,
+            'token' => str_random(40)
+        ]);
+
+        $user['password'] = $password;
+        Mail::to($user->email)->send(new UserMail($user));
     }
 }

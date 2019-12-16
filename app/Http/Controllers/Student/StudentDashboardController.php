@@ -233,7 +233,7 @@ class StudentDashboardController extends Controller
 	                        $status = false;
 	                    }  
 					}else{
-						$status = true;
+						$status = false;
 					}
 				}
 

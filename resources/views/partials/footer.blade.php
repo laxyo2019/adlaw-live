@@ -71,6 +71,11 @@
 
     <script src="{{asset('js/all_category.js')}}"></script>
     <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         
         tinymce.init({
 

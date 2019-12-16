@@ -15,15 +15,14 @@ use App\Models\QualMast;
 class LawSchoolsController extends Controller
 {
     public function index(){
-	    $comp_teacher =   User::with('state','city')->where('parent_id',Auth::user()->id)->where('user_flag','!=','S')->get();
+    	$id = Auth::user()->id;
+    	$user = User::with(['messages' => function($query){
+			$query->where('status',0);
+		},'members' => function($query){
+			$query->where('status','!=','S');
+		},'teams' ,'courses','students','batches'])->find($id);
 
-	    $approve_teacher = User::where('parent_id',Auth::user()->id)->where('user_flag','=','ct')->get();
-
-	    $pending_teacher = User::where('parent_id',Auth::user()->id)->where('user_flag','=','P')->get();
-
-	    $courses =UserQualification::where('user_id',Auth::user()->id)->get();
-	    
-	    return view('lawschools.dashboard.index',compact('approve_teacher','pending_teacher','comp_teacher','courses'));
+	    return view('lawschools.dashboard.index',compact('user'));
     }
 
 	public function show($id){

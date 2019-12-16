@@ -196,7 +196,7 @@
 									<div class="row form-group">
 										<div class="col-md-3 col-sm-6 col-xs-6 error-div passout_date">
 											<label class="required">Passout Date</label>
-											<input type="text" name="passout_date" class="form-control datepicker required" readonly="true" data-date-format="yyyy-mm-dd" value="{{$student->passout_date}}" placeholder="{{date('Y-m-d')}}">
+											<input type="text" name="passout_date" class="form-control datepicker " readonly="true" data-date-format="yyyy-mm-dd" value="{{$student->passout_date}}" placeholder="{{date('Y-m-d')}}">
 										</div>
 										<div class="col-md-3 col-sm-6 col-xs-6 error-div">
 											<label class="required">Mobile Number</label>
@@ -218,7 +218,7 @@
 										</div>
 										<div class="col-md-3 col-sm-6 col-xs-6 error-div">
 											<label class="">Email Address</label>
-											<input type="text" name="email" class="form-control" value="{{$student->email}}"> 
+											<input type="text" name="email" class="form-control " value="{{$student->email}}"> 
 											@error('email')
 												<span class="text-danger">
 													<strong>{{$message}}</strong>
@@ -661,9 +661,7 @@ form.validate({
 		dob:{
 			datebefore:true,
 		},
-		email:{
-			email:true,
-		},
+		
 		spec_ailment:{
 			minlength:5,
 			maxlength:100,
@@ -955,13 +953,20 @@ var qual_array = "{{count($student->stu_qual_details)}}";
 	});
 
 	$.validator.addMethod('greaterthan',function(value,element){
-		var addm_date =new Date("{{$student->addm_date}}");
-		// console.log(addm_date);
-		var passout_date = new Date(value);
-		if(passout_date.getFullYear() > addm_date.getFullYear()){
+		var status = $('.status').val();
+	
+		if(status == 'P'){
+			var addm_date =new Date("{{$student->addm_date}}");
+
+			var passout_date = new Date(value);
+			if(passout_date.getFullYear() > addm_date.getFullYear()){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		else{
 			return true;
-		}else{
-			return false;
 		}
 
 	},"Passout year is greater than addmission date");

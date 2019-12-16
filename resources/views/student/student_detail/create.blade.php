@@ -192,7 +192,7 @@
 									<div class="row form-group">
 										<div class="col-md-3 col-sm-6 col-xs-6 error-div passout_date" style="display: none;">
 											<label class="required">Passout Date</label>
-											<input type="text" name="passout_date" class="form-control datepicker required" readonly="true" data-date-format="yyyy-mm-dd" placeholder="{{date('Y-m-d')}}">
+											<input type="text" name="passout_date" class="form-control datepicker " readonly="true" data-date-format="yyyy-mm-dd" placeholder="{{date('Y-m-d')}}">
 										</div>
 
 										<div class="col-md-3 col-sm-6 col-xs-6 error-div">
@@ -215,7 +215,8 @@
 										</div>
 										<div class="col-md-3 col-sm-6 col-xs-6 error-div">
 											<label class="">Email Address</label>
-											<input type="text" name="email" class="form-control"> 
+											<input type="text" name="email" class="form-control "> 
+											{{-- <span class="text-muted">This is username of student login</span> --}}
 											@error('email')
 												<span class="text-danger">
 													<strong>{{$message}}</strong>
@@ -640,9 +641,7 @@ form.validate({
 		dob:{
 			datebefore:true,
 		},
-		email:{
-			email:true,
-		},
+		
 		spec_ailment:{
 			minlength:5,
 			maxlength:100,
@@ -689,13 +688,13 @@ form.validate({
 			qual:true,
 		},
 		'qual_marks[]':{
-			qual:true,					
+			qual:true,						
 		},
 		'qual_years[]':{
 			qual:true,
 		},
 		'qual_division[]':{
-			
+			qual:true,
 		},
 		'g_name[]':{
 			guardian:true,
@@ -881,13 +880,20 @@ $(document).ready(function(){
 		$('#row'+button_id+'').remove();
 	});
 	$.validator.addMethod('greaterthan',function(value,element){
-		var addm_date =new Date($('.addm_date').val());
-		var passout_date = new Date(value);
-		if(passout_date.getFullYear() > addm_date.getFullYear()){
-			return true;
+		var status = $('.status').val();
+	
+		if(status == 'P'){
+			var addm_date =new Date($('.addm_date').val());
+			var passout_date = new Date(value);
+			if(passout_date.getFullYear() > addm_date.getFullYear()){
+				return true;
+			}else{
+				return false;
+			}
 		}else{
-			return false;
+			return true;
 		}
+		
 
 	},"Passout year is greater than addmission date");
 

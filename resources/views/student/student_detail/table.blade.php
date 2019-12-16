@@ -1,13 +1,16 @@
 <table class="table table-striped table-bordered mytable">
 	<thead>
 		<tr>
-
-			<th>#</th>
+			@if($page == 'student_manage')
+				<th><input type="checkbox" name="selectAll" class="selectAll"></th>
+			@else
+				<th>#</th>
+			@endif
 			<th>Enrollment Number</th>
 			<th>Roll Number</th>
 			<th>Student Name</th>
-			{{-- <th>Qualification</th> --}}
-			{{-- <th>Course</th> --}}
+			<th>Qualification</th>
+			<th>Course</th>
 			<th>Year of Admission</th>
 			<th>Semester</th>
 			<th>Batch</th>
@@ -18,12 +21,16 @@
 		@php $count = 0; @endphp
 		@foreach($students as $student)
 		<tr>
-			<td>{{++$count}}</td>
+			@if($page == 'student_manage')
+				<td><input type="checkbox" name="checked[]" class="check" value="{{$student->id}}"></td>
+			@else
+				<td>{{++$count}}</td>				
+			@endif
 			<td>{{$student->enroll_no}}</td>
 			<td>{{$student->roll_no}}</td>
 			<td>{{$student->f_name .' '. $student->l_name }}</td>
-			{{-- <td>{{$student->qual_course->qual_catg_desc}}</td> --}}
-			{{-- <td>{{$student->qual_course->qual_desc}}</td> --}}
+			<td>{{$student->qual_course->qual_catg_desc}}</td>
+			<td>{{$student->qual_course->qual_desc}}</td>
 			<td>
 				{{$student->qual_year == '1' ? '1st ' : ($student->qual_year == '2' ? '2nd ' : ($student->qual_year == '3' ? '3rd ' : ($student->qual_year == '4' ? '4th' : '5th ')) )}} Year
 			</td>
@@ -37,9 +44,10 @@
 
 				<span class="mr">
 					<a href="{{route('student_detail.edit', $student->id)}}" ><i class="  fa fa-edit text-green" style="font-size: 16px;"></i></a></span>
-				<span class="mr" >
+				{{-- @if($page == 'student_detail') <span class="mr" >
 					<a href="javascript:$('#delform_{{$student->id}}').submit();"  onclick="return confirm('Are you sure?')" ><i class=" fa fa-trash text-red" style="font-size: 16px;" ></i></a>
 				</span>
+				@endif --}}
 				<span class="mr">
 					<a href="{{route('student_detail.show', $student->id )}}" ><i class=" fa fa-eye text-primary" style="font-size: 16px;"></i></a>
 					
@@ -61,7 +69,8 @@
 </style>
 <script >
 	$('.mytable').DataTable({
-		  searching:true,
-          scrolling:true,
+		lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+		searching:true,
+		scrolling:true,
 	});
 </script>

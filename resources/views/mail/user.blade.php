@@ -25,6 +25,8 @@
 									<p> Adlaw Law College have created your account please verfiy your account. your username and password is below here</p>
 								@elseif($user['user_catg_id'] == '2')
 									<p> Adlaw Law Company have created your account please verfiy your account. your username and password is below here</p>
+								@elseif($user['user_catg_id'] == '7')
+									<p>Your Law college have created your account please verfiy your account. your username and password is below here</p>
 								@endif
 
 							</div>

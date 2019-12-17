@@ -30,6 +30,8 @@ use App\Helpers\Helpers;
 class LawFirmController extends Controller
 {
 	public function index(){
+	
+
 
 		$id = Auth::user()->id;
 		$del_client = Helpers::deletedClients();
@@ -40,6 +42,9 @@ class LawFirmController extends Controller
 		},'members' => function($query){
 			$query->where('status','!=','S');
 		}])->with('teams')->find($id);
+
+
+
 
 		$case_assign = CaseLawyer::where('user_id1',$id)->where('deallocate_date',null)->get();
         $case_id = collect($case_assign)->map(function($e){

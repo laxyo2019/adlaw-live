@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="{{asset('adlaw_files/css/_all-skins.min.css')}}">
 
   <link rel="stylesheet" href="{{asset('css/parts-selector.css')}}">
+      <script src="{{ asset('js/app.js') }}" defer></script>
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
@@ -34,7 +35,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
   <script src="{{asset('tinymce/tinymce.min.js')}}"></script>
   <link rel="stylesheet" type="text/css" href="{{asset('css/dashboard/dashboard.css')}}"> 
-  
+  <link href="{{ asset('tabler/assets/css/dashboard.css') }}" rel="stylesheet" />
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet" />
 

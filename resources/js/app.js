@@ -1,31 +1,43 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+require('./bootstrap')
+require('vue-multiselect/dist/vue-multiselect.min.css')
 
-require('./bootstrap');
+import Multiselect from 'vue-multiselect'
+import PrettyCheckbox from 'pretty-checkbox-vue';
+import VueSweetalert2 from 'vue-sweetalert2'
+import Toasted from 'vue-toasted';
+// import VueFriendlyIframe from 'vue-friendly-iframe';
 
-window.Vue = require('vue');
+window.Vue = require('vue')
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+// Permissions Mixin
+// import Permissions from './mixins/Permissions';
+// Vue.mixin(Permissions);
+Vue.use(Toasted, {
+	iconPack: 'fontawesome'
+});
 
-// const files = require.context('./', true, /\.vue$/i);
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
+Vue.use(PrettyCheckbox);
+Vue.use(VueSweetalert2);
+Vue.use(require('vue-moment'));
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('user-manager', require('./components/user_manager/Home.vue').default);
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+
+// Reusable Modules
+Vue.component('multiselect', Multiselect)
+Vue.component('pagination', require('laravel-vue-pagination'));
+
+Vue.component('card-component', require('./components/re-usable/Card.vue').default)
+Vue.component('countdown-timer', require('./components/re-usable/Timer.vue').default)
+//Vue.component('notification-component', require('./components/re-usable/NotificationComponent.vue').default)
+Vue.component('users-online', require('./components/re-usable/UsersOnline.vue').default)
+Vue.component('media-component', require('./components/re-usable/MediaComponent.vue').default)
+Vue.component('comments-component', require('./components/re-usable/CommentsComponent.vue').default)
+Vue.component('user-selector', require('./components/re-usable/UserSelector.vue').default)
+
+
+// Docs
+Vue.component('docs-home', require('./modules/docs/Home.vue').default)
+Vue.component('stack-component', require('./modules/docs/Stack.vue').default)
+
 
 const app = new Vue({
     el: '#app',

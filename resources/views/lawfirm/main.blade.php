@@ -282,7 +282,7 @@
             </a>
           </li> 
           @endif
-           <li class="{{Request()->segment(1) == 'message' ? 'active' : '' }} {{Request()->segment(1) == 'sent_messages' ? 'active' : '' }} {{Request()->segment(1) == 'trash_message' ? 'active' : '' }} nav-item">
+          {{--  <li class="{{Request()->segment(1) == 'message' ? 'active' : '' }} {{Request()->segment(1) == 'sent_messages' ? 'active' : '' }} {{Request()->segment(1) == 'trash_message' ? 'active' : '' }} nav-item">
             <a class="nav-link" href="{{route('message.index')}}">
               <i class="fa fa-envelope"></i>
               <span >Mailbox </span>
@@ -293,7 +293,14 @@
               @endif
 
             </a>
-          </li>
+          </li> --}}
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('docs.home')}}">
+            <i class="fa fa-file"></i>
+            <span>Documents</span>
+            </a>
+        </li>
+
       
         <li class="{{Request()->segment(1) == 'calendar' ? 'active' : ''}} nav-item">
             <a class="nav-link" href="{{route('calendar.index')}}">
@@ -378,7 +385,7 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper" id="app">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1 class="text-capitalize">{{__('Dashboard')}}</h1>

@@ -271,3 +271,28 @@ Route::group(['middleware' => ['role:lawyer|lawcompany|lawcollege|admin']], func
 	Route::post('/member_cases', 'Teams\UsersController@member_cases')->name('member_cases');
 
 });
+
+
+
+Route::group(['prefix' => 'docs', 'namespace' => 'Docs'], function ()  {
+	// resources
+	Route::resource('/stacks', 'FilestacksController');
+	Route::resource('/documents', 'DocsController');
+	Route::resource('/folders', 'FoldersController');
+	Route::resource('/media', 'MediaController');
+
+	// gets
+	Route::get('/', 'MainController@index')->name('docs.home');
+	Route::get('/files/download/{ids}', 'DocsController@download');
+	Route::get('/stacks/search/{keyword}', 'FilestacksController@search');
+	Route::get('/back_to_home/{stack_id}', 'FilestacksController@backToHome');
+	
+	// posts
+	Route::post('/move_folder', 'FoldersController@move_folder');
+	Route::post('/stacks/get_count', 'FilestacksController@get_count');
+	Route::post('/documents/multi_delete', 'DocsController@multi_delete');
+	Route::post('/files/download', 'DocsController@download');
+	Route::post('/documents/move_file', 'DocsController@move_file');
+	Route::post('/documents/multi_cut_paste', 'DocsController@multi_cut_paste');
+	Route::post('/documents/upload_folder', 'DocsController@uploadFolder');
+});

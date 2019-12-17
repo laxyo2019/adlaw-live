@@ -58,9 +58,23 @@
 						</select>
 					</div>
 					<div class="col-md-2">
-						<button class="btn btn-sm btn-primary" id="btnFilter">Filter</button>
+						<select class="form-control" name="status">
+							<option value="">Select Status</option>
+							<option value="P">Passout</option>
+							<option value="D">Dropout</option>
+						</select>
 					</div>
-			
+				</div>
+				<div class="row" style="margin-top: 20px;">
+					<div class="col-md-12 text-center ">
+						<button class="btn btn-md btn-success" id="btnFilter">Filter</button>
+					</div>
+				</div>
+
+				<div class="row" style="margin-top: 20px;">
+					<div class="col-md-12 table-responsive" id="tableFilter">
+						@include('student.student_detail.table')
+					</div>
 				</div>
 			</div>
 		</div>
@@ -74,6 +88,30 @@
 			var qual_catg_code = $(this).val();
 			qual_course(qual_catg_code);
 			qual_docs(qual_catg_code);
+		});
+
+		$('#btnFilter').on('click',function(e){
+			e.preventDefault();
+			var qual_catg_code = $('select[name="qual_catg_code"] option:selected').val();
+			var qual_code = $('select[name="qual_code"] option:selected').val();
+			var batch_id = $('select[name="batch"] option:selected').val();
+			var qual_year = $('select[name="year"] option:selected').val();
+			var semester = $('select[name="semester"] option:selected').val();
+			var status = $('select[name="status"] option:selected').val();
+			var page = 'student_record';
+			if(batch_id !='' && qual_year != '' && semester !='' && qual_catg_code !='' && qual_code != '' && status != '' ){
+				$.ajax({
+					type:'POST',
+					url: "{{route('student_filter')}}",
+					data: {qual_catg_code:qual_catg_code,qual_code: qual_code, batch_id:batch_id,qual_year:qual_year,semester:semester,status:status, page:page},
+					success:function(res){
+						$('#tableFilter').empty().html(res);
+					}
+				});
+			}else{
+				alert('please select all field');
+			}
+
 		});
 	});
 </script>

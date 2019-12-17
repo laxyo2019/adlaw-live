@@ -122,4 +122,10 @@ class Helpers
             }]);
             return $query;
 	}
+
+	public static function filter_student($students, $status){
+    	return collect($students)->filter(function($e) use($status){
+    			return $e['status'] == $status;
+    	});
+    }
 }

@@ -1,87 +1,101 @@
 @extends('lawschools.main')
 @section('content')
 <section class="content">
+@role('lawcollege')
 <div class="row">
-  @role('lawcollege')
-	 <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-aqua">
-            <div class="inner">
-              <h3>{{ count($user->members) }}</h3>
-
-              <p>Total Teachers</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-user"></i>
-            </div>
-            <a href="{{route('teams.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
+   <div class="col-md-4 ">
+      <div class="small-box bg-yellow">
+        <div class="inner">
+          <h3>{{count($user->students)}}</h3>
+          <h4>Total Students</h4>
+          <span>Running: {{count($running_student)}} | Passout : {{count($passout_student)}} | Dropout : {{count($dropout_student)}} </span>
         </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3>{{count($user->students)}}</h3>
-
-              <p>Total Students</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-graduation-cap"></i>
-            </div>
-            <a href="{{route('student.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
+        <div class="icon">
+          <i class="fa fa-users"></i>
         </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3>{{count($user->teams)}}</h3>
+        <a href="{{route('student.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
 
-              <p>Total Teams</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-group"></i>
-            </div>
-            <a href="{{route('teams.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
+    <div class="col-md-4 ">
+      <div class="small-box bg-aqua">
+        <div class="inner">
+          <h3>{{count($user->members)}}</h3>
+          <h4>Total Teachers</h4>
+          <br>          
         </div>
-        <!-- ./col -->
-
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-red">
-            <div class="inner">
-              <h3>{{count($user->courses)}}</h3>
-
-              <p>Total Courses</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-gavel"></i>
-            </div>
-            <a href="{{route('course.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
+        <div class="icon">
+          <i class="fa fa-users"></i>
         </div>
-        <!-- ./col -->
- </div>	
- <div class="row">
-   <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-blue">
-            <div class="inner">
-              <h3>{{count($user->batches)}}</h3>
+        <a href="{{route('teams.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
 
-              <p>Total Batches</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-book"></i>
-            </div>
-            <a href="{{route('batches.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
+    <div class="col-md-4 ">
+      <div class="small-box bg-green">
+        <div class="inner">
+          <h3>{{count($user->teams)}}</h3>
+          <h4>Total Teams</h4>
+          <br>          
         </div>
- </div>
- @endrole
+        <div class="icon">
+          <i class="fa fa-book"></i>
+        </div>
+        <a href="{{route('teams.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 ">
+      <div class="small-box bg-blue">
+        <div class="inner">
+          <h3>{{count($user->courses)}}</h3>
+          <h4>Total Courses</h4>
+          <br>          
+        </div>
+        <div class="icon">
+          <i class="fa fa-book"></i>
+        </div>
+        <a href="{{route('course.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+    <div class="col-md-4 ">
+      <div class="small-box bg-orange">
+        <div class="inner">
+          <h3>{{count($user->batches)}}</h3>
+          <h4>Total Batches</h4>
+          <br>          
+        </div>
+        <div class="icon">
+          <i class="fa fa-briefcase"></i>
+        </div>
+        <a href="{{route('batches.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+</div>
+
+<div class="row"> 
+  <div class="col-md-6" >
+    <div class="box box-primary bg-default" style="height: 300px;">
+      <div class="box-header with-border bg-blue">
+        <i class="fa fa-list"></i>
+        <h3 class="box-title">Today's Birthday</h3>
+      </div>
+      <div class="box-body" >
+        <ul class="todo-list" style="height: 200px;">
+          @foreach($todays_birthday as $value)
+            <li class="text-capitalize">{{$value->f_name .' '. $value->l_name}}</li> 
+          @endforeach
+        </ul>
+      </div>
+      <!-- /.box-body -->
+      <div class="box-footer clearfix no-border">
+        
+      </div>
+    </div>
+  </div>
+</div>
+@endrole
 	<div class="row">
     <div class="col-md-12">
       <div class="box">

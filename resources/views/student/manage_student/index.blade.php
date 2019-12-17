@@ -168,12 +168,13 @@
 			var batch_id = $('select[name="batch"] option:selected').val();
 			var qual_year = $('select[name="year"] option:selected').val();
 			var semester = $('select[name="semester"] option:selected').val();
+			var status = 'R';
 			var page = 'student_manage';
 			if(batch_id !='' && qual_year != '' && semester !='' && qual_catg_code !=''  && qual_code != ''){
 				$.ajax({
 					type:'POST',
 					url: "{{route('student_filter')}}",
-					data: {qual_catg_code:qual_catg_code,qual_code:qual_code,batch_id:batch_id,qual_year:qual_year,semester:semester,page:page},
+					data: {qual_catg_code:qual_catg_code,qual_code:qual_code,batch_id:batch_id,qual_year:qual_year,semester:semester,page:page,status:status},
 					success:function(res){
 						$('#tableFilter').empty().html(res);
 						$('#tableFooter').show();

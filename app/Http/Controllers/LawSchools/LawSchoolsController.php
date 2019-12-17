@@ -12,6 +12,7 @@ use App\Models\State;
 use App\Models\UserQualification;
 use App\Models\QualCatg;
 use App\Models\QualMast;
+use App\Helpers\Helpers;
 class LawSchoolsController extends Controller
 {
     public function index(){
@@ -21,8 +22,15 @@ class LawSchoolsController extends Controller
 		},'members' => function($query){
 			$query->where('status','!=','S');
 		},'teams' ,'courses','students','batches'])->find($id);
+    	$running_student = Helpers::filter_student($user->students,$status ='R');
+    	$passout_student = Helpers::filter_student($user->students,$status ='P');
+    	$dropout_student = Helpers::filter_student($user->students,$status ='D');
 
-	    return view('lawschools.dashboard.index',compact('user'));
+    	$todays_birthday = collect($running_student)->filter(function($e){
+    		return date('m-d',strtotime($e['dob'])) == date('m-d');
+    	});
+    	// return $todays_birthday;
+	    return view('lawschools.dashboard.index',compact('user','running_student','passout_student','dropout_student','todays_birthday'));
     }
 
 	public function show($id){

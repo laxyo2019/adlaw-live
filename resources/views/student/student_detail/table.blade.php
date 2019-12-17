@@ -42,8 +42,10 @@
 				<form action="{{route('student_detail.destroy', $student->id)}}" method="POST" id="delform_{{$student->id}}">
 				@method('DELETE')
 
-				<span class="mr">
+				@if($page != 'student_record')
+					<span class="mr">
 					<a href="{{route('student_detail.edit', $student->id)}}" ><i class="  fa fa-edit text-green" style="font-size: 16px;"></i></a></span>
+				@endif
 				{{-- @if($page == 'student_detail') <span class="mr" >
 					<a href="javascript:$('#delform_{{$student->id}}').submit();"  onclick="return confirm('Are you sure?')" ><i class=" fa fa-trash text-red" style="font-size: 16px;" ></i></a>
 				</span>

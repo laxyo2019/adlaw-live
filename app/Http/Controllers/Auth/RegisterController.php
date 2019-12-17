@@ -169,7 +169,7 @@ class RegisterController extends Controller
     {
         $user_catgs = Role::whereNotIn('id',['1','6','7'])->get();
 
-        return view('auth.register', compact('user_catgs', 'states'));
+        return view('auth.register', compact('user_catgs'));
     }
     
     protected function registered(Request $request, $user)

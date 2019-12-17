@@ -26,8 +26,13 @@ class StudentDashboardController extends Controller
 {
     public function index(){
     	$students = StudentMast::where('user_id',Auth::user()->id)->get();
-    	return view('student.index',compact('students'));
+    	$running_student = Helpers::filter_student($students,$status ='R');
+    	$passout_student = Helpers::filter_student($students,$status ='P');
+    	$dropout_student = Helpers::filter_student($students,$status ='D');
+    	
+    	return view('student.index',compact('students','running_student','passout_student','dropout_student'));
     }
+   
     public function upload_student(){
     	return view('student.upload_student.index');
     }

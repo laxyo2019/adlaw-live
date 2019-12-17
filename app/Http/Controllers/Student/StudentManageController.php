@@ -70,6 +70,13 @@ class StudentManageController extends Controller
 	public function student_record(){
 		$batches = BatchMast::where('user_id',Auth::user()->id)->orderBy('name','DESC')->get();
     	$qual_catgs = QualCatg::where('qual_catg_code', '!=',4)->get();
-		return view('student.records.index',compact('batches', 'qual_catgs'));
+    	$students = array();
+    	$page = 'student_record';
+		return view('student.records.index',compact('batches', 'qual_catgs','students','page'));
+	}
+
+	public function student_record_filter(){
+		
 	}
 }
+

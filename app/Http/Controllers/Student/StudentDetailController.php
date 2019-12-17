@@ -399,7 +399,7 @@ class StudentDetailController extends Controller
                                 ->where('batch_id',request()->batch_id)
                                 ->where('qual_year',request()->qual_year)
                                 ->where('semester',request()->semester)
-                                ->where('status','R')
+                                ->where('status',request()->status)
                                 ->where('user_id',Auth::user()->id)->get();
         $page = request()->page; 
         return view('student.student_detail.table',compact('students','page'));

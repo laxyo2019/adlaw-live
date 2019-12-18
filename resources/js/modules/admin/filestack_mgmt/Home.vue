@@ -1,26 +1,26 @@
 <template>
 	<div class="my-3 my-md-5">
-    <div class="container" v-if="isEmpty(focusedFilestack)">
-				<div class="card">
-					<div class="card-header">
-						<b class="col-2">Filestacks</b>
-						<div class="form-group col-6">
+    <div class="" v-if="isEmpty(focusedFilestack)">
+		<div class="box">
+			<div class="box-header">
+				<b class="col-md-2">Filestacks</b>
+						<div class="form-group col-md-6">
 							<input type="text" class="mt-2 form-control" placeholder="Search a filestack..." v-model="searchKey" @keyup="getResults">
 						</div>
-						<div class="col-4 text-right">
+						<div class="col-md-4 text-right">
 							<a style="color:#fff" class="btn btn-warning btn-sm mr-2" @click.prevent="openForm=true">
 								<i class="fa fa-plus"></i>
 								New Filestack
 							</a>
-							<a style="color:#fff" class="btn btn-primary btn-sm mr-2" v-for="tag in tags" @click.prevent="searchKey='';type=tag.ident;focusedEditFilestack={};getResults()">{{tag.name.toUpperCase()}}</a>
+							<a style="color:#fff" class="btn btn-primary btn-sm mr-2" v-for="tag in tags" @click.prevent="searchKey='';type=tag.ident;focusedEditFilestack={};getResults()" v-if="tag.name != 'team'">{{tag.name.toUpperCase()}}</a>
 
-							<a style="color:#fff" class="btn btn-info btn-sm mr-2" title="Update Permissions column" @click.prevent="updateIndex()">
+							<!-- <a style="color:#fff" class="btn btn-info btn-sm mr-2" title="Update Permissions column" @click.prevent="updateIndex()">
 								<i class="fa fa-wrench"></i>
-							</a>
+							</a> -->
 
 						</div>
 					</div>
-					<div class="card-body" v-if="openForm">
+					<div class="box-body" v-if="openForm">
 						<div class="row">
 							<div class="col-sm-6 col-xs-12">
 								<label class="" for="">Title :</label>
@@ -53,7 +53,7 @@
 							</div>
 					</div>
 					<!-- edit title of filestack -->
-					<div class="card-body" v-if="!isEmpty(focusedEditFilestack)">
+					<div class="box-body" v-if="!isEmpty(focusedEditFilestack)">
 						<div class="row">
 							<label class="offset-3 col-sm-1 col-xs-12" for="">Title :</label>
 							<div class="form-group col-sm-4 com-xs-12">
@@ -66,10 +66,10 @@
 							</div>
 					</div>
 					<!-- list of all filestacks -->
-					<div class="card-body">
+					<div class="box-body">
 						<div>
 							<div class="table-responsive" style="min-height: 15rem;">
-								<table class="table table-hover table-outline table-vcenter text-nowrap card-table">
+								<table class="table table-hover table-outline table-vcenter text-nowrap box-table">
 									<thead>
 										<tr>
 											<th>#</th>
@@ -111,7 +111,7 @@
 					</div>
 				</div>
     </div>
-    <div class="container" v-else>
+    <div class="" v-else>
     		<FilestackComponent	
 					@unfocus="focusedFilestack={}"
 					:users="users"
@@ -151,7 +151,8 @@ export default {
 		},
 	methods: {
 		get_filestackUsers(){
-			axios.get(`/filestacks/get_users`).then(response => {
+			axios.post('/filestacks/get_users').then(response => {
+				console.log(response);
 				 this.filestackUsers = response.data;
 				// Vue.toasted.show("Updated Successfully", {
 				// 		type : 'success',
@@ -228,7 +229,7 @@ export default {
 			})
 		},
 		get_tags(){
-			axios.post('/admin/filestack-mgmt/tags')
+			axios.post('/filestack-mgmt/tags')
 				.then(response => {
 					this.tags = response.data;
 					this.filteredTags = this.tags.filter(t => (t.ident !=3));

@@ -272,6 +272,15 @@ Route::group(['middleware' => ['role:lawyer|lawcompany|lawcollege|admin']], func
 
 });
 
+Route::get('/filestack-mgmt', 'Admin\FilestackMgmtController@index')->name('admin.filestack-mgmt');
+Route::resource('/filestacks', 'Admin\FilestackMgmtController');
+Route::post('/filestacks/get_users', 'Admin\FilestackMgmtController@get_users');
+Route::post('/filestacks/paginate', 'Admin\FilestackMgmtController@search');
+Route::post('/filestacks/updateIndex', 'Admin\FilestackMgmtController@updateIndex');
+Route::post('/filestack-mgmt/update_permissions', 'Admin\FilestackMgmtController@update_permissions');
+Route::post('/filestack-mgmt/users', 'Admin\FilestackMgmtController@get_all_users');
+Route::post('/filestack-mgmt/tags', 'Admin\FilestackMgmtController@get_filestack_type');
+
 
 
 Route::group(['prefix' => 'docs', 'namespace' => 'Docs'], function ()  {

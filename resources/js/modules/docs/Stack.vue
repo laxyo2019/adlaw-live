@@ -61,201 +61,151 @@
 			<button type="button" v-scroll-to="{ element: '#fileForm', duration: 2000 }" 
 					style="display: none;" ref="scroll_2"></button>
 			<div class="row" id="fileForm" v-show="env.fileFormOpened">
-				<div class="col-md-2 form-group">
-					 <div class="form-label" >File Type</div>
-					<div class="custom-controls-stacked">
-					<label class="custom-control custom-radio" v-for="filetype in meta.filetypes">
-					<input v-if="! (filetype.name == 'shared' && stack.type == 2)" type="radio" class="custom-control-input" name="example-radios" :value="filetype.id" v-model="upload.type">
-					<div  v-if="! (filetype.name == 'shared' && stack.type == 2)"  class="custom-control-label">{{ filetype.name }}</div>
-					</label>
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-2 form-group">
+							<div class="" ><h4 class="font-weight-bold">File Type</h4></div>
+							<p-radio class="p-default p-round"  
+							v-model="upload.type"
+							v-for="filetype in meta.filetypes"
+							v-if="! (filetype.name == 'shared' && stack.type == 2)"
+							color="success"
+							:value="filetype.id"
+							:key="filetype.id">{{ filetype.name }}</p-radio>
+								
+								<!-- <div class="custom-controls-stacked">
+
+								<label class="custom-control custom-radio" v-for="filetype in meta.filetypes">
+								<input v-if="! (filetype.name == 'shared' && stack.type == 2)" type="radio" class="custom-control-input" name="example-radios" :value="filetype.id" v-model="upload.type">
+								<div  v-if="! (filetype.name == 'shared' && stack.type == 2)"  class="custom-control-label">{{ filetype.name }}</div>
+								</label>
+								</div> -->
+						</div>
+
+						<div class="form-group col-md-10">
+							<div class=""><h4 class="font-weight-bold">File Name</h4></div>
+							<div class="">
+							<span class="upload_file_css" v-if="upload.file != ''" v-for="(file,index) in upload.files">{{ file.name }}</span>
+							<span class="upload_file_css" v-else v-for="(file,index) in upload.files">{{ upload.title[index] }}</span>
+							</div>
+							<!-- <div class="form-group col-2">
+							<div class="form-label">Upload Progress</div>
+							{{ upload.progress[index] }}
+							</div> -->
+							<input type="file" ref="fileInput" @change="createFile()" class="d-none" multiple>     
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-md-10  mb-5">
+					      <textarea v-if="env.fileEditMode || singleFile" v-model="upload.note" class="form-control" placeholder="Enter Note"></textarea>
+					    </div>
+					</div>
+					<div class="row">						
+					    <div class="form-group col-md-10 offset-1 mb-5">
+							<user-selector 
+								:users="users" v-if="upload.type == 5"
+								:selectedUsersProp="shared_with_users" 
+								>
+							</user-selector>
+					    </div>
+					</div>
+					<div class="row">
+						  <div class="form-group col-md-12 text-center">
+					    	<button class="btn btn-pill btn-warning" 
+					    		:class="[env.uploading ? 'btn-loading' : '']"
+					    	  @click="updateFile()"
+					    	  v-if="env.fileEditMode">
+					    	  <i class="fe fe-upload mr-2"></i>Update
+					    	</button>
+					    	<button class="btn btn-pill btn-success" 
+					    		:class="[env.uploading ? 'btn-loading' : '']" 	  
+					    	  @click="storeFile()"
+					    	  v-else>
+					    	  <i class="fe fe-upload mr-2"></i>Store
+					    	</button>
+
+					    	<button class="btn btn-pill btn-outline-dark ml-2" 
+					    		v-show="!env.uploading"
+					    	  @click="env.fileFormOpened = env.fileEditMode = singleFile = false; upload = emptyFileForm();">Cancel
+					    	</button>
+					    </div> 
+
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-
-		<div class="row">
-			<div class="col-12 mb-2">
-
-			</div>
-			<div class="col-md-12">
-				<!-- <button type="button" v-scroll-to="{ element: '#folderForm', duration: 2000 }" style="display: none;" ref="scroll_1"></button>
-				
-				<div id="folderForm" v-show="env.folderFormOpened">
-					<div class="form-group">
-						<input type="text" class="col-lg-4 offset-lg-4 col-xl-4 offset-xl-4 form-control" placeholder="Name your folder..." 
-						v-model="focusedFolder.title" v-if="env.folderEditMode" @keyup.enter="updateFolder">
-						<input type="text" class="col-lg-4 offset-lg-4 col-xl-4 offset-xl-4 form-control" placeholder="Name your folder..." v-model="folder.title" @keyup.enter="storeFolder" v-else>
-					</div>
-					<div class="form-group col-12 text-center">
-						
-						<button class="btn btn-pill btn-warning" @click="updateFolder"
-							v-if="env.folderEditMode">Update
-						</button>
-						<button class="btn btn-pill btn-success" @click="storeFolder"
-							v-else>Create
-						</button>
-					
-						<button class="btn btn-pill btn-outline-dark ml-2" @click="env.folderFormOpened = env.folderEditMode = false">Cancel</button>
-					</div>
-				</div> -->
-
-				
-
-				<!-- File Upload Form -->
-			  <div id="fileForm" class="row pl-5 pr-5 pt-5" v-show="env.fileFormOpened">
-			    <div class="form-group col-2">
-			      <div class="form-label">File Type</div>
-			      <div class="custom-controls-stacked">
-			        <label class="custom-control custom-radio" v-for="filetype in meta.filetypes">
-			          <input v-if="! (filetype.name == 'shared' && stack.type == 2)" type="radio" class="custom-control-input" name="example-radios" :value="filetype.id" v-model="upload.type">
-			          <div  v-if="! (filetype.name == 'shared' && stack.type == 2)"  class="custom-control-label">{{ filetype.name }}</div>
-			        </label>
-			      </div>
-			    </div>
-
-			    <div class="form-group col-md-10">
-
-			      	<div class="form-label">File Name</div>
-				      <div class="">
-				      	<span class="upload_file_css" v-if="upload.file != ''" v-for="(file,index) in upload.files">{{ file.name }}</span>
-				     		<span class="upload_file_css" v-else v-for="(file,index) in upload.files">{{ upload.title[index] }}</span>
-				      </div>
-
-				     	<!-- <div class="form-group col-2">
-					      <div class="form-label">Upload Progress</div>
-					      {{ upload.progress[index] }}
-					    </div> -->
-
-
-			      <input type="file" ref="fileInput" @change="createFile()" class="d-none" multiple>     
-			    </div>
-			    
-
-		     	<div class="form-group col-md-10 offset-1 mb-5">
-			      <textarea v-if="env.fileEditMode || singleFile" v-model="upload.note" class="form-control" placeholder="Enter Note"></textarea>
-			    </div>
-			    <div class="form-group col-md-10 offset-1 mb-5">
-			      <!-- <p-check v-if="upload.type == 11" 
-			        v-model="upload.shared_with_users"
-			        v-for="user in users"
-			        class="col-3" 
-			        color="success"
-			        :value="user.id"
-			        :key="user.id"
-			        >{{user.name}}
-			      </p-check> -->
-
-						<user-selector 
-							:users="users" v-if="upload.type == 11"
-							:selectedUsersProp="shared_with_users" 
-							@input="agenda[selectedTab] = $event">
-						</user-selector>
-			    </div>
-
-			    <div class="form-group col-12 text-center">
-			    	<button class="btn btn-pill btn-warning" 
-			    		:class="[env.uploading ? 'btn-loading' : '']"
-			    	  @click="updateFile()"
-			    	  v-if="env.fileEditMode">
-			    	  <i class="fe fe-upload mr-2"></i>Update
-			    	</button>
-			    	<button class="btn btn-pill btn-success" 
-			    		:class="[env.uploading ? 'btn-loading' : '']" 	  
-			    	  @click="storeFile()"
-			    	  v-else>
-			    	  <i class="fe fe-upload mr-2"></i>Store
-			    	</button>
-
-			    	<button class="btn btn-pill btn-outline-dark ml-2" 
-			    		v-show="!env.uploading"
-			    	  @click="env.fileFormOpened = env.fileEditMode = singleFile = false; upload = emptyFileForm();">Cancel
-			    	</button>
-			    </div>  
-			  </div>
-
-			  <!-- <div id="bulkCreateForm" class="row pl-5 pr-5 pt-5">
-			    <div class="form-group col-12">
-			      <input type="file" ref="bulkFolder" @change="bulkCreate()" multiple directory webkitdirectory>     
-			    </div>
-		    	<div class="form-group col-12 text-center">
-			    	<button class="btn btn-pill btn-success" @click="bulkFolderStore()">
-			    		<i class="fe fe-upload mr-2"></i>Upload
-			    	</button>
-
-			    	<button class="btn btn-pill btn-outline-dark ml-2" v-show="!env.uploading"
-			    	  @click="env.uploadFolder = false; upload = emptyUploadForm();">Cancel</button>
-			    </div>  
-				</div> -->
-
-				<nav aria-label="breadcrumb" class="sticky" >
-				  <ol class="breadcrumb">
-				  	<li class="breadcrumb-item">
-				  		<a href="#" class="text-decoration-none" @click.prevent="backToHome">
-				  			<i class="fe fe-home fa-lg"></i>
-				  			<span>{{stack.title}}</span>
-				  		</a>
-				  	</li>
-				    <li class="breadcrumb-item" :class="{active : (crumb.id === location.folder.id) }"
-				    	v-for="(crumb, index) in breadcrumbs">
-				    	<span v-if="crumb.id === location.folder.id" v-text="crumb.title"></span>
-				    	<span v-else>
-				    		<a href="#" @click.prevent="levelUp(crumb.id, index)" v-text="crumb.title"></a>
-				    	</span>
-				    </li>
-				  </ol>
+		<div class="col-md-11  mt-4 mb-4">
+		<nav aria-label="breadcrumb" class="sticky" >
+		  <ol class="breadcrumb">
+		  	<li class="breadcrumb-item">
+		  		<a href="#" class="text-decoration-none" @click.prevent="backToHome">
+		  			<i class="fe fe-home fa-lg"></i>
+		  			<span>{{stack.title}}</span>
+		  		</a>
+		  	</li>
+		    <li class="breadcrumb-item" :class="{active : (crumb.id === location.folder.id) }"
+		    	v-for="(crumb, index) in breadcrumbs">
+		    	<span v-if="crumb.id === location.folder.id" v-text="crumb.title"></span>
+		    	<span v-else>
+		    		<a href="#" @click.prevent="levelUp(crumb.id, index)" v-text="crumb.title"></a>
+		    	</span>
+		    </li>
+		  </ol>
 				   	<!-- #refactor  all 4 option in dropdown (can merge single and multi move doc actions)-->
-				  <div class="" v-if="isEmpty(focusedMoveDoc)">
-					  <button style="min-height: 100%;top: 0;right: 0;position: absolute;" 
-									  class="btn btn-info" 
-									  v-if="selectedDoc.length > 0"
-									  @click="openGroupDocMenu=!openGroupDocMenu">
-					  	<i class="fe fe-ellipsis-v"></i>
-					  </button>
-					  <ul style="list-style: none;
-								    position: absolute;
-								    top: 42px;
-								    right: 0px;
-								    background: rgb(255, 255, 255);
-								    padding: 12px;
-								    border: solid 1px #827f7f;
-								    box-shadow: 4px 4px #c5c2c2;"
-								    v-if="openGroupDocMenu && selectedDoc.length > 0">
-					  	<!-- <li>
-					  		<a :href="`/docs/files/download/${selectedDoc.toString()}`" class="d-block p-2" style="color: #585757">
-								 	<i class="fa fa-download mr-2"></i>Download ({{selectedDoc.length}})
-								</a>
-					  	</li> -->
-					  	<li>
-					  		<a href="#" @click.prevent="deleteMultiDoc();openGroupDocMenu=!openGroupDocMenu" class="d-block p-2" style="color: #585757">
-								 	<i class="fe fe-trash mr-2"></i>Delete ({{selectedDoc.length}})
-								</a>
-					  	</li>
-					  	<li>
-					  		<a href="#" @click.prevent="cutMultiDoc()" class="d-block p-2" style="color: #585757">
-								 	<i class="fe fe-scissors mr-2"></i>Cut
-								</a>
-					  	</li>
-					  	<!-- <li>
-					  		<a href="#" @click.prevent="bulkAction='copy';openGroupDocMenu=!openGroupDocMenu" class="d-block p-2" style="color: #585757">
-								 	<i class="fe fe-files-o mr-2"></i>Copy
-								</a>
-					  	</li> -->
-					  	<li>
-					  		<a href="#" @click.prevent="selectAllDoc();openGroupDocMenu=!openGroupDocMenu" class="d-block p-2" style="color: #585757">
-								 	<i class="fe fe-check-square-o mr-2"></i>Select All
-								</a>
-					  	</li>
-					  	<li>
-					  		<a href="#" @click.prevent="selectedDoc=[];bulkAction='';openGroupDocMenu=!openGroupDocMenu" class="d-block p-2" style="color: #585757">
-								 	<i class="fa fa-times mr-2"></i>Unselect All
-								</a>
-					  	</li>
-					  </ul>
-					</div>
-				</nav>
-				<!-- Loop for folders -->
-				<div @contextmenu.prevent="$refs.moveFolderMenu.open">
+		  <div class="" v-if="isEmpty(focusedMoveDoc)">
+			  <button style="min-height: 66%;top: 0;right: 0;position: absolute;" 
+							  class="btn btn-info" 
+							  v-if="selectedDoc.length > 0"
+							  @click="openGroupDocMenu=!openGroupDocMenu">
+			  	<i class="fa fa-ellipsis-v"></i>
+			  </button>
+			  <ul style="list-style: none;
+						    position: absolute;
+						    top: 42px;
+						    right: 0px;
+						    background: rgb(255, 255, 255);
+						    padding: 12px;
+						    border: solid 1px #827f7f;
+						    box-shadow: 4px 4px #c5c2c2;"
+						    v-if="openGroupDocMenu && selectedDoc.length > 0">
+			  	<!-- <li>
+			  		<a :href="`/docs/files/download/${selectedDoc.toString()}`" class="d-block p-2" style="color: #585757">
+						 	<i class="fa fa-download mr-2"></i>Download ({{selectedDoc.length}})
+						</a>
+			  	</li> -->
+			  	<li class="p-2">
+			  		<a href="#" @click.prevent="deleteMultiDoc();openGroupDocMenu=!openGroupDocMenu" class="d-block p-2" style="color: #585757;">
+						 	<i class="fe fe-trash mr-2"></i>Delete ({{selectedDoc.length}})
+						</a>
+			  	</li>
+			  	<li class="p-2">
+			  		<a href="#" @click.prevent="cutMultiDoc()" class="d-block p-2" style="color: #585757">
+						 	<i class="fe fe-scissors mr-2"></i>Cut
+						</a>
+			  	</li>
+			  	<!-- <li>
+			  		<a href="#" @click.prevent="bulkAction='copy';openGroupDocMenu=!openGroupDocMenu" class="d-block p-2" style="color: #585757">
+						 	<i class="fe fe-files-o mr-2"></i>Copy
+						</a>
+			  	</li> -->
+			  	<li class="p-2">
+			  		<a href="#" @click.prevent="selectAllDoc();openGroupDocMenu=!openGroupDocMenu" class="d-block p-2" style="color: #585757">
+						 	<i class="fa fa-check-square-o mr-2"></i>Select All
+						</a>
+			  	</li>
+			  	<li class="p-2">
+			  		<a href="#" @click.prevent="selectedDoc=[];bulkAction='';openGroupDocMenu=!openGroupDocMenu" class="d-block p-2" style="color: #585757">
+						 	<i class="fa fa-times mr-2"></i>Unselect All
+						</a>
+			  	</li>
+			  </ul>
+			</div>
+		</nav>			
+		</div>
+
+		<div class="col-md-12">
+			<!-- Loop for folder -->
+			<div @contextmenu.prevent="$refs.moveFolderMenu.open">
 				<span v-if="folders.length > 0">
 					<div class="row row-cards">
 						<div class="col-6 col-sm-4 col-lg-2" v-for="folder in folders" :key="folder.id">
@@ -276,7 +226,9 @@
 					<p class="text-center">No folders yet</p>
 				</span>
 			</div>
-				<hr>
+			<hr>
+			<div class="col-md-12">
+			
 				<!-- Loop for documents -->
 				<div @contextmenu.prevent="$refs.moveDocMenu.open">
 					<span v-if="docs.length > 0">
@@ -325,7 +277,9 @@
 						<p class="text-center" style="min-height: 200px">No docs yet</p>
 					</span>
 				</div>
-			
+			</div>
+
+			<div class="col-md-12 mt-2">
 				<vue-context ref="moveDocMenu">
 					<template slot-scope="child">
 				    <li>
@@ -378,8 +332,11 @@
 			    	</template>
 				</vue-context>
 
+
 			</div>
+
 		</div>
+	</div>
 </div>
 </template>
 
@@ -422,6 +379,8 @@
 				focusedMoveDoc: {}, // file being manipulated
 				focusedMoveFolder: {}, // folder being manipulated
 				moveAction:null,
+				shared_with_users : [],
+
 			}
 		},
 		created() {
@@ -602,7 +561,7 @@
 			    files: [],
 			    progress: [],
 			    shared_with_users: [],
-			    type: 10,
+			    type: 4,
 			    note:''
 			  }
 			},
@@ -833,6 +792,7 @@
     	storeFile(){
   	  	this.env.uploading = true;
   	    let formData = new FormData();
+  	    console.log(formData);
   	    let scope = this;
   	     for( var i = 0; i < this.upload.files.length; i++ ){		
           let file = this.upload.files[i];

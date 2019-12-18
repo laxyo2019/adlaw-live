@@ -69,6 +69,10 @@
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script>
 
+    <script src="{{asset('plugins/iCheck/icheck.min.js')}}"></script>
+
+
+
     <script src="{{asset('js/all_category.js')}}"></script>
     <script type="text/javascript">
         $.ajaxSetup({

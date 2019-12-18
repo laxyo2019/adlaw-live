@@ -294,7 +294,7 @@
 
             </a>
           </li> --}}
-        <li class="nav-item">
+        <li class="{{Request()->segment(1) == 'docs' ? 'active' : ''}} {{Request()->segment(1) == 'filestack-mgmt' ? 'active' : ''}}  nav-item">
             <a class="nav-link" href="{{route('docs.home')}}">
             <i class="fa fa-file"></i>
             <span>Documents</span>

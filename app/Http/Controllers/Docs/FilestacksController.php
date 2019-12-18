@@ -7,6 +7,7 @@ use App\Models\Document;
 use App\Models\Filestack;
 use App\Models\Folder;
 use App\User;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -38,10 +39,10 @@ class FilestacksController extends Controller
 
   public function search($keyword)
   {
-
-    $filestacks = Filestack::where('type', 1) // user filestacks
+    $filestack_id = get_user_filestack_id();    
+    $filestacks = Filestack::with('user_owns')->where('type', 1) // user filestacks
           ->where('title', 'LIKE', '%'.$keyword.'%')
-          ->orderBy('title', 'asc')
+          ->whereIn('id',$filestack_id)
           ->get();
       
     return response()->json($filestacks, 200);
@@ -49,7 +50,8 @@ class FilestacksController extends Controller
 
   public function show($id)
   {
-    $users = User::all();
+    $users = User::where('parent_id', auth()->user()->id)->get();
+    $users[] =Auth::user();
     $stack = Filestack::find($id);
 
 

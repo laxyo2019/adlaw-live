@@ -1,17 +1,18 @@
 <template>
 	<div class="row">
-		<div class="col-12">
-			<div class="form-group">
+		<div class="col-md-12">
+			
 				<input style="padding:20px" @keyup="searchUser()" v-model="searchkey" class="form-control" placeholder="Search User..." >
-			</div>
+			
 		</div>
-		<div class="col-12" style="height:300px; overflow-y: auto;">
-			<p-check class="text-left col-10"
-        v-model="selectedUsers"
-        v-for="user in allUsers"
-        color="success"
-        :value="user.id"
-        :key="user.id">{{user.name}}
+		<div class="col-md-12" style="height:300px; margin-top:10px; overflow-y: auto;">
+			<p-check class="text-left col-md-10"
+		        v-model="selectedUsers"
+		        v-for="user in allUsers"
+		        color="success"
+		        :value="user.id"
+		        :key="user.id">
+		        {{user.name}}
 			</p-check>
 		</div>
 	</div>

@@ -49,4 +49,16 @@ if (!function_exists('get_notify_users')) {
   }
 }
 
+if(!function_exists('get_user_filestack_id')){
+  function get_user_filestack_id(){
+    $users = User::where('parent_id', auth()->user()->id)->get();
+
+    $filestack_id =  collect($users)->map(function($e) {
+      return $e['filestack_id'];
+    });
+    $filestack_id[] = Auth::user()->filestack_id;
+
+    return $filestack_id;
+  }
+}  // User filestack id get 
 

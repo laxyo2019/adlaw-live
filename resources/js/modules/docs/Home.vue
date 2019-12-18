@@ -6,20 +6,20 @@
 				<div class="box-body">
 					<div class="row mb-5">
 						<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 mb-5">
-							<div class="input-group">
+							<!-- <div class="input-group"> -->
 								<input type="text" class="form-control" 
 								placeholder="Search a filestack..." 
 								v-model="searchKey" 
 								@keyup="handleSearch">
-							</div>
+							<!-- </div> -->
 						</div>
 
 						<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-						<!-- 	<a class="text-muted pull-right text-decoration-none" href="admin/filestack-mgmt" 
-							v-if="admins.indexOf(logged_user.id) > -1">
-							<i class="fe fe-unlock"></i> Admin 
-							</a> -->
-							<!-- <span class="float-right mr-5 ml-5" v-if="admins.indexOf(logged_user.id) > -1"> | </span> -->
+							<a class="text-muted pull-right text-decoration-none" href="filestack-mgmt" 
+							v-if="logged_user.parent_id == null">
+							<i class="fe fe-unlock"></i> Admin  
+							</a>
+							<span class="pull-right mr-5 ml-5" v-if="logged_user.parent_id == null"> | </span>
 							<a class="text-muted pull-right text-decoration-none" 
 							v-scroll-to="{ element: '#stack-'+logged_user.filestack_id, duration: 2000 }" ref="scrollBtn">
 							<i class="fe fe-user"></i> My Folder
@@ -33,33 +33,37 @@
 			</div>
 		</div>
 	</div>
-<div class="row">
+					<div class="row">
 						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4" 
 						v-for="gstack in gstacks" :key="gstack.id">
+
 							<a v-if="(JSON.parse(gstack.permissions)).users.indexOf(logged_user.id) > -1"
 							:href="`/docs/stacks/${gstack.id}`" class="text-decoration-none">
+							
 							<div class="panel panel-default">
 								<div class="panel-status bg-blue"></div>
 								<div class="panel-body">
 									<div class="media">
-									<span class="avatar avatar-xxl avatar-blue mr-5"><i class="fe fe-globe"></i></span>
-									<div class="media-body">
-									<h4 class="m-0" v-text="gstack.title"></h4>
-									<ul class="social-links list-inline mb-0 mt-2">
-									<li class="list-item">
-									<a class="nav-link icon">
-											      <i class="fe fe-folder"></i>
-											    </a>
-											    <span v-text="gstack.folder_count"></span>
-									</li>
-									<li class="list-item"> 
-									<a class="nav-link icon">
-											      <i class="fe fe-file-text"></i>
-											    </a>
-											    <span v-text="gstack.file_count"></span>
-									</li>
-									</ul>
-									</div>
+										<div class="media-left">
+											<span class="avatar avatar-xxl avatar-blue mr-5"><i class="fe fe-globe"></i></span>					
+										</div>								
+										<div class="media-body">
+											<h4 class="m-0" v-text="gstack.title"></h4>
+											<ul class="social-links list-inline mb-0 mt-2">
+												<li class="list-item">
+												<a class="nav-link icon">
+														      <i class="fe fe-folder"></i>
+														    </a>
+														    <span v-text="gstack.folder_count"></span>
+												</li>
+												<li class="list-item"> 
+												<a class="nav-link icon">
+														      <i class="fe fe-file-text"></i>
+														    </a>
+														    <span v-text="gstack.file_count"></span>
+												</li>
+											</ul>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -70,8 +74,10 @@
 					<div class="row">
 						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4" 
 						v-for="stack in stacks" :key="stack.id">
+
 							<a :href="`/docs/stacks/${stack.id}`" v-bind:id="'stack-' + stack.id" class="text-decoration-none">
 								<div class="panel panel-default">
+
 									<div class="panel-status bg-green" v-if="stack.id === logged_user.filestack_id"></div>
 									<div class="panel-body">
 
@@ -121,7 +127,7 @@
 		props: ['people', 'general_stacks', 'filestacks', 'logged_user'],
 		data() {
 			return {
-				admins: [1, 2],
+				admins: [],
 				avatars: [],
 				stacks: [],
 				gstacks: [],
@@ -133,6 +139,12 @@
 			// this.getAvatars();
 			this.stacks = this.filestacks;
 			this.gstacks = this.general_stacks;
+
+
+			// var d = this.gstacks.map((e) => {
+			// 	return (JSON.parse(e.permissions)).users.indexOf(this.logged_user.id) > -1;
+			// })
+			// console.log(d);
 
 			// this.stacks.forEach(function(e) {
 			// 	e.folder_count = e.file_count = 0;
@@ -217,5 +229,5 @@
 </script>
 
 <style scoped>
-
+	
 </style>

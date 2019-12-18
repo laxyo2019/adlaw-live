@@ -1,7 +1,9 @@
 <template>
-	<div class="container">
-		<div class="card">
-			<div class="card-header">
+<div>
+<div class="row">
+	<div class="col-md-12 col-xl-12 col-lg-12 col-sm-12 ">
+		<div class="box box-primary">
+			<div class="box-header">
 				<a style="color:#467fcf" class="" @click.prevent="$emit('unfocus')">
 					<i class="fa fa-arrow-left"></i>
 				</a>
@@ -14,27 +16,31 @@
 							{{tab.toUpperCase()}}</a>
 				</div>
 			</div>
-			<div class="card-body">
-			<div class="row">
-					<p class="col-3">
+			<div class="box-body">
+			
+				<div class="row">
+					<p class="col-md-3">
 					<span class=" mr-2"><b>Permissions <i class="fa fa-arrow-right m-2">	</i>{{activeTab.toUpperCase()}} </b> </span>		
-				</p>
-				<p class="col-9 pt-1 text-right">
-					<a  v-for="subTab in subTabs[activeTab]"
-						style="color:#fff" 
-						:class="activeSubTab==subTab?'btn-primary':'btn-info'" 
-						class="btn btn-primary btn-sm mr-2" 
-						@click.prevent="activeSubTabFun(subTab)">
-						{{subTab.toUpperCase()}}</a>
-				</p>
-			</div>
-	      <user-selector :users='allUsers' :selectedUsersProp='selectedUsers' @input="selectedUsers = $event"></user-selector>
-	      <div class="text-center">
-	      	<button class="btn btn-success btn-pill" @click="updatePermissions">Update</button>
-	      </div>
+					</p>
+					<p class="col-md-9 pt-1 text-right">
+						<a  v-for="subTab in subTabs[activeTab]"
+							style="color:#fff" 
+							:class="activeSubTab==subTab?'btn-primary':'btn-info'" 
+							class="btn btn-primary btn-sm mr-2" 
+							@click.prevent="activeSubTabFun(subTab)">
+							{{subTab.toUpperCase()}}</a>
+					</p>
+				</div>
+				
+				<user-selector :users='allUsers' :selectedUsersProp='selectedUsers' @input="selectedUsers = $event"></user-selector>
+				<div class="text-center">
+				<button class="btn btn-success btn-pill" @click="updatePermissions">Update</button>
+				</div>
 			</div>
 		</div>
 	</div>
+</div>
+</div>
 </template>
 <script>
 
@@ -85,7 +91,7 @@ export default{
 			this.permissionsType(this.activeTab);
 		},
 		updatePermissions(){
-			axios.post('/admin/filestack-mgmt/update_permissions',{
+			axios.post('/filestack-mgmt/update_permissions',{
 					permissionsIndex:this.permissionsIndex,
 					id:this.filestack.id,
 					active_tab:this.activeTab,
@@ -115,7 +121,7 @@ export default{
 			 this.selectedUsers = users;
 		},
 		getAllUsers(){
-			axios.post('/admin/filestack-mgmt/users')
+			axios.post('/filestack-mgmt/users')
 				.then(response => {
 					this.allUsers = response.data;
 				});

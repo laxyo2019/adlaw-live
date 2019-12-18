@@ -5,6 +5,9 @@ import Multiselect from 'vue-multiselect'
 import PrettyCheckbox from 'pretty-checkbox-vue';
 import VueSweetalert2 from 'vue-sweetalert2'
 import Toasted from 'vue-toasted';
+
+import 'sweetalert2/dist/sweetalert2.min.css';
+
 // import VueFriendlyIframe from 'vue-friendly-iframe';
 
 window.Vue = require('vue')
@@ -37,7 +40,8 @@ Vue.component('user-selector', require('./components/re-usable/UserSelector.vue'
 // Docs
 Vue.component('docs-home', require('./modules/docs/Home.vue').default)
 Vue.component('stack-component', require('./modules/docs/Stack.vue').default)
-
+//Admin
+Vue.component('filestack-mgmt', require('./modules/admin/filestack_mgmt/Home.vue').default)
 
 const app = new Vue({
     el: '#app',

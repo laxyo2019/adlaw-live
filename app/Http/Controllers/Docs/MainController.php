@@ -7,7 +7,7 @@ use App\Team;
 use App\User;
 use App\Models\Filestack;
 use Illuminate\Http\Request;
-
+use Auth;
 
 class MainController extends Controller
 {
@@ -18,9 +18,15 @@ class MainController extends Controller
 
 	public function index() {
 		$users = User::where('parent_id', auth()->user()->id)->get();
+
+		$filestack_id = get_user_filestack_id();
+		
+		
 		$general_stacks = Filestack::where('type', 2)->get();
-		$filestacks = Filestack::where('type', 1)->orderBy('title', 'asc')->get();
+		$filestacks = Filestack::with('user_owns')->where('type', 1)->whereIn('id',$filestack_id)->get();
+		// return $general_stacks;
 		// return $filestacks;
+		 // return $users;
 		return view('docs.index', [
 			'users' => $users,
 			'general_stacks' => $general_stacks,

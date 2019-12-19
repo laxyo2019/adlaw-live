@@ -193,6 +193,12 @@
             <span>Courses</span>
           </a>
         </li>   
+        <li class="{{Request()->segment(1) == 'docs' ? 'active' : ''}} {{Request()->segment(1) == 'filestack-mgmt' ? 'active' : ''}}  nav-item">
+            <a class="nav-link" href="{{route('docs.home')}}">
+            <i class="fa fa-file"></i>
+            <span>Documents</span>
+            </a>
+        </li>
         
          <li class="{{Request()->segment(1) == 'teams' ? 'active' : '' }} nav-item">
           <a class="nav-link" href="{{route('teams.index')}}">
@@ -280,7 +286,7 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper" id="app">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1 class="text-capitalize">{{__('Dashboard')}}</h1>

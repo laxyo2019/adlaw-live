@@ -272,6 +272,8 @@ Route::group(['middleware' => ['role:lawyer|lawcompany|lawcollege|admin']], func
 
 });
 
+
+
 Route::get('/filestack-mgmt', 'Admin\FilestackMgmtController@index')->name('admin.filestack-mgmt');
 Route::resource('/filestacks', 'Admin\FilestackMgmtController');
 Route::post('/filestacks/get_users', 'Admin\FilestackMgmtController@get_users');
@@ -305,3 +307,42 @@ Route::group(['prefix' => 'docs', 'namespace' => 'Docs'], function ()  {
 	Route::post('/documents/multi_cut_paste', 'DocsController@multi_cut_paste');
 	Route::post('/documents/upload_folder', 'DocsController@uploadFolder');
 });
+
+Route::group(['prefix' => 'pms', 'namespace' => 'PMS'], function ()  {
+	Route::resource('agenda', 'Agenda\AgendaMastController');
+	Route::resource('agenda/response', 'Agenda\AgendaResponseController');
+	Route::post('agenda/checks/is_strict', 'Agenda\AgendaMastController@check_is_strict');
+	Route::post('/get_users','Agenda\AgendaMastController@get_users');
+});
+
+
+//new route for agenda
+
+	// Route::resource('agenda', 'Agenda\AgendaMastController');
+	// Route::resource('agenda/response', 'Agenda\AgendaResponseController');
+	// Route::post('agenda/checks/is_strict', 'Agenda\AgendaMastController@check_is_strict');
+
+	// Route::get('/', 'MainController@pmsIndex')->name('pms');
+	// Route::get('/team/{id}', 'MainController@teamIndex')->name('team.index'); //shows list of tools
+	// Route::get('/get-media-url/{post}', 'MediaController@getMediaUrl');
+	// Route::post('/fetch-comments', 'CommentsController@getComments');
+
+	// Route::resource('/topics', 'TopicsController');
+	// Route::resource('/documents', 'DocumentsController');
+	// Route::resource('/media', 'MediaController');
+	// Route::resource('/comments', 'CommentsController');
+	// Route::resource('/posts', 'PostsController');
+	
+	// Route::get('/agenda_pass','Agenda\AgendaResponseController@agendaPass')->name('agenda_pass');
+	// ROute::post('/agenda_submit','Agenda\AgendaResponseController@submitAgenda')->name('submit_agneda');
+	
+	// Route::post('/documents/search', 'DocumentsController@paginatedDocs');
+
+	// Route::resource('/media', 'MediaController');
+	// Route::get('/get-media-url/{post}', 'MediaController@getMediaUrl');
+
+
+
+
+
+

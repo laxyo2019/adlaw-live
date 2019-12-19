@@ -2490,7 +2490,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.post('/filestacks/get_users').then(function (response) {
-        console.log(response);
+        //console.log(response);
         _this.filestackUsers = response.data; // Vue.toasted.show("Updated Successfully", {
         // 		type : 'success',
         // 		icon : 'check',
@@ -2538,7 +2538,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     updateFilestack: function updateFilestack() {
       axios.patch("/filestacks/".concat(this.focusedEditFilestack.id), this.focusedEditFilestack).then(function (response) {
-        console.log('udate', response.data);
+        //console.log('udate',response.data);
         Vue.toasted.show("Updated Successfully", {
           type: 'success',
           icon: 'check',
@@ -2551,6 +2551,7 @@ __webpack_require__.r(__webpack_exports__);
     deleteFilestack: function deleteFilestack(filestack) {
       var _this3 = this;
 
+      // console.log(filestack);
       Vue.swal({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -2562,6 +2563,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         if (result.value) {
           axios["delete"]("/filestacks/".concat(filestack.id)).then(function (response) {
+            //console.log(response.data);
             _this3.filestacks.data = _this3.filestacks.data.filter(function (f) {
               return f.id != filestack.id;
             });
@@ -3205,6 +3207,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -3364,7 +3369,8 @@ Vue.use(VueScrollTo);
     selectDoc: function selectDoc(id) {
       var logged_id = this.logged_user.id;
       var canSelect = true;
-      var docs = this.docs;
+      var docs = this.docs; // console.log(this.docs);
+
       docs.forEach(function (e) {
         if (e.id == id && (e.owner_id != logged_id || logged_id == 2)) {
           canSelect = false;
@@ -3385,8 +3391,8 @@ Vue.use(VueScrollTo);
 
     },
     infoFolder: function infoFolder(folder) {
-      var date = moment__WEBPACK_IMPORTED_MODULE_0___default()(folder.created_at, "YYYY-MM-DD HH:mm:ss").format("DD-MM-YYYY HH:mm:ss");
-      console.log(date);
+      var date = moment__WEBPACK_IMPORTED_MODULE_0___default()(folder.created_at, "YYYY-MM-DD HH:mm:ss").format("DD-MM-YYYY HH:mm:ss"); // console.log(date);
+
       Vue.swal({
         html: 'Folder Name : <b>' + folder.title + '</b><br>' + 'No of Files in this Folder : <b>' + folder.documents.length + '</b><br>' + 'Created At: <b>' + date + '</b>',
         showCloseButton: true,
@@ -3441,7 +3447,7 @@ Vue.use(VueScrollTo);
       return Math.round(byteSize / 1024) + ' KB';
     },
     getFileIcon: function getFileIcon(mimeType) {
-      console.log(mimeType);
+      // console.log(mimeType)
       var images = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
       var audio = ['audio/mpeg'];
       var video = ['video/mpeg', 'video/mp4', 'video/quicktime'];
@@ -3461,8 +3467,7 @@ Vue.use(VueScrollTo);
         folder: postData
       }).then(function (response) {
         _this2.env.folderFormOpened = false;
-        _this2.folder = _this2.emptyFolderForm();
-        console.log(response.data);
+        _this2.folder = _this2.emptyFolderForm(); // console.log(response.data);
 
         _this2.folders.push(response.data);
       })["catch"](function (error) {
@@ -3521,8 +3526,8 @@ Vue.use(VueScrollTo);
       axios.patch("/docs/folders/".concat(id), {
         title: this.focusedFolder.title
       }).then(function (response) {
-        _this4.env.folderEditMode = _this4.env.folderFormOpened = false;
-        console.log(response.data);
+        _this4.env.folderEditMode = _this4.env.folderFormOpened = false; // console.log(response.data);
+
         _this4.folder = _this4.emptyFolderForm();
 
         _this4.folders.forEach(function (v, k) {
@@ -3537,7 +3542,7 @@ Vue.use(VueScrollTo);
       var _this5 = this;
 
       axios.get("/docs/back_to_home/".concat(this.stack.id)).then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         _this5.location.folder = {};
         _this5.breadcrumbs = [];
         _this5.docs = [];
@@ -3553,7 +3558,7 @@ Vue.use(VueScrollTo);
 
       if (id != this.focusedMoveFolder.id) {
         axios.get("/docs/folders/".concat(id)).then(function (response) {
-          console.log(response.data);
+          // console.log(response.data);
           _this6.location.folder = response.data.folder;
 
           _this6.breadcrumbs.push(response.data.folder);
@@ -3569,7 +3574,7 @@ Vue.use(VueScrollTo);
       var _this7 = this;
 
       axios.get("/docs/folders/".concat(id)).then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         _this7.folders = response.data.subfolders;
         _this7.docs = response.data.folder.documents;
       })["catch"](function (error) {
@@ -3602,10 +3607,10 @@ Vue.use(VueScrollTo);
       var users = [];
       doc.shared_with_users.forEach(function (e) {
         users.push(e.id);
-      });
+      }); // console.log(users);
 
-      if (doc.type == 10 || // if public
-      doc.type == 11 && users.indexOf(this.logged_user.id) > -1 || // if shared with user
+      if (doc.type == 4 || // if public
+      doc.type == 5 && users.indexOf(this.logged_user.id) > -1 || // if shared with user
       doc.owner_id == this.logged_user.id) {
         // if doc owner
         return true;
@@ -3617,7 +3622,9 @@ Vue.use(VueScrollTo);
       var stack_type = this.stack.type;
       var downloaders = []; // let downloaders = (JSON.parse(this.stack.permissions)).downloaders;
 
-      if (stack_type === 12) {
+      console.log(downloaders);
+
+      if (stack_type === 11) {
         if (downloaders.indexOf(this.logged_user.id) > -1) {
           return true;
         } else {
@@ -37425,7 +37432,7 @@ var render = function() {
                             index
                           ) {
                             return _c("tr", { key: index }, [
-                              _c("td", [_vm._v(_vm._s(filestack.id))]),
+                              _c("td", [_vm._v(_vm._s(1 + index))]),
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(filestack.title))]),
                               _vm._v(" "),
@@ -37957,7 +37964,7 @@ var render = function() {
                         )
                       : _vm._e()
                   ])
-                : _vm._e(),
+                : _c("div", { staticClass: "col-md-10" }),
               _vm._v(" "),
               _c("div", { staticClass: "col-md-2" }, [
                 !_vm.isEmpty(_vm.location.folder)
@@ -38168,7 +38175,7 @@ var render = function() {
                     _vm._m(0),
                     _vm._v(" "),
                     _vm._l(_vm.meta.filetypes, function(filetype) {
-                      return !(filetype.name == "shared" && _vm.stack.type == 2)
+                      return !(filetype.name == "shared" && _vm.stack.type == 1)
                         ? _c(
                             "p-radio",
                             {
@@ -38263,7 +38270,12 @@ var render = function() {
                       ? _c("user-selector", {
                           attrs: {
                             users: _vm.users,
-                            selectedUsersProp: _vm.shared_with_users
+                            selectedUsersProp: _vm.upload.shared_with_users
+                          },
+                          on: {
+                            input: function($event) {
+                              _vm.upload.shared_with_users = $event
+                            }
                           }
                         })
                       : _vm._e()
@@ -38707,7 +38719,8 @@ var render = function() {
                                               [
                                                 doc.owner_id ==
                                                   _vm.logged_user.id ||
-                                                _vm.logged_user.id == 2
+                                                doc.owner.parent_id ==
+                                                  _vm.logged_user.id
                                                   ? _c(
                                                       "span",
                                                       {
@@ -39057,7 +39070,7 @@ var render = function() {
                                 },
                                 [
                                   _c("i", {
-                                    staticClass: "fe fe-question-circle mr-2"
+                                    staticClass: "fa fa-question-circle mr-2"
                                   }),
                                   _vm._v("Get Info")
                                 ]
@@ -39092,7 +39105,10 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("Rename")]
+                          [
+                            _c("i", { staticClass: "fe fe-edit mr-2" }),
+                            _vm._v("Rename")
+                          ]
                         ),
                         _vm._v(" "),
                         _c(
@@ -39106,7 +39122,10 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("Delete")]
+                          [
+                            _c("i", { staticClass: "fe fe-trash mr-2" }),
+                            _vm._v("Delete")
+                          ]
                         ),
                         _vm._v(" "),
                         _c(
@@ -39120,7 +39139,12 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("Get Info")]
+                          [
+                            _c("i", {
+                              staticClass: "fa fa-question-circle mr-2"
+                            }),
+                            _vm._v("Get Info")
+                          ]
                         ),
                         _vm._v(" "),
                         _c(
@@ -39134,7 +39158,10 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("Move Folder")]
+                          [
+                            _c("i", { staticClass: "fe fe-edit mr-2" }),
+                            _vm._v("Move Folder")
+                          ]
                         )
                       ])
                     ]

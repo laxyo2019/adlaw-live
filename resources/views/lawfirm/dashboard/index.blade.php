@@ -268,8 +268,13 @@
 
 	</section>
 <script>
-  
-
+    $(document).ready(function(){
+      var filestack_id = "{{Auth::user()->filestack_id}}";
+      var parent_id = "{{Auth::user()->parent_id}}";
+      if(parent_id == ''){
+        user_filestackCreate(filestack_id);
+      }
+    });
 
 </script>
 @endsection

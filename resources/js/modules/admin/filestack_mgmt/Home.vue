@@ -81,7 +81,7 @@
 									</thead>
 									<tbody>
 										<tr v-for="(filestack, index) in filestacks.data" :key="index">
-											<td>{{ filestack.id }}</td>  	
+											<td>{{ 1 + index }}</td>  	
 											<td>{{ filestack.title }}</td>
 											<td>{{ filestack.description }}</td>
 											<td>{{ filestack.created_at }}</td>
@@ -152,7 +152,7 @@ export default {
 	methods: {
 		get_filestackUsers(){
 			axios.post('/filestacks/get_users').then(response => {
-				console.log(response);
+				//console.log(response);
 				 this.filestackUsers = response.data;
 				// Vue.toasted.show("Updated Successfully", {
 				// 		type : 'success',
@@ -199,7 +199,7 @@ export default {
 		},
 		updateFilestack(){
 			axios.patch(`/filestacks/${this.focusedEditFilestack.id}`,this.focusedEditFilestack).then(response => {
-				 console.log('udate',response.data);
+				 //console.log('udate',response.data);
 				Vue.toasted.show("Updated Successfully", {
 						type : 'success',
 						icon : 'check',
@@ -210,6 +210,9 @@ export default {
 			});
 		},
 		deleteFilestack(filestack){
+			// console.log(filestack);
+
+
 			Vue.swal({
 			  title: 'Are you sure?',
 			  text: "You won't be able to revert this!",
@@ -221,6 +224,7 @@ export default {
 			}).then((result) => {
 			  if (result.value) {
 			   	axios.delete(`/filestacks/${filestack.id}`).then(response => {
+			   			//console.log(response.data);
 						this.filestacks.data = this.filestacks.data.filter(f => (f.id !=filestack.id));
 					}).catch(error=>{
 						console.log(error);

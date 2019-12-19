@@ -101,39 +101,69 @@ class FilestackMgmtController extends Controller
 
     public function store(Request $request)
     {
-       $vData = $request->validate([
-	  		'type' => 'required',
-	  		'title' => 'required_if:type,==,2',
-	  		'userTitle' => 'required_if:type,==,1',
-	  	],[	
-	  		'title.required_if' => 'Title is required.',
-	  		'userTitle.required_if' => 'User is required.',
-	  	]);
 
+
+        if($request->userTitle == 'dashboard'){
+             $vData = [
+                'type' => $request->type,
+                'title'=> $request->title,
+                'userTitle'=> Auth::user()
+             ]; 
+        }else{
+            $vData = $request->validate([
+            'type' => 'required',
+            'title' => 'required_if:type,==,2',
+            'userTitle' => 'required_if:type,==,1',
+            ],[ 
+                'title.required_if' => 'Title is required.',
+                'userTitle.required_if' => 'User is required.',
+            ]); 
+        }
+        $auth_id = ($request->type == 1 ? '' : Auth::user()->id);
         $permissions = array(
-        'users'=>[],   //who can see this filestack
-        'folder' => array(   //permissions for folder in filestack
-            'create'=>[],
-            'move'=>[],
-            'edit'=>[],
-            'delete'=>[]
-        ),
-        'file' => array(  //permissions for files in filestack
-            'upload'=>[],
-            'download'=>[],
-            'move'=>[],
-            'copy'=>[],
-            'delete'=>[]
-        )
+            'users'=>[
+                $auth_id
+            ],   //who can see this filestack
+            'folder' => array(   //permissions for folder in filestack
+                'create'=>[
+                    $auth_id
+                ],
+                'move'=>[
+                    $auth_id
+                ],
+                'edit'=>[
+                    $auth_id
+                ],
+                'delete'=>[
+                    $auth_id
+                ]
+            ),
+            'file' => array(  //permissions for files in filestack
+                'upload'=>[
+                    $auth_id
+                ],
+                'download'=>[
+                    $auth_id
+                ],
+                'move'=>[
+                    $auth_id
+                ],
+                'copy'=>[
+                    $auth_id
+                ],
+                'delete'=>[
+                    $auth_id
+                ]
+            )
         );
-        if($vData['type']==1){
+
+        if($vData['type'] == 1){
         	$filestack = new Filestack();
         	$filestack->title = $vData['userTitle']['name'];
         	$filestack->type = $vData['type'];
         	$filestack->permissions = json_encode($permissions);
             $filestack->user_id = Auth::user()->id;
         	$filestack->save();
-
         	$user = User::find($vData['userTitle']['id']);
         	$user->filestack_id = $filestack->id;
         	$user->save();
@@ -173,9 +203,14 @@ class FilestackMgmtController extends Controller
 
     public function destroy($id)
     {
-      $filestack = Filestack::find($id);
-      Filestack::where('id', $id) ->delete();
-      return response()->json($filestack);
+
+        $filestack = Filestack::find($id);
+        if($filestack->type !=2){
+            $userId  = User::where('filestack_id',$id)->first()->id;
+            User::find($userId)->update(['filestack_id' => null]);
+        }
+        Filestack::where('id', $id)->delete();
+        return response()->json($filestack);
     }
 
 }

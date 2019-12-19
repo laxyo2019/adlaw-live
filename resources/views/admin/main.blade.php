@@ -156,7 +156,9 @@
               @endif
             </a>
           </li>  
-        
+          
+          
+
         {{--    <li class="nav-item">
             <a class="nav-link" href="">
               <i class="fa fa-users"></i>
@@ -282,7 +284,7 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper" id="app">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>Dashboard</h1>

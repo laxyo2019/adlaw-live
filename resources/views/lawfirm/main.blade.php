@@ -151,6 +151,9 @@
                 <div class="pull-left">
                   <a href="{{route('lawfirm.show',Auth::user()->id)}}" class="btn btn-default btn-flat">Profile</a>
                 </div>
+                <div class="pull-left ml-2">
+                  <a href="{{route('lawfirm.show',Auth::user()->id)}}" class="btn btn-default btn-flat">Admin Control</a>
+                </div>
                 <div class="pull-right">
                   <a href="{{ route('logout') }}" onclick="event.preventDefault();
           document.getElementById('logout-form').submit();" class="btn btn-default btn-flat">Sign out</a>   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -294,6 +297,15 @@
 
             </a>
           </li> --}}
+
+
+       {{--  <li class="{{Request()->segment(1) == 'pms' ? 'active' : ''}}   nav-item">
+            <a class="nav-link" href="{{route('agenda.index')}}">
+            <i class="fa fa-file"></i>
+            <span>Agenda</span>
+            </a>
+        </li> --}}
+  
         <li class="{{Request()->segment(1) == 'docs' ? 'active' : ''}} {{Request()->segment(1) == 'filestack-mgmt' ? 'active' : ''}}  nav-item">
             <a class="nav-link" href="{{route('docs.home')}}">
             <i class="fa fa-file"></i>
@@ -330,6 +342,15 @@
               @endif
           </a>
         </li>
+         <li class="nav-item">
+          <a class="nav-link" href="">
+            <i class="fa fa-gears"></i>
+            <span>Admin Control</span>             
+          </a>
+        </li>
+
+
+
         @endif
 
       

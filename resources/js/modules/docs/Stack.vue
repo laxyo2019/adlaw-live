@@ -7,6 +7,7 @@
 					<div class="row mb-5">
 						<div class="col-md-10" 
 						v-if="(stack.id === logged_user.filestack_id) || (JSON.parse(stack.permissions)).folder.create.indexOf(this.logged_user.id) > -1">
+
 						<button class="btn bg-blue" @click="createFolder">
 							<i class="fe fe-folder-plus"></i> New folder
 						</button>
@@ -19,6 +20,7 @@
 									@click="triggerBulkCreate">Bulk Create
 						</button> -->
 						</div>
+						<div v-else class="col-md-10"></div>
 						<div class="col-md-2">
 						<button class="btn btn-default pull-right" title="Refresh"
 						v-if="!isEmpty(location.folder)" 
@@ -68,7 +70,7 @@
 							<p-radio class="p-default p-round"  
 							v-model="upload.type"
 							v-for="filetype in meta.filetypes"
-							v-if="! (filetype.name == 'shared' && stack.type == 2)"
+							v-if="!(filetype.name == 'shared' && stack.type == 1)"
 							color="success"
 							:value="filetype.id"
 							:key="filetype.id">{{ filetype.name }}</p-radio>
@@ -104,7 +106,8 @@
 					    <div class="form-group col-md-10 offset-1 mb-5">
 							<user-selector 
 								:users="users" v-if="upload.type == 5"
-								:selectedUsersProp="shared_with_users" 
+								:selectedUsersProp="upload.shared_with_users" 
+								@input="upload.shared_with_users = $event"
 								>
 							</user-selector>
 					    </div>
@@ -240,7 +243,7 @@
 				          <div class="panel-body p-3 text-center" :class="[selectedDoc.indexOf(doc.id) > -1 ? 'selected_doc' : '']">
 			          		<div class="text-right">
 				            	<span style="cursor: pointer;" title="Edit"
-				            		v-if="doc.owner_id == logged_user.id || logged_user.id == 2" @click="editFile(doc.id)">
+				            		v-if="doc.owner_id == logged_user.id || doc.owner.parent_id == logged_user.id" @click="editFile(doc.id)">
 				              	<i class="fe fe-edit"></i>
 				              </span>
 				            </div>
@@ -314,17 +317,17 @@
 			        <a href="#" @click.prevent="deleteDoc(child.data)"><i class="fe fe-trash mr-2"></i>Delete</a>
 			        <a href="#" @click.prevent="moveDoc(child.data,'cut')"><i class="fe fe-scissors mr-2"></i>Cut</a>
 			        <a href="#" @click.prevent="moveDoc(child.data,'copy')"><i class="fe fe-clipboard mr-2"></i>Copy</a>
-			        <a href="#" @click.prevent="infoDoc(child.data)"><i class="fe fe-question-circle mr-2"></i>Get Info</a>
+			        <a href="#" @click.prevent="infoDoc(child.data)"><i class="fa fa-question-circle mr-2"></i>Get Info</a>
 				    </li>
 			    </template>
 				</vue-context>
 				<vue-context ref="folderMenu">
 					<template slot-scope="child">
 					    <li>
-					        <a href="#" @click.prevent="editFolder(child.data)">Rename</a>
-					        <a href="#" @click.prevent="deleteFolder(child.data)">Delete</a>
-					        <a href="#" @click.prevent="infoFolder(child.data)">Get Info</a>
-					        <a href="#" @click.prevent="cutFolder(child.data)">Move Folder</a>
+					        <a href="#" @click.prevent="editFolder(child.data)"><i class="fe fe-edit mr-2"></i>Rename</a>
+					        <a href="#" @click.prevent="deleteFolder(child.data)"><i class="fe fe-trash mr-2"></i>Delete</a>
+					        <a href="#" @click.prevent="infoFolder(child.data)"><i class="fa fa-question-circle mr-2"></i>Get Info</a>
+					        <a href="#" @click.prevent="cutFolder(child.data)"><i class="fe fe-edit mr-2"></i>Move Folder</a>
 					    </li>
 					    <!-- <li>
 				        <a href="#" @click.prevent="onClick($event.target.innerText)">Option 2</a>
@@ -379,7 +382,7 @@
 				focusedMoveDoc: {}, // file being manipulated
 				focusedMoveFolder: {}, // folder being manipulated
 				moveAction:null,
-				shared_with_users : [],
+				shared_with_users:[]
 
 			}
 		},
@@ -481,9 +484,11 @@
 				
 			},
 			selectDoc(id){
+
 				let logged_id = this.logged_user.id;
 				let canSelect = true;
 				let docs = this.docs;
+				// console.log(this.docs);
 				docs.forEach(function(e){
 					if(e.id == id && (e.owner_id != logged_id || logged_id == 2 )){
 						canSelect = false;
@@ -503,7 +508,7 @@
 			},
 			infoFolder(folder){
 				let date = moment(folder.created_at,"YYYY-MM-DD HH:mm:ss").format("DD-MM-YYYY HH:mm:ss");
-				console.log(date);
+				// console.log(date);
 				Vue.swal({
 					  html:
 					  'Folder Name : <b>' + folder.title+'</b><br>'+
@@ -569,7 +574,7 @@
 				return Math.round(byteSize/1024)+ ' KB'
 			},
 			getFileIcon(mimeType) {
-				console.log(mimeType)
+				// console.log(mimeType)
 				let images = ['image/jpeg','image/jpg','image/png','image/gif'];
 				let audio = ['audio/mpeg'];
 				let video = ['video/mpeg', 'video/mp4', 'video/quicktime'];
@@ -601,7 +606,7 @@
 				axios.post('/docs/folders', {folder: postData}).then(response => {
 					this.env.folderFormOpened = false;
 					this.folder = this.emptyFolderForm();
-					console.log(response.data);
+					// console.log(response.data);
 					this.folders.push(response.data);
 
 				}).catch(error => console(error.response.data));
@@ -649,7 +654,7 @@
 				let id = this.focusedFolder.id;
 				axios.patch(`/docs/folders/${id}`, {title: this.focusedFolder.title}).then(response => {
 					this.env.folderEditMode = this.env.folderFormOpened = false;
-					console.log(response.data);
+					// console.log(response.data);
 					this.folder = this.emptyFolderForm();
 					this.folders.forEach((v, k) => {
 						if (v.id == id)
@@ -661,7 +666,7 @@
 
 			backToHome() {
 				axios.get(`/docs/back_to_home/${this.stack.id}`).then(response => {
-					console.log(response.data);
+					// console.log(response.data);
 					this.location.folder = {};
 					this.breadcrumbs = [];
 					this.docs = [];
@@ -673,7 +678,7 @@
 				console.log("level down",id);
 				if(id!=this.focusedMoveFolder.id){
 					axios.get(`/docs/folders/${id}`).then(response => {
-						console.log(response.data);
+						// console.log(response.data);
 						this.location.folder = response.data.folder;
 						this.breadcrumbs.push(response.data.folder);
 						this.folders = response.data.subfolders;
@@ -684,7 +689,7 @@
 
 			refresh(id) {
 				axios.get(`/docs/folders/${id}`).then(response => {
-					console.log(response.data);
+					// console.log(response.data);
 					this.folders = response.data.subfolders;
 					this.docs = response.data.folder.documents;
 				}).catch(error => console(error.response.data));
@@ -712,8 +717,9 @@
     		doc.shared_with_users.forEach(function(e){
     		  users.push(e.id);
     		});
-    		if((doc.type == 10) || // if public
-    		  (doc.type == 11 && (users.indexOf(this.logged_user.id) > -1)) || // if shared with user
+    		// console.log(users);
+    		if((doc.type == 4) || // if public
+    		  (doc.type == 5 && (users.indexOf(this.logged_user.id) > -1)) || // if shared with user
     		  (doc.owner_id == this.logged_user.id)) { // if doc owner
     		  return true;
     		}
@@ -722,15 +728,17 @@
 
 	    checkDownloadAbility() {
 	    	let stack_type = this.stack.type;
-	    	let downloaders = [];
+	    	 let downloaders = [];
 	    	// let downloaders = (JSON.parse(this.stack.permissions)).downloaders;
-	    	if(stack_type === 12) {
+	    	console.log(downloaders);
+	    	if(stack_type === 11) {
 	    		if(downloaders.indexOf(this.logged_user.id) > -1) {
 	    			return true;
 	    		} else {
 	    			return false;
 	    		}
 	    	}
+
 	    	return true;
 	    },
 

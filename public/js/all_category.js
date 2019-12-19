@@ -422,3 +422,21 @@ function qual_docs(qual_catg_code){
 		});
 	}
 }
+
+
+function user_filestackCreate(filestack_id){
+	if(filestack_id == ''){
+	var type  = 1;
+	var title = '';
+	var userTitle ='dashboard';
+	$.ajax({
+	  type:'POST',
+	  url:"/filestacks",
+	  data:{type:type,title:title,userTitle:userTitle},
+	  success:function(res){
+	      //console.log(res);
+	  }
+	});
+	// console.log(userTitle);
+	}
+}

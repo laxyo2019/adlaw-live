@@ -65,7 +65,7 @@ class DocsController extends Controller
         ->addMedia($request->file)
         ->toMediaCollection('files');
 
-      if($request->type == 11 && !empty($request->users))
+      if($request->type == 5 && !empty($request->users))
       {
         $document->shared_with_users()->sync(explode(',', $request->users));
       }
@@ -94,13 +94,13 @@ class DocsController extends Controller
   }
 
   public function uploadFolder(Request $request)
-  {
+  {  //Bulk folder upload not use at this time
     $document = new Document;
     $document->stack_id = 1;
     $document->folder_id = 1;
     $document->title = 1;
     $document->owner_id = auth()->user()->id;
-    $document->type = 10;
+    $document->type = 4;
     $document->save();
 
     $document
@@ -130,7 +130,7 @@ class DocsController extends Controller
       $document->note = $request->note;
       $document->save();
 
-      if($request->type == 11 && !empty($request->users))
+      if($request->type == 5 && !empty($request->users))
       {
         $document->shared_with_users()->sync($request->users);
       }else{

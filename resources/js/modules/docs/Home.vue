@@ -1,9 +1,9 @@
 <template>
 	<div>
-	<div class="row">
+	<div class="row mb-3">
 		<div class="col-md-12 col-xs-12 col-sm-12 m-auto">
-			<div class="box box-primary">
-				<div class="box-body">
+			<div class="card">
+				<div class="card-body">
 					<div class="row mb-5">
 						<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 mb-5">
 							<!-- <div class="input-group"> -->
@@ -34,15 +34,15 @@
 		</div>
 	</div>
 					<div class="row">
-						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4" 
+						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-5" 
 						v-for="gstack in gstacks" :key="gstack.id">
 
 							<a v-if="(JSON.parse(gstack.permissions)).users.indexOf(logged_user.id) > -1"
 							:href="`/docs/stacks/${gstack.id}`" class="text-decoration-none">
 							
-							<div class="panel panel-default">
-								<div class="panel-status bg-blue"></div>
-								<div class="panel-body">
+							<div class="card">
+								<div class="card-status bg-blue"></div>
+								<div class="card-body">
 									<div class="media">
 										<div class="media-left">
 											<span class="avatar avatar-xxl avatar-blue mr-5"><i class="fe fe-globe"></i></span>					
@@ -72,14 +72,14 @@
 					</div>
 					<hr>
 					<div class="row">
-						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4" 
+						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-5" 
 						v-for="stack in stacks" :key="stack.id">
 
 							<a :href="`/docs/stacks/${stack.id}`" v-bind:id="'stack-' + stack.id" class="text-decoration-none">
-								<div class="panel panel-default">
+								<div class="card">
 
-									<div class="panel-status bg-green" v-if="stack.id === logged_user.filestack_id"></div>
-									<div class="panel-body">
+									<div class="card-status bg-green" v-if="stack.id === logged_user.filestack_id"></div>
+									<div class="card-body">
 
 										<div class="media">
 											<div class="media-left">

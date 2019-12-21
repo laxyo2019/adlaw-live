@@ -37,6 +37,8 @@ Vue.component('comments-component', require('./components/re-usable/CommentsComp
 Vue.component('user-selector', require('./components/re-usable/UserSelector.vue').default)
 
 
+Vue.component('agenda', require('./modules/agenda/Index.vue').default)
+
 // Docs
 Vue.component('docs-home', require('./modules/docs/Home.vue').default)
 Vue.component('stack-component', require('./modules/docs/Stack.vue').default)

@@ -1,9 +1,9 @@
 <template>
 <div>
-	<div class="row">
+	<div class="row mb-4">
 		<div class="col-md-12 col-xs-12 col-sm-12 m-auto">
-			<div class="box box-primary">
-				<div class="box-body">
+			<div class="card">
+				<div class="card-body">
 					<div class="row mb-5">
 						<div class="col-md-10" 
 						v-if="(stack.id === logged_user.filestack_id) || (JSON.parse(stack.permissions)).folder.create.indexOf(this.logged_user.id) > -1">

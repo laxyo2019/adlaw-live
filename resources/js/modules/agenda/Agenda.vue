@@ -3,7 +3,7 @@
 		<div class="card">	
 			<div class="card-header" v-if="action=='creatorResponses'">
 				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-7 col-xl-7 col-lg-7" style="width: 100%">
+					<div class="col-xs-12 col-sm-12 col-md-7 col-xl-7 col-lg-7" >
 						<user-selector :users="users" 
 							:selectedUsersProp="selectedUsersIds" 
 							@input="selectedUsersIds = $event">
@@ -44,7 +44,7 @@
 			</div>
 			<div class="" v-if="action == 'UserResponses'">
 				<div class="card-body">
-					<div class="col-12" v-if="!todaysResponse()">
+					<div class="col-md-12" v-if="!todaysResponse()">
 						<div class="text-right" v-if="agenda.worktime_check > 0">
 							<a href="#" v-if="totalHours < agenda.worktime_check" class="btn btn-success" @click.prevent="modifyFormRow('plus')"><i class="fe fe-plus"></i></a>
 							<a href="#" v-if="totalHours>1" class="btn btn-danger" @click.prevent="modifyFormRow('minus')"><i class="fe fe-minus"></i></a>
@@ -56,12 +56,12 @@
 							</div>
 						</div>
 						<div class="row mt-2" v-for="n in totalHours" >
-							<div class="col-10">
+							<div class="col-md-10">
 								<div class="form-group">
 									<input type="text" class="form-control" v-model="loopTasks[n-1].detail" placeholder="Write task details here...">
 								</div>
 							</div>
-							<div class="col-2">
+							<div class="col-md-2">
 								<div class="form-group">
 									<select name="" id="" class="form-control" v-model="loopTasks[n-1].time" >
 										<option :value="n"   v-for="n in agenda.worktime_check">{{n}}</option>
@@ -108,8 +108,8 @@
 							<span class="timeline-balloon-date-month">{{ resp_group.date | moment("MMM") }}</span>
 						</div>
 						<div class="timeline-item row" style="width:100%">
-							<div class="col-sm-11" 
-								:style="[selectedUsersIds.indexOf(user_group.responder_id) > -1 ? {'margin':'10px 0 0 20px'}:{'margin':'0'}]" 
+							<div class="col-sm-11 col-md-11" 
+								:style="[selectedUsersIds.indexOf(user_group.responder_id) > -1 ? {'margin':'10px 0 0 50px'}:{'margin':'0'}]" 
 								v-for="user_group in resp_group.resp_users">
 								<div class="timeline-panel credits" v-if="selectedUsersIds.indexOf(user_group.responder_id) > -1" >
 									<ul class="timeline-panel-ul">
@@ -128,18 +128,18 @@
 										</li>	
 									</ul>
 									<div class="row">
-										<div class="col-12">
+										<div class="col-md-12">
 											<table v-if="agenda.worktime_check > 0" class="table table-striped table-bordered" style=
 											"border-top:0">
 												<thead class="table-dark">
-													<th class="col-10" style="color:#000">Task details</th>
-													<th class="col-2" style="color:#000">Hrs</th>
+													<th class="col-md-10" style="color:#000">Task details</th>
+													<th class="col-md-2" style="color:#000">Hrs</th>
 												</thead>
 												<tbody>
 													<tr v-for="response in user_group.responses">
-														<td class="col-10" v-if="response.body != null" v-html="response.body"></td>
-														<td class="col-10" v-else> <span class="text-danger">Response Missed!!</span></td>
-														<td class="col-2" v-html="response.time"></td>
+														<td class="col-md-10" v-if="response.body != null" v-html="response.body"></td>
+														<td class="col-md-10" v-else> <span class="text-danger">Response Missed!!</span></td>
+														<td class="col-md-2" v-html="response.time"></td>
 													</tr>
 												</tbody>
 											</table>

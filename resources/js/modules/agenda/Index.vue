@@ -1,30 +1,34 @@
 <template>
-	<div class="container">
-  	<div class="col-10 offset-1">
-  		<div class="card mb-n2">
-				<div class="card-header">
-					<a href="/" title="Back"><i class="fa fa-arrow-left fa-lg"></i></a>
-					<span class="card-title mx-auto">
-						<b>Daily Agenda</b>
-					</span>
-					<!-- <a href="#" title="Reset"><i class="fa fa-refresh fa-lg"></i></a> -->
-	      </div>
-  		</div>
-  	</div>
-		<div class="col-12">
-			<div class="card mb-3">
+	<div class="">
+		<div class="row">
+			<div class="col-md-10 offset-1">
+				<div class="card border-default mb-n2">
+					<div class="card-header">
+						<a href="/lawfirm" title="Back"><i class="fa fa-arrow-left fa-lg"></i></a>
+						<span class="card-title ml-2" >
+						<b> Daily Agenda</b>
+						</span>				
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card mb-3">
 				<div class="card-body">
-					<div class="row">
-						<span class='pb-5'>
-					  	<button type="button" v-if="creators.indexOf(logged_user.id) > -1"
-					  		class="btn btn-pill btn-primary" href="#" @click="toggleCreateAgendaForm">
-					  		<i class="fe fe-plus"></i> New Agenda
-					  	</button>
-					  </span>
+					<div class="row mb-4">
+						<div class="col-md-12">
+							<span class='pb-5'>
+						  	<button type="button" v-if="creators.indexOf(logged_user.id) > -1"
+						  		class="btn btn-pill btn-primary" href="#" @click="toggleCreateAgendaForm">
+						  		<i class="fe fe-plus"></i> New Agenda
+						  	</button>
+						  	</span>							
+						</div>
 				  </div>
-				  <div class="card" v-if="env.createAgenda">
+				  <div class="card mt-4" v-if="env.createAgenda">
 				  	<form>
-				  			<div class="col-12 p-5">
+				  		<div class="col-md-12 p-5">
 									<div class="mb-5 form-group">
 										<label><b>What question do you want to ask?</b></label>
 					  				<input type="text" name="title" class="form-control" v-model="agenda.title"
@@ -38,19 +42,19 @@
 						  			<div class="validation-message" v-text="validation.getMessage('description')"></div>
 									</div>
 									<div class="row">
-										<div class="mb-5 form-group col-4">
-											<label><b>At what time of day?</b></label>
+										<div class="mb-5 form-group col-md-4">
+										<label><b>At what time of day?</b></label>
 							  			<flat-pickr class="form-control" v-model="agenda.required_at"
 					  					:config="flatPickrConfig_agendaTime"></flat-pickr>	
 					  					<div class="validation-message" v-text="validation.getMessage('required_at')">
-								  				</div>
+								  		</div>
 										</div>
-										<div class="mb-5 form-group col-4">
-											<label><b>Expiry Time</b></label>
+										<div class="mb-5 form-group col-md-4">
+										<label><b>Expiry Time</b></label>
 							  			<flat-pickr class="form-control" v-model="agenda.expires_at"
 					  				:config="flatPickrConfig_agendaTime"></flat-pickr>
 										</div>
-										<div class="mb-5 form-group col-4">
+										<div class="mb-5 form-group col-md-4">
 											<label><b>Hours</b></label>
 											<multiselect v-model="agenda.hours" 
 												:options="maxHours" 
@@ -71,6 +75,7 @@
 									</div>
 									<div class="form-group">
 					          <label class="form-label">How often do you want to ask?</label>
+					          <br>
 					          <div class="selectgroup selectgroup-pills">
 					            <label class="selectgroup-item" v-for="(value, name) in agenda.days">
 					              <input v-model="agenda.selectedDays" type="checkbox" :name="value" :value="value" class="selectgroup-input" checked="">
@@ -82,7 +87,7 @@
 									<div class="mb-5 form-group">
 										<p><a v-for="subTab in subTabs" style="color:#fff" 
 												:class="selectedTab==subTab?'btn-primary':'btn-info'" 
-												class="btn btn-primary btn-sm mr-2" 
+												class="btn btn-primary btn-sm mr-2 mt-2" 
 												@click.prevent="update_permissions(subTab)">
 												{{subTab.toUpperCase()}}
 										</a></p>
@@ -106,22 +111,21 @@
 				  	</div>
 				  </div>
 					<div v-for="agenda in agendasLoop">
-						<div class="card" :class="{'card-fullscreen' : focusedAgenda.id === agenda.id}">
+						<div class="card mt-4" :class="{'card-fullscreen' : focusedAgenda.id === agenda.id}">
 							<div class="card-header">
-								<h3 class="card-title agenda-title">
+								<h4 class="agenda-title">
 									<a href="#" class="mr-2" v-if="!isEmpty(focusedAgenda)" @click.prevent="focusedAgenda={}">
 										<i class="fa fa-arrow-left"></i>
 									</a> {{ agenda.title }}
-								</h3>
-								<div class="card-options">
-									<a href="#" title="Show Help" @click.prevent="displayHelp(agenda.description)">
-					        	<i class="fe fe-bookmark"></i>
-					        </a>
-					        <a href="#" title="Edit Agenda" v-if="agenda_permission(agenda, 'can_edit')"
-					        	@click.prevent="editAgenda(agenda.id)">
-					        	<i class="fe fe-edit"></i>
-				       		</a>					
-				       	</div>
+							        <a href="#" title="Edit Agenda" v-if="agenda_permission(agenda, 'can_edit')"
+							        	@click.prevent="editAgenda(agenda.id)" class="pull-right mr-2">
+							        	<i class="fe fe-edit"></i>
+						       		</a>					
+									<a href="#" title="Show Help" @click.prevent="displayHelp(agenda.description)" class="pull-right mr-2">
+							        	<i class="fe fe-bookmark"></i>
+							        </a>
+								</h4>
+							
 							</div>
 							<div class="card-body" style="overflow-y:auto">
 				    		<span v-if="agenda.id === focusedAgenda.id">
@@ -138,15 +142,15 @@
 								  	<span v-if="agenda_permission(agenda, 'can_respond')">
 								  		<a href="#"  
 								  		@click.prevent="addResponse(agenda)"
-								  		class="text-decoration-none" 
-								  		style="background: #3490dc;color: #fff;font-size: .8rem;padding: .4rem;margin-right: 1rem;">
+								  		class="text-decoration-none btn btn-sm btn-primary mr-2" 
+								  		>
 										  	Add your response
 									  	</a>
 								  	</span>
 								  	<span v-if="agenda_permission(agenda, 'can_view')">
-								  		<a href="#"  class="text-decoration-none"
+								  		<a href="#"  class="text-decoration-none btn btn-sm btn-primary mr-2"
 								  		@click.prevent="focusAgendaResponses(agenda,'creatorResponses')"
-								  		style="background: #3490dc;color: #fff;font-size: .8rem;padding: .4rem;">
+								  		>
 										  	View all responses
 									  	</a>
 								  	</span>
@@ -156,6 +160,7 @@
 						</div>
 					</div>
 				</div>
+			</div>
 			</div>
 		</div>
 	</div>
@@ -291,7 +296,7 @@
 	      });
 			},
 
-			handleAgendaUpdate() {
+			handleAgendaUpdate() {  // Update Agenda Mast
 		  	let postData = this.agenda;
 		     window.axios.patch(`/pms/agenda/${this.env.EditID}`, postData).then(response => {
 		     	//console.log('save',response.data);
@@ -323,7 +328,7 @@
 			displayHelp(data) {
 				Vue.swal(data);
 			},
-			agendaStore(){
+			agendaStore(){    //Create Agenda mast
   			let postData = this.agenda;
 	  		postData.team = this.team; // add additional param
 		     window.axios.post('/pms/agenda', postData).then(response => {

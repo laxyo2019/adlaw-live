@@ -2,7 +2,7 @@
  <a href="{{route('todos.show',$notification['data']['id'].'_'.$notification->id)}}">
 	  <i class="fa fa-tasks {{$notification['data']['type'] == 'awaiting' ? 'text-yellow' : ($notification['data']['type'] == 'completed' ? 'text-success' : ($notification['data']['type'] == 'pending' ? 'text-primary' : 'text-orange'))}}"></i> 
 
-	  <span> {{str_limit($notification['data']['title'], $limit = 30, $end = '...') }} </span>
+	  <span> {{str_limit($notification['data']['title'], $limit = 50, $end = '...') }} </span>
 	  <br>
 	  @if($notification['data']['type'] == 'awaiting')
 	  	<span>Todo completed by: {{$notification['data']['assignee']}}</span>
@@ -11,7 +11,7 @@
 	  @elseif($notification['data']['type'] == 'pending')
 	  	<span>{{$notification['data']['creator']}} has assigned todo to you </span>
 	  @else
-	  	<span>you has the missed task please give the reason </span>
+	  	<span>Task missed please give the reason </span>
 	  @endif
 
 	  <br> <span>{{$notification['created_at']->diffForHumans()}}</span>

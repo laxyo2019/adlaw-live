@@ -4,14 +4,6 @@
 @endpush
 @section('content')
 <section class="content" >
-  	<agenda 
-  		:team="{{ json_encode($team)}}"
-  		:agendas="{{ json_encode($agendas)}}"
-  		:focus-agenda="{{ $focusAgenda}}"
-  		:users="{{ json_encode($users)}}"
-  		:can_create_agenda="{{ json_encode($can_create_agenda)}}"
-  		:logged_user="{{ json_encode(auth()->user())}}"
-		></agenda>
 
 </section>
 

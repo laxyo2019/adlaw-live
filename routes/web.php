@@ -307,6 +307,10 @@ Route::group(['prefix' => 'docs', 'namespace' => 'Docs'], function ()  {
 	Route::post('/documents/multi_cut_paste', 'DocsController@multi_cut_paste');
 	Route::post('/documents/upload_folder', 'DocsController@uploadFolder');
 });
+// Route::get('notifyAgendaAdded/{id}/{team_id?}','PMS\Agenda\AgendaMastController@active_agenda');
+
+// Route::get('agendaAddReminder/{id}/{team_id?}','PMS\Agenda\AgendaMastController@active_add_response');
+
 
 Route::group(['prefix' => 'pms', 'namespace' => 'PMS'], function ()  {
 	Route::resource('agenda', 'Agenda\AgendaMastController');

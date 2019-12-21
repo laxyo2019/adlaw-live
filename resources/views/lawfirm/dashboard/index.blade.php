@@ -133,7 +133,19 @@
             <a href="{{route('teams.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
       </div>
-     
+      <div class="col-md-4 ">  
+          <div class="small-box" style="background-color: #3f315ade; color:white;">
+            <div class="inner">
+              <h3>0</h3>
+              <h4>Agenda</h4>
+              </br></br>
+            </div>
+            <div class="icon">
+              <i class="fa fa-user"></i>
+            </div>
+            <a href="{{route('agenda.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+      </div>
       {{-- <div class="col-md-4 ">
       <!-- small box -->
         <div class="small-box" style="background-color: #5da3d4; color: white">

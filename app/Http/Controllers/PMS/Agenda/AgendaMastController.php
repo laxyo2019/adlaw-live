@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Agenda\AgendaMast;
 use App\Notifications\SendAgendaMessage;
 use App\User;
+
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
@@ -14,27 +16,42 @@ class AgendaMastController extends Controller
 {
 	  public function index()
 	  {
+	  	
+		$id = Auth::user()->id;
+		if(Auth::user()->parent_id == null){
+			$agendas = AgendaMast::where('creator_id',$id)
+			    	->orderBy('ordering', 'asc')
+			    	->get();
+
+			if(empty($agenda)){
+				$user = User::find($id);				
+				$permission = DB::table('permission_user')->where('user_id',$id)->where('permission_id',4)->get();
+				if(count($permission) ==0){
+					$user->attachPermission(4);	
+				} 		
+			}
+
+			//fetch all users for stand alone agenda
+	   
+			$users = User::where('parent_id', Auth::user()->id)->get();
+		    $users[] =Auth::user();
+		}else{
+			$agendas = AgendaMast::where('creator_id',Auth::user()->parent_id)
+			    	->orderBy('ordering', 'asc')
+			    	->get();
+			$users = User::where('parent_id', Auth::user()->parent_id)->get();
+		}
 
 
-	 //  	//fetch users having permission of can_create_agenda
-	 //  	$users_list = User::wherePermissionIs('create_agenda')->get();
+	  	//fetch users having permission of can_create_agenda
+	  	$users_list = User::wherePermissionIs('can_create_agenda')->get();
+		$collection = collect($users_list);
 
-	 //  	return $users_list;
-		// $collection = collect($users_list);
+			//converting array("1","2") to array(1,2) -- string to number conversion
+		$can_create_agenda =  array_map('intval', explode(',', $collection->implode('id', ', ')));
 
-		// 	//converting array("1","2") to array(1,2) -- string to number conversion
-		// $can_create_agenda =  array_map('intval', explode(',', $collection->implode('id', ', ')));
-
-	  	// $workspace_id = auth()->user()->workspace_id;
-
-	    $agendas = AgendaMast::where(['team_id' => null, 'workspace_id' => Auth::user()->id])
-	    	->orderBy('ordering', 'asc')
-	    	->get();
-
-	    return $agendas;
-	    
-	    //fetch all users for stand alone agenda
-	    // $users = User::where()->get();
+	 
+	  	// return $agendas;
 	   	$team = null;
 	   	$focusAgenda = 0;
 	   	
@@ -62,7 +79,7 @@ class AgendaMastController extends Controller
 
 		//this function is executed by cron in every 30 minutes to send "add response" notification if any agenda has started.
 	  public function agenda_reminder($id,$team_id= null){
-			$from = date('H:i:s',strtotime ( '-30 min' , strtotime (date('H:i:s')) ));
+		$from = date('H:i:s',strtotime ( '-70 min' , strtotime (date('H:i:s')) ));
 	  	$to = date('H:i:s');
 
 	   $agendas = AgendaMast::whereBetween('required_at',array($from,$to))
@@ -107,7 +124,7 @@ class AgendaMastController extends Controller
 			  	$agenda->is_strict = $request->restrictTime;  
 			  	$agenda->worktime_check = $request->hours;  
 			  	$agenda->required_at = $validatedData['required_at'].":00";
-			  	$agenda->workspace_id = auth()->user()->workspace_id;	
+			  	$agenda->workspace_id = null;	
 			  	$agenda->expires_at = $request->expires_at.":00";
 			  	$agenda->permissions = json_encode($permissions);
 			  	$agenda->save();

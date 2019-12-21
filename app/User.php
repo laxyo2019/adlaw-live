@@ -7,11 +7,13 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Cache;
 use Laratrust\Traits\LaratrustUserTrait;
-
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\Models\Media;
 class User extends Authenticatable
 {
     use Notifiable;
-    use LaratrustUserTrait; // add this trait to your user model
+    use LaratrustUserTrait, HasMediaTrait; // add this trait to your user model
     /**
      * The attributes that are mass assignable.
      *

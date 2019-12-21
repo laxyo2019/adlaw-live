@@ -2,7 +2,7 @@
 	<div class="">
 		<div class="row">
 			<div class="col-md-10 offset-1">
-				<div class="card border-default mb-n2">
+				<div class="card mb-n2">
 					<div class="card-header">
 						<a href="/lawfirm" title="Back"><i class="fa fa-arrow-left fa-lg"></i></a>
 						<span class="card-title ml-2" >

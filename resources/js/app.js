@@ -38,6 +38,7 @@ Vue.component('user-selector', require('./components/re-usable/UserSelector.vue'
 
 
 Vue.component('agenda', require('./modules/agenda/Index.vue').default)
+Vue.component('schedules', require('./modules/schedules/Index.vue').default)
 
 // Docs
 Vue.component('docs-home', require('./modules/docs/Home.vue').default)

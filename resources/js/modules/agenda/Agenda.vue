@@ -184,7 +184,6 @@ export default {
 			selectedUsersIds:[],
 			agenda: [],
 			totalHours: 0,
-			checkval : '',
 			loopTasks: [],			
 		}
 	},
@@ -200,10 +199,10 @@ export default {
 			});
 		}
 		this.get_users();
-		this.checkval = this.agenda.worktime_check;
+
 		this.totalHours = this.agenda.worktime_check != 0 ? this.agenda.worktime_check - minus : this.agenda.worktime_check ;
 
-		// console.log(this.totalHours);
+		console.log(this.totalHours);
 
 	},
 	methods:{

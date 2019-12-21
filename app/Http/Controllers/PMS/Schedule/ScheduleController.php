@@ -5,18 +5,32 @@ namespace App\Http\Controllers\PMS\Schedule;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Models\Schedule;
-use App\Models\ScheduleHistory;
+// use App\Models\ScheduleHistory;
 use App\Models\SchedulesDisplay;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Auth;
 
 class ScheduleController extends Controller
 {
   public function index()
 	{
-		$users = User::where('workspace_id', 1)->get();
+		$id = Auth::user()->id;
+		if(Auth::user()->parent_id == null){
+			$user = User::find($id);				
+				$permission = DB::table('permission_user')->where('user_id',$id)->where('permission_id',5)->get();
+				if(count($permission) ==0){
+					$user->attachPermission(5);	
+				} 		
+
+			//fetch all users for stand alone agenda
+			$users = User::where('parent_id', $id)->get();
+		    $users[] =Auth::user();
+		}else{
+			$users = User::where('parent_id', Auth::user()->parent_id)->get();
+		}
+		
 		$schedules = SchedulesDisplay::orderBy('start')->get();
 
 		return view('pms.schedules.index',compact('users', 'schedules'));
@@ -138,7 +152,7 @@ class ScheduleController extends Controller
   		$schedule->start = $validate['startTime'];
   		$schedule->reminder_start = $validate['remind_startTime'];
   		$schedule->end = $validate['endTime'];
-  		$schedule->workspace_id = auth()->user()->workspace_id;
+  		// $schedule->workspace_id = auth()->user()->workspace_id;
   		$schedule->expiry_date = $validate['repeat']['value'] != 1 ? $validate['repeatTillDate'] : null;
   		$schedule->save();
 
@@ -191,7 +205,7 @@ class ScheduleController extends Controller
 				$scheduleDisplay->users = $schedule->users;
 				$scheduleDisplay->description = $schedule->description;
 				$scheduleDisplay->reminder_start = $schedule->reminder_start;
-				$scheduleDisplay->workspace_id = $schedule->workspace_id;
+				// $scheduleDisplay->workspace_id = $schedule->workspace_id;
 				$scheduleDisplay->creator_id = $schedule->creator_id;
 				$scheduleDisplay->save();
 			}
@@ -212,7 +226,7 @@ class ScheduleController extends Controller
 								$scheduleDisplay->users = $schedule->users;
 								$scheduleDisplay->description = $schedule->description;
 			  				$scheduleDisplay->reminder_start = $schedule->reminder_start;
-								$scheduleDisplay->workspace_id = $schedule->workspace_id;
+								// $scheduleDisplay->workspace_id = $schedule->workspace_id;
 								$scheduleDisplay->creator_id = $schedule->creator_id;
 								$scheduleDisplay->save();
 							}
@@ -238,7 +252,7 @@ class ScheduleController extends Controller
 						$scheduleDisplay->users = $schedule->users;
 						$scheduleDisplay->description = $schedule->description;
 						$scheduleDisplay->reminder_start = $schedule->reminder_start;
-						$scheduleDisplay->workspace_id = $schedule->workspace_id;
+						// $scheduleDisplay->workspace_id = $schedule->workspace_id;
 						$scheduleDisplay->creator_id = $schedule->creator_id;
 						$scheduleDisplay->save();
 				}

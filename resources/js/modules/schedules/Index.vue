@@ -1,17 +1,20 @@
 <template>
-	<div class="container">
-  	<div class="col-10 offset-1">
-  		<div class="card mb-n2">
+	<div class="">
+  	<div class="row">
+		<div class="col-md-10 offset-1">
+			<div class="card mb-n2">
 				<div class="card-header">
-					<a href="/" title="Back"><i class="fa fa-arrow-left fa-lg"></i></a>
+					<a href="/lawfirm" title="Back"><i class="fa fa-arrow-left fa-lg"></i></a>
 					<span class="card-title mx-auto">
 						<b>Schedule</b>
 					</span>
 					<!-- <a href="#" title="Reset"><i class="fa fa-refresh fa-lg"></i></a> -->
-	      </div>
-  		</div>
-  	</div>
-		<div class="col-12">
+				</div>
+			</div>
+		</div>
+    </div>
+    <div class="row">
+		<div class="col-md-12">
 			<div class="card mb-3">
 				<div class="card-body">
 					<span v-if="isEmpty(focusedSchedule)">
@@ -137,7 +140,8 @@
 				  			</div>
 				  		</div>
 				  	</div>
-				  	<div class="col-md-4  col-sm-8 col-xs-10 offset-md-4 offset-sm-2 offset-xs-1">
+				  	<div class="row mt-4 mb-4" >
+				  		<div class="col-md-4  col-sm-12 col-xs-12 offset-md-4 offset-sm-2 offset-xs-1 text-center mt-4 mb-4">
 							 <vue-cal class="vuecal--rounded-theme vuecal--green-theme"
 				 					@cell-click="onCellClick($event)"
 					         xsmall
@@ -148,7 +152,8 @@
 					         :events="displayLoop">
 								</vue-cal>
 						</div>
-						<div class="card">
+						<div class="col-md-12 mt-4 mb-4">
+							<div class="card">
 							<div class="card-body">
 								<span v-for="day in daysOfYear">
 										<p style="margin: 0 -24px 10px;padding: 2px 5px;background: #e4f5ef;"><b>{{day}}</b></p>
@@ -169,6 +174,10 @@
 								</span>
 							</div>
 						</div>
+						</div>
+				  	</div> 
+				  	
+						
 					</span>
 					<span v-else>
 						<schedule-component
@@ -182,6 +191,8 @@
 				</div>
 			</div>
 		</div>
+		</div>
+
 	</div>
 </template>
 <script>

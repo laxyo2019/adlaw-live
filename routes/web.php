@@ -317,7 +317,12 @@ Route::group(['prefix' => 'pms', 'namespace' => 'PMS'], function ()  {
 	Route::resource('agenda/response', 'Agenda\AgendaResponseController');
 	Route::post('agenda/checks/is_strict', 'Agenda\AgendaMastController@check_is_strict');
 	Route::post('/get_users','Agenda\AgendaMastController@get_users');
+	// Schedule Routes
+	Route::resource('/schedule', 'Schedule\ScheduleController');
+	Route::patch('/schedule/{display_id}/take_action', 'Schedule\ScheduleController@takeAction');
 });
+
+
 
 
 //new route for agenda

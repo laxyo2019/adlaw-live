@@ -203,7 +203,7 @@ export default {
 		this.checkval = this.agenda.worktime_check;
 		this.totalHours = this.agenda.worktime_check != 0 ? this.agenda.worktime_check - minus : this.agenda.worktime_check ;
 
-		console.log(this.totalHours);
+		// console.log(this.totalHours);
 
 	},
 	methods:{

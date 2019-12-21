@@ -2838,8 +2838,7 @@ Vue.use(vue_js_modal__WEBPACK_IMPORTED_MODULE_0___default.a);
 
     this.get_users();
     this.checkval = this.agenda.worktime_check;
-    this.totalHours = this.agenda.worktime_check != 0 ? this.agenda.worktime_check - minus : this.agenda.worktime_check;
-    console.log(this.totalHours);
+    this.totalHours = this.agenda.worktime_check != 0 ? this.agenda.worktime_check - minus : this.agenda.worktime_check; // console.log(this.totalHours);
   },
   methods: {
     addResponse: function addResponse() {

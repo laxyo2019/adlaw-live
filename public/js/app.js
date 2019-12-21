@@ -2820,22 +2820,26 @@ Vue.use(vue_js_modal__WEBPACK_IMPORTED_MODULE_0___default.a);
       selectedUsersIds: [],
       agenda: [],
       totalHours: 0,
+      checkval: '',
       loopTasks: []
     };
   },
   created: function created() {
     this.agenda = this.openedAgenda;
     var n = 0;
+    var minus = this.agenda.worktime_check - 1;
 
     if (n < this.agenda.worktime_check) {
       this.loopTasks.push({
         detail: '',
-        time: 8
+        time: this.agenda.worktime_check
       });
     }
 
     this.get_users();
-    this.totalHours = this.agenda.worktime_check == 8 ? this.agenda.worktime_check - 7 : this.agenda.worktime_check;
+    this.checkval = this.agenda.worktime_check;
+    this.totalHours = this.agenda.worktime_check != 0 ? this.agenda.worktime_check - minus : this.agenda.worktime_check;
+    console.log(this.totalHours);
   },
   methods: {
     addResponse: function addResponse() {

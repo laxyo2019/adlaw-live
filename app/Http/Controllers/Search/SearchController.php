@@ -323,6 +323,7 @@ class SearchController extends Controller
   		$userData = $this->query->where('id',$id)
                 ->first();  
   	}else{
+     
   		$userData = Helpers::lawcompanyDetails()->where('id',$id)->first(); 
   	}
 
@@ -330,6 +331,7 @@ class SearchController extends Controller
   
     $reviews = Review::with('customers')->where('user_id',$id)->where('review_status','A')->paginate(4);
     $slots =Slots::all();
+    // return $userData;
    	return view('profiles.lawyerProfile', compact('userData','slots','reviews'));
   }
 

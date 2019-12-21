@@ -184,20 +184,26 @@ export default {
 			selectedUsersIds:[],
 			agenda: [],
 			totalHours: 0,
+			checkval : '',
 			loopTasks: [],			
 		}
 	},
 	created(){	
 		this.agenda = this.openedAgenda;
 		let n = 0;
+		let minus = this.agenda.worktime_check - 1;
+
 		if(n<this.agenda.worktime_check){
 			this.loopTasks.push({
 				detail: '',
-				time: 8
+				time: this.agenda.worktime_check
 			});
 		}
 		this.get_users();
-		this.totalHours = this.agenda.worktime_check == 8 ? this.agenda.worktime_check - 7 : this.agenda.worktime_check;
+		this.checkval = this.agenda.worktime_check;
+		this.totalHours = this.agenda.worktime_check != 0 ? this.agenda.worktime_check - minus : this.agenda.worktime_check ;
+
+		console.log(this.totalHours);
 
 	},
 	methods:{

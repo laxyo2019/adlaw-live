@@ -80,14 +80,14 @@
             <div class="col-md-3">
                 <h4 class="font-weight-bold">Team Members Management</h4>
                 <p class="p-text">
-                Adlaw offers a complete case management solution for lawyers, law firms and corporate legal departments. This feature is stuffed with various sub-includes that empower you to accomplish more in less time. Here is a run-down of the sub-features – we encourage you to attempt our
+                Adlaw's team members management feature used to create new user, edit and delete user. Assign or create team of lawyer organize and keep track of cases assigned to each individual lawyer. It is a critical part of organizing and keeping track of cases assigned to each individual lawyer, See which groups team members are a part of, edit and delete profiles and Search for members by name, email address or mobile number.
                 </p>
                 <a href="" class="btn btn-sm btn-info">More Info</a>
             </div>
             <div class="col-md-3">
                 <h4 class="font-weight-bold">Profile Management</h4>
                 <p class="p-text">
-                Adlaw offers a complete case management solution for lawyers, law firms and corporate legal departments. This feature is stuffed with various sub-includes that empower you to accomplish more in less time. Here is a run-down of the sub-features – we encourage you to attempt our product for nothing to 
+               Adlaw offers profile management in which lawyers can create their profile, update and delete the profile. The created lawyers profile will be shown in search box. With the help of this user can search the lawyer by name anywhere and get full profile details of lawyers. 
                 </p>
                 <a href="" class="btn btn-sm btn-info">More Info</a>
             </div>

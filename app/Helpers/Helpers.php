@@ -75,7 +75,7 @@ class Helpers
 			           $query->where('review_status','A');
 			        }])->with('city', 'state')			        
 			        ->where('status','A')
-			        ->where('user_catg_id',3);
+			        ->where('user_catg_id',4);
 
 		if($court_id == null){
 			$result = $query->with(['user_courts'=>function($query){

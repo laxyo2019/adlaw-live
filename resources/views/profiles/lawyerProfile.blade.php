@@ -81,7 +81,7 @@ p.stars  i
                 @endforeach
               </ul>
             </li>
-        @endif
+       
             <li class="">
               <a href="" data-toggle="collapse" aria-expanded="false" style="text-decoration: none;" id="pract">
                 <span style="margin: -3px;"><i class="fa fa-university" aria-hidden="true"></i>&nbsp;Practicing In Courts<i class="fa fa-plus float-right" aria-hidden="true" id="pplus"></i></span>
@@ -93,7 +93,8 @@ p.stars  i
                 </li>
                 @endforeach
               </ul>
-            </li>    
+            </li>   
+          @endif 
     </ul>
 </nav>
 

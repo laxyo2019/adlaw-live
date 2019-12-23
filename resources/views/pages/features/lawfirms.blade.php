@@ -80,8 +80,9 @@
             <div class="col-md-3">
                 <h4 class="font-weight-bold">Team Members Management</h4>
                 <p class="p-text">
-                Adlaw's team members management feature used to create new user, edit and delete user. Assign or create team of lawyer organize and keep track of cases assigned to each individual lawyer. It is a critical part of organizing and keeping track of cases assigned to each individual lawyer, See which groups team members are a part of, edit and delete profiles and Search for members by name, email address or mobile number.
+                Adlaw's team members management feature used to create new user, edit and delete user. Assign or create team of lawyer organize and keep track of cases assigned to each individual lawyer. 
                 </p>
+                <br>
                 <a href="" class="btn btn-sm btn-info">More Info</a>
             </div>
             <div class="col-md-3">
@@ -94,14 +95,14 @@
             <div class="col-md-3">
                 <h4 class="font-weight-bold">To-Dos Management</h4>
                 <p class="p-text">
-                Adlaw offers a complete case management solution for lawyers, law firms and corporate legal departments. This feature is stuffed with various sub-includes that empower you to accomplish more in less time. Here is a run-down of the sub-features – we encourage you to attempt our product for nothing to 
+               To-dos are a viable way to assign priorities, gather speed, work together without perplexities and guarantee that move steps are made on schedule, every time. They are also essential to manage work overload effectively, helping you..
                 </p>
                 <a href="" class="btn btn-sm btn-info">More Info</a>
             </div>
             <div class="col-md-3">
                 <h4 class="font-weight-bold">Hearing Date Management</h4>
                 <p class="p-text">
-                Adlaw offers a complete case management solution for lawyers, law firms and corporate legal departments. This feature is stuffed with various sub-includes that empower you to accomplish more in less time. Here is a run-down of the sub-features – we encourage you to attempt our product for nothing to 
+               To keep track of your hearing dates adlaw offer hearing date management system in which you can input the basic details such as case type, number and year, it pulls publicly available data from the Supreme Court, High Court or District Court website.
                 </p>
                 <a href="" class="btn btn-sm btn-info">More Info</a>
             </div>

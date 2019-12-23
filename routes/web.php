@@ -28,6 +28,7 @@ Route::post('/courtTypeFilter','HomeController@courtTypeFilter')->name('courtTyp
 Route::get('/court_category/{id}','HomeController@court_category');
 
 Route::get('/case_subcategory', 'HomeController@case_subcategory');
+Route::get('/get_all_users', 'HomeController@get_all_users')->name('get_all_users');
 
 Route::post('/book_an_appointment','BookingController@book_an_appointment')->name('book_an_appointment');
 

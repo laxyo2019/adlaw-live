@@ -299,18 +299,18 @@
           </li> --}}
 
 
-        <li class="{{Request()->segment(1) == 'pms/agenda' ? 'active' : ''}}   nav-item">
+        <li class="{{Request()->segment(2) == 'agenda' ? 'active' : ''}}   nav-item">
             <a class="nav-link" href="{{route('agenda.index')}}">
             <i class="fa fa-tasks"></i>
             <span>Agenda</span>
             </a>
         </li>
-        <li class="{{Request()->segment(1) == 'pms/schedule' ? 'active' : ''}} nav-item">
+      {{--   <li class="{{Request()->segment(1) == 'pms/schedule' ? 'active' : ''}} nav-item">
             <a class="nav-link" href="{{route('schedule.index')}}">
             <i class="fa fa-tasks"></i>
             <span>Schedules</span>
             </a>
-        </li>
+        </li> --}}
         <li class="{{Request()->segment(1) == 'docs' ? 'active' : ''}} {{Request()->segment(1) == 'filestack-mgmt' ? 'active' : ''}}  nav-item">
             <a class="nav-link" href="{{route('docs.home')}}">
             <i class="fa fa-file"></i>

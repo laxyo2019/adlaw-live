@@ -185,7 +185,24 @@
             <span>My Profile</span>
           </a>
         </li>
-     
+        @role('lawcollege','teacher')
+       <li class="{{Request()->segment(1) == 'docs' ? 'active' : ''}} {{Request()->segment(1) == 'filestack-mgmt' ? 'active' : ''}}  nav-item">
+            <a class="nav-link" href="{{route('docs.home')}}">
+            <i class="fa fa-file"></i>
+            <span>Documents</span>
+            </a>
+        </li>
+        
+        <li class="{{Request()->segment(2) == 'agenda' ? 'active' : ''}}   nav-item">
+            <a class="nav-link" href="{{route('agenda.index')}}">
+            <i class="fa fa-tasks"></i>
+            <span>Agenda</span>
+            </a>
+        </li>
+
+        @endrole
+
+
       @role('lawcollege')
          <li class="{{Request()->segment(1) == 'course' ? 'active' : '' }} nav-item">
           <a class="nav-link" href="{{route('course.index')}}">
@@ -193,12 +210,7 @@
             <span>Courses</span>
           </a>
         </li>   
-        <li class="{{Request()->segment(1) == 'docs' ? 'active' : ''}} {{Request()->segment(1) == 'filestack-mgmt' ? 'active' : ''}}  nav-item">
-            <a class="nav-link" href="{{route('docs.home')}}">
-            <i class="fa fa-file"></i>
-            <span>Documents</span>
-            </a>
-        </li>
+
         
          <li class="{{Request()->segment(1) == 'teams' ? 'active' : '' }} nav-item">
           <a class="nav-link" href="{{route('teams.index')}}">

@@ -74,7 +74,7 @@ class StudentDetailController extends Controller
             StudentDocs::create($stud_docs);
         }
        
-        //$this->create_account($data);
+        $this->create_account($data);
 
         return redirect()->route('student_detail.create')->with('success','Student created successfully');
     }
@@ -416,15 +416,12 @@ class StudentDetailController extends Controller
             'parent_id' => Auth::user()->id,
             'mobile' => $data['mobile']
         ]; 
-
         $user = User::create($student_data);
         $user->attachRole($user->user_catg_id);
-
         $verifyUser = VerifyUser::create([
             'user_id' => $user->id,
             'token' => str_random(40)
         ]);
-
         $user['password'] = $password;
         Mail::to($user->email)->send(new UserMail($user));
     }

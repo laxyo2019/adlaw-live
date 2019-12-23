@@ -28,9 +28,11 @@
 							<br>
 							<h5>Before upload read terms & conditions:</h5>
 							<ol>
+
 								<li>Don't change sample file header.</li> 
 								<li>Some field value format fixed. Date format is already fixed don't change</li>
 								<li>Date of birth define should not equal to current year.</li> 
+								<li>Email Must be unique</li>
 								<li>Mandatory fields: 
 									<ul>
 										<li>Qualification name</li>

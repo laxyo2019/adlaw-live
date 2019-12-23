@@ -58,6 +58,16 @@ class FilestackMgmtController extends Controller
 
     public function get_all_users(){
     	$users = User::where('parent_id', auth()->user()->id)->get();
+        if(Auth::user()->user_catg_id == '4'){
+            $users = collect($users)->filter(function($e){
+                return $e['user_catg_id'] === '6';
+            });
+        }else{
+            $users = collect($users)->filter(function($e){
+                return $e['user_catg_id'] === '2';
+            });
+        }
+        
         $users[] = Auth::user();
 
     	return response()->json($users);

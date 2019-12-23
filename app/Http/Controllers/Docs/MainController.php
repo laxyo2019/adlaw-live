@@ -17,16 +17,23 @@ class MainController extends Controller
 	}
 
 	public function index() {
+
 		$users = User::where('parent_id', auth()->user()->id)->get();
 
+		if(Auth::user()->user_catg_id == '4'){
+			$users = collect($users)->filter(function($e){
+				return $e['user_catg_id'] === '6';
+			});
+		}else{
+			$users = collect($users)->filter(function($e){
+				return $e['user_catg_id'] === '2';
+			});
+		}
+
 		$filestack_id = get_user_filestack_id();
-		
-		
 		$general_stacks = Filestack::where('type', 2)->get();
 		$filestacks = Filestack::with('user_owns')->where('type', 1)->whereIn('id',$filestack_id)->get();
-		// return $general_stacks;
-		// return $filestacks;
-		 // return $users;
+		
 		return view('docs.index', [
 			'users' => $users,
 			'general_stacks' => $general_stacks,

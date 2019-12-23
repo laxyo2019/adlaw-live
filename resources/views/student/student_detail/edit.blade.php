@@ -217,8 +217,9 @@
 											@enderror
 										</div>
 										<div class="col-md-3 col-sm-6 col-xs-6 error-div">
-											<label class="">Email Address</label>
-											<input type="text" name="email" class="form-control " value="{{$student->email}}"> 
+											<label class="required">Email Address</label>
+											<span class="text-muted">Must be unique</span>
+											<input type="text" name="email" class="form-control required" readonly value="{{$student->email}}"> 
 											@error('email')
 												<span class="text-danger">
 													<strong>{{$message}}</strong>
@@ -661,7 +662,9 @@ form.validate({
 		dob:{
 			datebefore:true,
 		},
-		
+		email:{
+			email:true,
+		},
 		spec_ailment:{
 			minlength:5,
 			maxlength:100,

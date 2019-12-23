@@ -5211,7 +5211,8 @@ __webpack_require__.r(__webpack_exports__);
     storeSchedule: function storeSchedule() {
       var _this2 = this;
 
-      var error = false; //check if date or name is empty in a notifiers
+      var error = false; // console.log(this.createSchedule);
+      //check if date or name is empty in a notifiers
 
       this.createSchedule.notifiers.forEach(function (v, k) {
         if (v.date == null || v.user == null) {
@@ -7657,7 +7658,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*edit count of events on particular date*/\n.vuecal__cell-events-count {\n  width: 4px;\n  min-width: 0;\n  height: 4px;\n  padding: 0;\n  color: transparent !important;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*edit count of events on particular date*/\n.vuecal__cell-events-count {\n  width: 4px;\n  min-width: 0;\n  height: 4px;\n  padding: 0;\n  color: transparent !important;\n}\n", ""]);
 
 // exports
 
@@ -65390,7 +65391,10 @@ var render = function() {
                         _c("div", { staticClass: "card-body row" }, [
                           _c(
                             "div",
-                            { staticClass: "form-group col-sm-6 col-xs-12" },
+                            {
+                              staticClass:
+                                "form-group col-md-6 col-sm-6 col-xs-12"
+                            },
                             [
                               _vm._m(1),
                               _vm._v(" "),
@@ -65437,7 +65441,10 @@ var render = function() {
                           _vm._v(" "),
                           _c(
                             "div",
-                            { staticClass: "form-group col-sm-6 col-xs-12" },
+                            {
+                              staticClass:
+                                "form-group col-sm-6 col-md-6 col-xs-12"
+                            },
                             [
                               _vm._m(2),
                               _vm._v(" "),
@@ -65478,7 +65485,7 @@ var render = function() {
                           _vm._v(" "),
                           _c(
                             "div",
-                            { staticClass: "form-group col-6 col-xs-12" },
+                            { staticClass: "form-group col-md-6 col-xs-12" },
                             [
                               _vm._m(3),
                               _vm._v(" "),
@@ -65537,92 +65544,99 @@ var render = function() {
                             1
                           ),
                           _vm._v(" "),
-                          _c("div", { staticClass: "col-sm-6 col-xs-12" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-group" },
-                              [
-                                _vm._m(4),
-                                _vm._v(" "),
-                                _c("multiselect", {
-                                  attrs: {
-                                    options: _vm.repeatOptions,
-                                    "close-on-select": true,
-                                    "clear-on-select": true,
-                                    "preserve-search": true,
-                                    placeholder: "Pick repeat",
-                                    label: "title",
-                                    "track-by": "title"
-                                  },
-                                  model: {
-                                    value: _vm.createSchedule.repeat,
-                                    callback: function($$v) {
-                                      _vm.$set(
-                                        _vm.createSchedule,
-                                        "repeat",
-                                        $$v
-                                      )
+                          _c(
+                            "div",
+                            { staticClass: "col-sm-6 col-md-6 col-xs-12" },
+                            [
+                              _c(
+                                "div",
+                                { staticClass: "form-group" },
+                                [
+                                  _vm._m(4),
+                                  _vm._v(" "),
+                                  _c("multiselect", {
+                                    attrs: {
+                                      options: _vm.repeatOptions,
+                                      "close-on-select": true,
+                                      "clear-on-select": true,
+                                      "preserve-search": true,
+                                      placeholder: "Pick repeat",
+                                      label: "title",
+                                      "track-by": "title"
                                     },
-                                    expression: "createSchedule.repeat"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("div", {
-                                  staticClass: "validation-message",
-                                  domProps: {
-                                    textContent: _vm._s(
-                                      _vm.validation.getMessage("repeat")
-                                    )
-                                  }
-                                })
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _vm.createSchedule.repeat.value != 1 &&
-                            Object.keys(_vm.createSchedule.repeat).length != 0
-                              ? _c(
-                                  "div",
-                                  { staticClass: "form-group" },
-                                  [
-                                    _vm._m(5),
-                                    _vm._v(" "),
-                                    _c("flat-pickr", {
-                                      staticClass: "form-control",
-                                      model: {
-                                        value:
-                                          _vm.createSchedule.repeatTillDate,
-                                        callback: function($$v) {
-                                          _vm.$set(
-                                            _vm.createSchedule,
-                                            "repeatTillDate",
-                                            $$v
-                                          )
-                                        },
-                                        expression:
-                                          "createSchedule.repeatTillDate"
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("div", {
-                                      staticClass: "validation-message",
-                                      domProps: {
-                                        textContent: _vm._s(
-                                          _vm.validation.getMessage(
-                                            "repeatTillDate"
-                                          )
+                                    model: {
+                                      value: _vm.createSchedule.repeat,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.createSchedule,
+                                          "repeat",
+                                          $$v
                                         )
-                                      }
-                                    })
-                                  ],
-                                  1
-                                )
-                              : _vm._e()
-                          ]),
+                                      },
+                                      expression: "createSchedule.repeat"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("div", {
+                                    staticClass: "validation-message",
+                                    domProps: {
+                                      textContent: _vm._s(
+                                        _vm.validation.getMessage("repeat")
+                                      )
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _vm.createSchedule.repeat.value != 1 &&
+                              Object.keys(_vm.createSchedule.repeat).length != 0
+                                ? _c(
+                                    "div",
+                                    { staticClass: "form-group" },
+                                    [
+                                      _vm._m(5),
+                                      _vm._v(" "),
+                                      _c("flat-pickr", {
+                                        staticClass: "form-control",
+                                        model: {
+                                          value:
+                                            _vm.createSchedule.repeatTillDate,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.createSchedule,
+                                              "repeatTillDate",
+                                              $$v
+                                            )
+                                          },
+                                          expression:
+                                            "createSchedule.repeatTillDate"
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("div", {
+                                        staticClass: "validation-message",
+                                        domProps: {
+                                          textContent: _vm._s(
+                                            _vm.validation.getMessage(
+                                              "repeatTillDate"
+                                            )
+                                          )
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                : _vm._e()
+                            ]
+                          ),
                           _vm._v(" "),
                           _c(
                             "div",
-                            { staticClass: "form-group col-sm-6 col-xs-12" },
+                            {
+                              staticClass:
+                                "form-group col-sm-6 col-md-6 col-xs-12"
+                            },
                             [
                               _vm._m(6),
                               _vm._v(" "),
@@ -65656,7 +65670,10 @@ var render = function() {
                           _vm._v(" "),
                           _c(
                             "div",
-                            { staticClass: "form-group col-sm-6 col-xs-12" },
+                            {
+                              staticClass:
+                                "form-group col-sm-6 col-md-6 col-xs-12"
+                            },
                             [
                               _vm._m(7),
                               _vm._v(" "),
@@ -65686,7 +65703,10 @@ var render = function() {
                           _vm._v(" "),
                           _c(
                             "div",
-                            { staticClass: "form-group col-sm-6 col-xs-12" },
+                            {
+                              staticClass:
+                                "form-group col-sm-6 col-md-6 col-xs-12"
+                            },
                             [
                               _vm._m(8),
                               _vm._v(" "),
@@ -65726,7 +65746,7 @@ var render = function() {
                             "div",
                             {
                               staticClass:
-                                "form-group col-sm-6 col-xs-12 text-right"
+                                "form-group col-sm-6 col-md-6 col-xs-12 text-right"
                             },
                             [
                               _c("br"),
@@ -65761,12 +65781,12 @@ var render = function() {
                             ]
                           ),
                           _vm._v(" "),
-                          _c("div", { staticClass: "col-12" }, [
+                          _c("div", { staticClass: "col-md-12" }, [
                             _c(
                               "table",
                               {
                                 staticClass:
-                                  "col-12 table table-striped table-bordered"
+                                  "col-md-12 table table-striped table-bordered"
                               },
                               [
                                 _vm._m(10),
@@ -65832,7 +65852,7 @@ var render = function() {
                           _vm._v(" "),
                           _c(
                             "div",
-                            { staticClass: "col-12 form-group" },
+                            { staticClass: "col-md-12 form-group" },
                             [
                               _c("vue-editor", {
                                 attrs: { "editor-toolbar": _vm.customToolbar },
@@ -65852,7 +65872,7 @@ var render = function() {
                             1
                           ),
                           _vm._v(" "),
-                          _c("div", { staticClass: "col-12" }, [
+                          _c("div", { staticClass: "col-md-12" }, [
                             _c(
                               "button",
                               {

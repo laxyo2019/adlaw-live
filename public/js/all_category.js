@@ -440,3 +440,16 @@ function user_filestackCreate(filestack_id){
 	// console.log(userTitle);
 	}
 }
+
+function unique_email_check(value){
+	// console.log(value);
+$.ajax({
+		type:'get',
+		url : '/get_all_users',
+		data:{email:value},			
+		success:function(res){
+			$('#email_check').val(res);
+
+		}
+	});
+}

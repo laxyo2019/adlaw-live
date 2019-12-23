@@ -17,13 +17,24 @@ class ScheduleController extends Controller
   public function index()
 	{
 		$id = Auth::user()->id;
+		if(Auth::user()->user_catg_id == '4'){
+			$users = User::where('parent_id', Auth::user()->parent_id)
+					->where('user_catg_id',4)
+					->get();
+
+		}else if(Auth::user()->user_catg_id == '2'){
+			$users = User::where('parent_id', Auth::user()->parent_id)
+					->where('user_catg_id',2)
+					->get();
+		}
+
+		
 		if(Auth::user()->parent_id == null){
 			$user = User::find($id);				
-				$permission = DB::table('permission_user')->where('user_id',$id)->where('permission_id',5)->get();
-				if(count($permission) ==0){
-					$user->attachPermission(5);	
-				} 		
-
+			$permission = DB::table('permission_user')->where('user_id',$id)->where('permission_id',5)->get();
+			if(count($permission) ==0){
+				$user->attachPermission(5);	
+			} 		
 			//fetch all users for stand alone agenda
 			$users = User::where('parent_id', $id)->get();
 		    $users[] =Auth::user();
@@ -68,6 +79,8 @@ class ScheduleController extends Controller
 		]);
 
 		$asc_dates_array = array((new Carbon($endTime))->isoFormat('YYYY-MM-DD'));
+
+		return $asc_dates_array;
 		$notifiers = array(); 
 		if(!empty($request->notifiers)) {
   		foreach($request->notifiers as $key=>$notifier) {

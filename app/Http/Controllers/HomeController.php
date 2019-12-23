@@ -79,4 +79,10 @@ class HomeController extends Search\SearchController
     public function all_notifications(){
       return view('notifications.all_notifications');
     }
+    public function get_all_users(){
+      $user = User::where('email', request('email'))->first();
+      if($user){
+        echo 'duplicate';
+      }
+    }
 }

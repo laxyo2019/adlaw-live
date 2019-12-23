@@ -214,9 +214,9 @@
 											@enderror
 										</div>
 										<div class="col-md-3 col-sm-6 col-xs-6 error-div">
-											<label class="">Email Address</label>
-											<input type="text" name="email" class="form-control "> 
-											{{-- <span class="text-muted">This is username of student login</span> --}}
+											<label class="required">Email Address</label> <span class="text-muted"><span class="text-muted">must be unique</span>
+											<input type="text" name="email" class="form-control required"> 
+											
 											@error('email')
 												<span class="text-danger">
 													<strong>{{$message}}</strong>
@@ -579,6 +579,7 @@
 						    </div>
 						    @csrf
 						</form>
+						<input type="hidden" name="email_check" value="" id="email_check">
 					</div>
 				</div>
 			</div>
@@ -641,7 +642,10 @@ form.validate({
 		dob:{
 			datebefore:true,
 		},
-		
+		email:{
+			email:true,
+			uniqueCheck: true,
+		},
 		spec_ailment:{
 			minlength:5,
 			maxlength:100,
@@ -728,7 +732,6 @@ form.validate({
 		}
 
     },
-
 	errorElement: "em",
 	errorPlacement: function errorPlacement(error, element) { 
 		element.after(error);
@@ -896,6 +899,23 @@ $(document).ready(function(){
 		
 
 	},"Passout year is greater than addmission date");
+
+	$.validator.addMethod('uniqueCheck',function(value,element){
+		 var flag = true;
+		if(value != null){
+			unique_email_check(value);
+			var check = $('#email_check').val();
+			if(check == ''){
+				return true;
+			}
+			// console.log(flag);
+			// console.log(flag.length);
+		}		
+
+	},"Email Address Must be unique.");
+
+
+
 
 	$.validator.addMethod('datebefore',function(value,element){
 		var c_d = new Date();

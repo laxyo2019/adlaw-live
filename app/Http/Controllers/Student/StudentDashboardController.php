@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Student;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Student\StudentDetailController;
 use Auth;
 use App\Imports\StudentsImport;
 use App\Exports\StudentErrorExport;
@@ -22,7 +23,8 @@ use App\Models\Country;
 use App\Models\LanguageMast;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use App\Helpers\Helpers;
-class StudentDashboardController extends Controller
+use App\User;
+class StudentDashboardController extends StudentDetailController
 {
     public function index(){
     	$students = StudentMast::where('user_id',Auth::user()->id)->get();
@@ -232,7 +234,13 @@ class StudentDashboardController extends Controller
 					if($data['email'] !=''){
 						$email_check = Helpers::valid_email($data['email']);
 	                    if($email_check == true){
-	                        $status = true;
+	                         $user = User::where('email', $data['email'])->first();
+						      if($user){
+						        $status = false;
+						      }
+						      else{
+						      	$status = true;
+						      }
 	                    }
 	                    else{
 	                        $status = false;
@@ -466,7 +474,7 @@ class StudentDashboardController extends Controller
 			            ];
 			            StudentDocs::create($stud_docs);
 					}
-					
+					$this->create_account($true);
 				}else{
 					$errors[] = [
 						'qualification_name'=> $data['qualification_name'],
@@ -510,7 +518,8 @@ class StudentDashboardController extends Controller
         if(count($errors) !=0){
             return Excel::download(new StudentErrorExport($errors), 'student_upload_ error_sheet.xlsx');
         }
-
+        return back()->with('success',"Student Created Successfully");
+       
     }
       
 }

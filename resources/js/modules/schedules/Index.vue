@@ -22,12 +22,12 @@
 				  	<i class="fe fe-plus"></i> New Schedule</button>
 				  	<div class="card mt-3" v-if="env.createSchedule" >
 					  	<div class="card-body row">
-				  			<div class="form-group col-sm-6 col-xs-12">
+				  			<div class="form-group col-md-6 col-sm-6 col-xs-12">
 				  				<label for="title"><b>Title : </b></label>
 				  				<input v-model="createSchedule.title"  type="text" name="title" id="title" class="form-control">
 				  				<div class="validation-message" v-text="validation.getMessage('title')"></div>
 				  			</div>
-				  			<div class="form-group col-sm-6 col-xs-12">
+				  			<div class="form-group col-sm-6 col-md-6 col-xs-12">
 				  				<label for=""><b>Assignee : </b></label>
 									  <multiselect v-model="createSchedule.assignee" 
 										  :options="userLoop" 
@@ -40,7 +40,7 @@
 								  	></multiselect>
 								  <div class="validation-message" v-text="validation.getMessage('assignee')"></div>
 				  			</div>
-				  			<div class="form-group col-6 col-xs-12">
+				  			<div class="form-group col-md-6 col-xs-12">
 				  				<label for=""><b>Users : </b></label>
 								  <multiselect v-model="createSchedule.users" 
 									  :options="userLoop" 
@@ -59,7 +59,7 @@
 
 							  	</multiselect>
 				  			</div>
-								<div class="col-sm-6 col-xs-12">
+								<div class="col-sm-6 col-md-6 col-xs-12">
 									<div class="form-group">
 					  				<label for=""><b>Repeat : </b></label>
 										  <multiselect v-model="createSchedule.repeat" 
@@ -72,36 +72,36 @@
 											  track-by="title"
 										  ></multiselect>
 									  <div class="validation-message" v-text="validation.getMessage('repeat')"></div>
-					  			</div>
-					  			<div class="form-group" v-if="createSchedule.repeat.value!=1 && Object.keys(createSchedule.repeat).length != 0">
-								   	<label for=""><b>Repeat Till :</b></label>
-								   	 <flat-pickr  class="form-control" v-model="createSchedule.repeatTillDate"></flat-pickr>
-								   	 <div class="validation-message" v-text="validation.getMessage('repeatTillDate')"></div>
-						  		</div>
+						  			</div>
+						  			<div class="form-group" v-if="createSchedule.repeat.value!=1 && Object.keys(createSchedule.repeat).length != 0">
+									   	<label for=""><b>Repeat Till :</b></label>
+									   	 <flat-pickr  class="form-control" v-model="createSchedule.repeatTillDate"></flat-pickr>
+									   	 <div class="validation-message" v-text="validation.getMessage('repeatTillDate')"></div>
+							  		</div>
 								</div>
-								<div class="form-group col-sm-6 col-xs-12">
+							<div class="form-group col-sm-6 col-md-6 col-xs-12">
 				  					<label for=""><b>Set a start date :</b></label>
 										<flat-pickr class="form-control" v-model="createSchedule.startDate" :config="dateConfig1"></flat-pickr>
 										<div class="validation-message" v-text="validation.getMessage('startTime')"></div>
 				  			</div>
-				  			<div class="form-group col-sm-6 col-xs-12">
+				  			<div class="form-group col-sm-6 col-md-6 col-xs-12">
 			  					<label for=""><b>Set a End date :</b></label>
 									<flat-pickr class="form-control" v-model="createSchedule.endDate" :config="dateConfig2"></flat-pickr>
 									<div class="validation-message" v-text="validation.getMessage('endTime')"></div>
 				  			</div>
-				  			<div class="form-group col-sm-6 col-xs-12">
+				  			<div class="form-group col-sm-6 col-md-6 col-xs-12">
 			  					<label for=""><b>Reminder Starts At :</b></label>
 									<flat-pickr class="form-control" v-model="createSchedule.remind_start" :config="dateConfig3"></flat-pickr>
 									<div class="validation-message" v-if="validation.getMessage('remind_startTime')" v-text="validation.getMessage('remind_startTime')"></div>
 				  			</div>
-								<div class="form-group col-sm-6 col-xs-12 text-right">
+								<div class="form-group col-sm-6 col-md-6 col-xs-12 text-right">
 									<br>
 									<span class="text-left"> <b>Adjust Levels of notifiers: </b></span>
 									<button class="btn btn-success" @click="modifyNotifier('push')"><i class="fa fa-plus"></i></button>
 									<button class="btn btn-danger" @click="modifyNotifier('pop')"><i class="fa fa-minus"></i></button>
 								</div>
-								<div class="col-12">
-									<table class="col-12 table table-striped table-bordered">
+								<div class="col-md-12">
+									<table class="col-md-12 table table-striped table-bordered">
 										<thead>
 											<tr>
 												<th>Level</th>
@@ -131,10 +131,10 @@
 										</tbody>
 									</table>
 				  			</div>
-				  			<div class="col-12 form-group">
+				  			<div class="col-md-12 form-group">
 				  				<vue-editor v-model="createSchedule.description" :editor-toolbar="customToolbar" />
 				  			</div>
-				  			<div class="col-12">
+				  			<div class="col-md-12">
 				  				<button class="btn btn-danger btn-pill pull-right" @click="toggleForm()">Cancel</button>
 				  				<button class="btn btn-success btn-pill pull-right mr-2" @click="storeSchedule()">Save</button>
 				  			</div>
@@ -359,6 +359,7 @@ export default{
 
 		storeSchedule() {
 			let error = false;
+			// console.log(this.createSchedule);
 			//check if date or name is empty in a notifiers
 			this.createSchedule.notifiers.forEach(function(v,k){
 	  		if(v.date == null || v.user == null)

@@ -34,13 +34,25 @@ class AgendaMastController extends Controller
 			//fetch all users for stand alone agenda
 	   
 			$users = User::where('parent_id', Auth::user()->id)->get();
-		    $users[] =Auth::user();
+		 
 		}else{
 			$agendas = AgendaMast::where('creator_id',Auth::user()->parent_id)
 			    	->orderBy('ordering', 'asc')
 			    	->get();
+		
 			$users = User::where('parent_id', Auth::user()->parent_id)->get();
 		}
+
+		if(Auth::user()->user_catg_id == '4'){
+			$users = collect($users)->filter(function($e){
+				return $e['user_catg_id'] === '6';
+			});
+		}else{
+			$users = collect($users)->filter(function($e){
+				return $e['user_catg_id'] === '2';
+			});
+		}
+		   $users[] =Auth::user();
 
 
 	  	//fetch users having permission of can_create_agenda

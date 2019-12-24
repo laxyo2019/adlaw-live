@@ -13,7 +13,7 @@
                 <p class="p-text">
                 Adlaw offers a complete case management solution for lawyers, law firms and corporate legal departments. This feature is stuffed with various sub-includes that empower you to accomplish more in less time. Here is a run-down of the sub-features – we encourage you to attempt our product for nothing to audit its capacities altogether.
                 </p>
-                <a href="" class="btn btn-sm btn-info">More Info</a>
+                <a href="{{route('features.case_management')}}" class="btn btn-sm btn-info">More Info</a>
             </div>
             <div class="col-md-3">
                 <h4 class="font-weight-bold">Client Management</h4>
@@ -21,7 +21,7 @@
                 Add any number of clients and their identifiable data. Organise client information in a structured way. Easily and accurately match each legal case with a client. Send emails and invoices to clients, add updates, make changes as and when needed to maintain the exactness of client data with Manage Adlaw.
                 </p>
                 <br>
-                <a href="" class="btn btn-sm btn-info">More Info</a>
+                <a href="{{route('features.client_management')}}" class="btn btn-sm btn-info">More Info</a>
             </div>
             <div class="col-md-3">
                 <h4 class="font-weight-bold">Calendar Management</h4>

@@ -53,7 +53,7 @@
 					});
 				}
 				else{
-					alert('select state')
+					alert('select qualification category')
 				}
 			});
     });

@@ -27,11 +27,11 @@
                 <br>
                 <a href="" class="btn btn-sm btn-info">More Info</a>
             </div>
-            {{-- <div class="col-md-3">
+            <div class="col-md-3">
                 <h4 class="font-weight-bold">Reviews to Lawyer / Law Firms and LawSchools</h4>
                 <p class="p-text">Our case management system has made managing information easier than ever before. Create a case in just a few seconds. The case will create its activity stream as you keep adding information, making updates and attaching documents. Everything comes together seamlessly to provide the big picture systematically.</p>
                 <a href="" class="btn btn-sm btn-info">More Info</a>
-            </div> --}}
+            </div>
 
         </div>
         <div class="row py-4">

@@ -60,14 +60,25 @@ Route::view('/disclaimer','pages.subpages.disclaimer');
 Route::view('/privacy_policy','pages.subpages.privacy_policy');
 Route::view('/why_adlaw','pages.subpages.why_adlaw');
 
-Route::group(['prefix' => 'features'] ,function(){	
-	Route::get('/lawfirms','Search\SearchController@lawfirms')->name('lawfirms');
-	Route::get('/lawfirms/search','Search\SearchController@lawfirmsSearch')->name('lawfirms.search');
-	Route::get('/lawfirms/profile/{id}', 'Search\SearchController@lawyerProfileShow')->name('lawyerProfile.show');	
-	Route::post('lawfirms/review','Search\SearchController@writeReview')->name('lawfirms.writeReview');
-	Route::get('/lawschools','Search\SearchController@lawSchools')->name('lawschools');
-	Route::get('/lawschools/search','Search\SearchController@lawschoolsSearch')->name('lawschools.search');
-	Route::view('/guest','pages.subpages.guest_features')->name('guest');
+Route::group(['prefix' => 'features/lawfirms'] ,function(){
+	Route::get('/','Search\SearchController@lawfirms')->name('lawfirms');
+	Route::get('/search','Search\SearchController@lawfirmsSearch')->name('lawfirms.search');
+	Route::get('/profile/{id}', 'Search\SearchController@lawyerProfileShow')->name('lawyerProfile.show');	
+	Route::post('/review','Search\SearchController@writeReview')->name('lawfirms.writeReview');
+	Route::view('/case_management','pages.features.subpages.lawfirms.case_management')->name('features.case_management');
+	Route::view('/client_management','pages.features.subpages.lawfirms.client_management')->name('features.client_management');
+	
+});	
+
+
+Route::group(['prefix' => 'features/lawSchools'] ,function(){	
+	Route::get('/','Search\SearchController@lawSchools')->name('lawschools');
+	Route::get('/search','Search\SearchController@lawschoolsSearch')->name('lawschools.search');
+});
+
+
+Route::group(['prefix' => 'features/guest'] ,function(){	
+	Route::view('/','pages.subpages.guest_features')->name('guest');
 });
 
 
@@ -93,36 +104,47 @@ Route::group(['middleware' => ['role:admin']], function() {
 	Route::get('/contact_details','Admin\AdminController@contact_details')->name('admin.contact_details');
 
 // Start Master module
-	Route::resource('/master/location/country','Admin\Master\CountryController');
 
-	Route::resource('/master/location/city','Admin\Master\CityController');
-	Route::post('/master/city/cityfilter','Admin\Master\CityController@cityfilter')->name('master.cityfilter');
-	Route::resource('/master/location/state','Admin\Master\StateController');
-	Route::post('/master/state/countryFilter','Admin\Master\StateController@countryFilter')->name('master.countryFilter');
-	Route::resource('/master/slots','Admin\Master\SlotsController');	
-	Route::resource('/master/payment_mode','Admin\Master\PaymentModeController');	
-	Route::resource('/master/religion','Admin\Master\ReligionController');	
-	Route::resource('/master/relation','Admin\Master\RelationController');	
-	Route::resource('/master/profession','Admin\Master\ProfessionMastController');	
-	Route::resource('/master/reservation','Admin\Master\ReservationClassController');	
-	Route::resource('/master/designation','Admin\Master\DesignationMastController');	
-	Route::resource('/master/specialization/spec_category','Admin\Master\SpecCategoryController');
-	Route::resource('/master/specialization/spec_subcategory','Admin\Master\SpecSubCategoryController');
-	Route::post('/master/specialization/subCategoryFilter','Admin\Master\SpecSubCategoryController@subCategoryFilter')->name('spec_subCategoryFilter');
-	Route::resource('/master/qualification/qual_category','Admin\Master\QualCategoryController');
-	Route::resource('/master/qualification/qual_subcategory','Admin\Master\QualSubCategoryController');
-	Route::resource('/master/qualification/qual_doc_type','Admin\Master\QualDocTypeController');
-	Route::resource('/master/qualification/qual_doc_mast','Admin\Master\QualDocMastController');
-	
-	
-	Route::post('/master/qualification/qual_subCategoryFilter','Admin\Master\QualSubCategoryController@subCategoryFilter')->name('qual_subCategoryFilter');	
-	Route::resource('/master/court/court_category','Admin\Master\CourtCategoryController');
-	Route::resource('/master/court/court_subcategory','Admin\Master\CourtSubCategoryController');	
-	Route::resource('/master/case_type','Admin\Master\CaseTypeController');
-	Route::post('/master/case_type/courtFilter','Admin\Master\CaseTypeController@courtFilter')->name('courtFilter');
+Route::group(['prefix' => 'master', 'namespace' => 'Admin\Master'], function ()  {
+
+	Route::group(['prefix' => 'location'], function ()  {
+		Route::resource('/country','CountryController');
+		Route::resource('/city','CityController');
+		Route::resource('/state','StateController');
+		Route::post('/state/countryFilter','StateController@countryFilter')->name('master.countryFilter');
+		Route::post('/city/cityfilter','CityController@cityfilter')->name('master.cityfilter');
+	});
+
+	Route::resource('/slots','SlotsController');	
+	Route::resource('/payment_mode','PaymentModeController');	
+	Route::resource('/religion','ReligionController');	
+	Route::resource('/relation','RelationController');	
+	Route::resource('/profession','ProfessionMastController');	
+	Route::resource('/reservation','ReservationClassController');	
+	Route::resource('/designation','DesignationMastController');	
+
+	Route::group(['prefix' => 'specialization'], function ()  {
+		Route::resource('/spec_category','SpecCategoryController');
+		Route::resource('/spec_subcategory','SpecSubCategoryController');
+		Route::post('/subCategoryFilter','SpecSubCategoryController@subCategoryFilter')->name('spec_subCategoryFilter');
+	});
+
+	Route::group(['prefix' => 'qualification'], function ()  {
+		Route::resource('/qual_category','QualCategoryController');
+		Route::resource('/qual_subcategory','QualSubCategoryController');
+		Route::resource('/qual_doc_type','QualDocTypeController');
+		Route::resource('/qual_doc_mast','QualDocMastController');
+		Route::post('/qual_subCategoryFilter','QualSubCategoryController@subCategoryFilter')->name('qual_subCategoryFilter');	
+	});
+
+	Route::resource('/court/court_category','CourtCategoryController');
+	Route::resource('/court/court_subcategory','CourtSubCategoryController');	
+	Route::resource('/case_type','CaseTypeController');
+	Route::post('/case_type/courtFilter','CaseTypeController@courtFilter')->name('courtFilter');
 	// Route::resource('/master/user','Admin\Master\UserController');
 // End Master
 
+	});
 });
 /* --------------------Admin---------------------------------- */
 
@@ -198,6 +220,7 @@ Route::group(['middleware' => ['role:lawyer|lawcompany|guest']], function(){
 
 /* --------------Lawcollege--------Teacher-----------Student---------- */
 Route::group(['middleware' => ['role:lawcollege|teacher|student']], function() {
+
 	Route::resource('/lawschools', 'LawSchools\LawSchoolsController');
 
 // Route::group(['prefix' => 'features'] ,function(){	});
@@ -272,8 +295,6 @@ Route::group(['middleware' => ['role:lawyer|lawcompany|lawcollege|admin']], func
 	Route::post('/member_cases', 'Teams\UsersController@member_cases')->name('member_cases');
 
 });
-
-
 
 Route::get('/filestack-mgmt', 'Admin\FilestackMgmtController@index')->name('admin.filestack-mgmt');
 Route::resource('/filestacks', 'Admin\FilestackMgmtController');

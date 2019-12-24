@@ -71,8 +71,25 @@
             <a href="{{route('booking.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
-@endif
+
         <div class="col-md-4 ">
+  
+          <div class="small-box" style="background-color: #df6c6f; color:white;">
+            <div class="inner">
+              <h3>{{count($user->teams)}} </h3>
+              <h4>Teams</h4>
+              </br></br>
+            </div>
+            <div class="icon">
+              <i class="fa fa-users"></i>
+            </div>
+            <a href="{{route('teams.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
+
+@endif
+       {{--  <div class="col-md-4 ">
           <!-- small box -->
           <div class="small-box " style="color:white; background-color: #5c6a77">
             <div class="inner">
@@ -85,7 +102,7 @@
             </div>
             <a href="" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
-        </div>
+        </div> --}}
          <div class="col-md-4 ">
       <!-- small box -->
         <div class="small-box" style="background-color: #23bab5; color: white">
@@ -105,20 +122,7 @@
     @if(Auth::user()->parent_id ==null)
 
     <div class="row">
-       <div class="col-md-4 ">
-  
-          <div class="small-box" style="background-color: #df6c6f; color:white;">
-            <div class="inner">
-              <h3>{{count($user->teams)}} </h3>
-              <h4>Teams</h4>
-              </br></br>
-            </div>
-            <div class="icon">
-              <i class="fa fa-users"></i>
-            </div>
-            <a href="{{route('teams.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
+   
 
       <div class="col-md-4 ">  
           <div class="small-box" style="background-color: #2d6c98de; color:white;">
@@ -133,7 +137,7 @@
             <a href="{{route('teams.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
       </div>
-      <div class="col-md-4 ">  
+    {{--   <div class="col-md-4 ">  
           <div class="small-box" style="background-color: #3f315ade; color:white;">
             <div class="inner">
               <h3>0</h3>
@@ -145,7 +149,7 @@
             </div>
             <a href="{{route('agenda.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
-      </div>
+      </div> --}}
       {{-- <div class="col-md-4 ">
       <!-- small box -->
         <div class="small-box" style="background-color: #5da3d4; color: white">

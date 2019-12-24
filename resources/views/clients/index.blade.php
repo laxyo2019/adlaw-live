@@ -41,7 +41,7 @@
 
 						@foreach($clients as $client)
 						<tr class="row">
-							<td><input type="checkbox" name=""></td>
+							<td>{{++$count}}</td>
 
 							<td>{{$client->cust_name}}</td>
 

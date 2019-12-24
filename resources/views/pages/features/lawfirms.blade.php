@@ -29,7 +29,7 @@
                 Managing an organized law firm is challenging without visibility into your staff’s schedule. Adlaw helps you monitor what's going in your cases on one convenient, central calendar so nothing slips through the cracks. Create and connect occasions to specific cases and share them with clients as well as users.
                 </p>
                 <br>   
-                <a href="" class="btn btn-sm btn-info">More Info</a>
+                <a href="{{route('features.calendar_management')}}" class="btn btn-sm btn-info">More Info</a>
             </div>
             <div class="col-md-3">
                 <h4 class="font-weight-bold">Document Management</h4>
@@ -37,7 +37,7 @@
                 It allows professionals to write the cases in word processing software and store the files with specifically labeled meta-data. With the adlaw Dropbox combination, you can exploit Dropbox's amazing highlights from directly within your adlaw account. To keep your records sorted out and in a state of sync..
                 </p>
                 <br>
-                <a href="" class="btn btn-sm btn-info">More Info</a>
+                <a href="{{route('features.document_management')}}" class="btn btn-sm btn-info">More Info</a>
             </div>
 
         </div>
@@ -47,7 +47,7 @@
                 <p class="p-text">
                 Online appointment booking system make your life stress free by creating a platform through which your clients can schedule their appointments directly. Adlaw allows the appointment schedule management feature that is It, not only schedules your clients, but also helps you manage your schedules by adding new or edit existing date.
                 </p>
-                <a href="" class="btn btn-sm btn-info">More Info</a>
+                <a href="{{route('features.appointment_schedule')}}" class="btn btn-sm btn-info">More Info</a>
             </div>
             <div class="col-md-3">
                 <h4 class="font-weight-bold">Schedule Management</h4>
@@ -55,7 +55,7 @@
                 Adlaw allows law firms to create the schedule for a particular events. Its, not only schedules your clients, but also helps you manage your schedules by adding new or edit existing date. Allocate particular services to specified staff with respect to their designations and create a well functioning work environment. If your office has more than one lawyer or attorney working,..
                 </p>
            
-                <a href="" class="btn btn-sm btn-info">More Info</a>
+                <a href="{{route('features.schedule_management')}}" class="btn btn-sm btn-info">More Info</a>
             </div>
             <div class="col-md-3">
                 <h4 class="font-weight-bold">Agenda Management</h4>
@@ -64,7 +64,7 @@
                 Beyond the cases, agenda help in strengthening the efficiency of day-to-day firm...
                 </p>
                 {{-- <br> --}}
-                <a href="" class="btn btn-sm btn-info">More Info</a>
+                <a href="{{route('features.agenda_management')}}" class="btn btn-sm btn-info">More Info</a>
             </div>
             <div class="col-md-3">
                 <h4 class="font-weight-bold">Chat Or Messanger</h4>

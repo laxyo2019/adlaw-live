@@ -5,9 +5,9 @@
 					<div class="row">
 						<div class="col-md-12 text-center">
 							<label><i class="fa fa-square" style="color: #3c8dbc; height: 25px;width: 20px;"></i> My To-dos</label>
-							@if(Auth::user()->parent_id ==null )<label><i class="fa fa-square" style="color: #ff4566; height: 25px;width: 20px;"></i> Member To-dos</label>@endif
+							@if(Auth::user()->parent_id ==null )<label><i class="fa fa-square" style="color: #157b7f; height: 25px;width: 20px;"></i> Member To-dos</label>@endif
 							<label><i class="fa fa-square" style="color: #0cab0a; height: 25px;width: 20px;"></i> Hearing Morning Session</label>
-							<label><i class="fa fa-square" style="color: #8259ff; height: 25px;width: 20px;"></i> Hearing Evening Session</label>
+							<label><i class="fa fa-square" style="color: #1bada6; height: 25px;width: 20px;"></i> Hearing Evening Session</label>
 						</div>
 					</div>
 					<div id="calendar"></div>
@@ -55,7 +55,7 @@
 						 	echo $value .', ';
 						} 
 					?>',
-					color:'{{date('G',strtotime($hearing->start_time)) > '12' ? '#0cab0a' : '#8259ff' }}',
+					color:'{{date('G',strtotime($hearing->start_time)) > '12' ? '#0cab0a' : '#1bada6' }}',
 					url: '{{route('case_mast.show',$hearing->case_id.',case_diary')}}',
 					start: '{{$hearing->hearing_date}}',
 					end: '{{$hearing->hearing_date}}',
@@ -67,7 +67,7 @@
 				id: '{{$todo->id}}',
 				title: '{{$todo->title}}',
 				description: 'Creator : {{$todo->created_user->name}} <br> Assignee: {{$todo->assigned_user->name}} <br>Status: {{$todo->status == 'P' ? 'Pending' : ''}} <br> Start Date: {{date('d-m-Y', strtotime($todo->start_date))}} <br> End Date: {{date('d-m-Y', strtotime($todo->end_date))}}',
-				color: '{{$todo->user_id1 == Auth::user()->id ? '#3c8dbc': '#ff4566'}}',
+				color: '{{$todo->user_id1 == Auth::user()->id ? '#3c8dbc': '#157b7f'}}',
 				url : '{{route('todos.show',$todo->id.'_')}}',
 				start: '{{$todo->start_date}}',
 				end: '{{$todo->end_date}}',

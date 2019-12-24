@@ -305,7 +305,7 @@
             <span>Agenda</span>
             </a>
         </li>
-      {{--   <li class="{{Request()->segment(1) == 'pms/schedule' ? 'active' : ''}} nav-item">
+        {{-- <li class="{{Request()->segment(2) == 'schedule' ? 'active' : ''}} nav-item">
             <a class="nav-link" href="{{route('schedule.index')}}">
             <i class="fa fa-tasks"></i>
             <span>Schedules</span>

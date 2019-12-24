@@ -23,7 +23,7 @@
 			<td>{{ $todo->status == 'P' ? 'Pending' : ($todo->status == 'A' ? 'Awaiting' : ($todo->status == 'C' ? 'completed' : ($todo->status == 'M' ? 'Missed' : 'Closed')))}}</td>
 			<td>{{$todo->created_user->name}} <i class="fa fa-long-arrow-right" aria-hidden="true"></i> {{$todo->assigned_user->name}}</td>
 			<td>
-				<a href="{{route('todos.show',$todo->id.'_')}}" title="show" class=" btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>
+				<a href="{{route('todos.show',$todo->id)}}" title="show" class=" btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>
 				@if($todo->status == 'P' && $todo->user_id1 == Auth::user()->id)
 				<a class="complete btn btn-sm btn-success" id="{{$todo->id}}" title="completed"><i class="fa fa-check"></i></a>
 				@endif

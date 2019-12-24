@@ -1,5 +1,5 @@
 <li>
- <a href="{{route('todos.show',$notification['data']['id'].'_'.$notification->id)}}">
+ <a href="{{route('todos.show',$notification['data']['id'])}}">
 	  <i class="fa fa-tasks {{$notification['data']['type'] == 'awaiting' ? 'text-yellow' : ($notification['data']['type'] == 'completed' ? 'text-success' : ($notification['data']['type'] == 'pending' ? 'text-primary' : 'text-orange'))}}"></i> 
 
 	  <span> {{str_limit($notification['data']['title'], $limit = 50, $end = '...') }} </span>

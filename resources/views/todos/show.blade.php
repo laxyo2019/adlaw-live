@@ -114,24 +114,24 @@
 </section>
 <script >
 	$(document).ready(function(){
-		var noti_id = "{{$noti_id}}";		
- 		if(noti_id !=''){
- 			$.ajax({
-				type:'GET',
-				url:"{{route('mark_as_read')}}",
-				data:{noti_id:noti_id},
-				success:function(res){
-					if(res == 'true'){
-						console.log(res);
+		// var noti_id = "";		
+ 	// 	if(noti_id !=''){
+ 	// 		$.ajax({
+		// 		type:'GET',
+		// 		url:"{{route('mark_as_read')}}",
+		// 		data:{noti_id:noti_id},
+		// 		success:function(res){
+		// 			if(res == 'true'){
+		// 				console.log(res);
 						
-						location.reload();
-					}else{
-						console.log(res);
-					}
+		// 				location.reload();
+		// 			}else{
+		// 				console.log(res);
+		// 			}
 		   		
-				}
-			});
- 		}
+		// 		}
+		// 	});
+ 	// 	}
 		$('#btnSubmit').on('click',function(e){
 			e.preventDefault();
 			var reason = $('#reason').val();

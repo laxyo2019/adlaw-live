@@ -59,11 +59,12 @@ class TodosController extends Controller
     	
     }
     public function show($id){
-        $arr = explode('_', $id);
-        $todo_id = $arr[0];
-        $noti_id = $arr[1];
-        $todo = $this->query->find($todo_id);      
-        return view('todos.show',compact('todo','noti_id'));
+        // $arr = explode('_', $id);
+        // $todo_id = $arr[0];
+        // $noti_id = $arr[1];
+
+        $todo = $this->query->find($id);      
+        return view('todos.show',compact('todo'));
     }
     public function mark_as_read(){
       $notification =  auth()->user()->unreadNotifications->where('id', request()->noti_id);
@@ -90,7 +91,6 @@ class TodosController extends Controller
     public function update(Request $request,$id){
 
         $data = $this->validation($request);
-
         $todo = Todo::find($id);
         if($todo->end_date != $request->end_date){
             $data['status'] = 'P';

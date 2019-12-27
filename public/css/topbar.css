@@ -1,3 +1,4 @@
+
   .feature_ul li {
     line-height: 40px;
   }
@@ -22,6 +23,7 @@
   .p-text{
     color: #505050;
     font-size: 16px;
+    text-align: justify;
     line-height: 23px;
   }
   .select2{

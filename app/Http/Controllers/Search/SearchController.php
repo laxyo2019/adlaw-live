@@ -66,6 +66,8 @@ class SearchController extends Controller
 	    $searchfield =  $request->searchfield;
 	    $gender = $request->gender;
 	    $court_id = $request->court_id;
+      $user_name = $request->user_name;
+
 
 	    $courts_details = Court::where('court_code',$court_id)->get();
 	    $user_ids1 =array();
@@ -82,6 +84,10 @@ class SearchController extends Controller
 
 
   if($searchfield == 'lawyer'){
+    if($user_name != '' ){
+      $lawyers = $this->query->where('name', 'LIKE', '%' .$user_name. '%');
+    }
+
     if($speciality_code == 0){ 
        if($court_id == '0'){     
           if($gender == 'all'){
@@ -272,6 +278,7 @@ class SearchController extends Controller
         }
       }      
     }
+
     $lawyers = $lawyers->paginate(5);
   }
   else if($searchfield == 'lawcompany'){

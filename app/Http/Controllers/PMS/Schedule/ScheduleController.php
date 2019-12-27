@@ -80,7 +80,7 @@ class ScheduleController extends Controller
 
 		$asc_dates_array = array((new Carbon($endTime))->isoFormat('YYYY-MM-DD'));
 
-		return $asc_dates_array;
+		// return $asc_dates_array;
 		$notifiers = array(); 
 		if(!empty($request->notifiers)) {
   		foreach($request->notifiers as $key=>$notifier) {

@@ -248,9 +248,9 @@ p.stars  i
                     <div class="col-sm-6 col-md-6 col-xs-6 col-lg-6">
                        <h3>Top Reviews</h3>
                     </div>
-                    <div class="col-sm-6 col-md-6 col-xs-6 col-lg-6 text-right">
+                   {{--  <div class="col-sm-6 col-md-6 col-xs-6 col-lg-6 text-right">
                        <a class="btn text-primary border-primary font-weight-bold text-white">Write A Reviews</a> 
-                    </div>
+                    </div> --}}
                    </div>
                     <hr>
               
@@ -276,9 +276,9 @@ p.stars  i
                             <span class="live-rating"></span>
                           </div>
                           @if(Auth::user()) 
-                          <button class="btn text-primary border-primary btn-sm font-weight-bold" type="submit" style="font-size: 12px" id="review_submit">Submit</button>
+                          <button class="btn text-success border-success btn-sm font-weight-bold" type="submit" style="font-size: 12px" id="review_submit">Submit</button>
                           @else
-                            <button type="button" class="btn text-primary border-primary btn-sm font-weight-bold" id="writeReview" >Submit</button>
+                            <button type="button" class="btn text-success border-success btn-sm font-weight-bold" id="writeReview" >Submit</button>
                           @endif
                           <a class="btn text-danger border-danger btn-sm font-weight-bold"  id="cancelWR" style="margin-right: 10px; color: #fff;font-size: 12px">
                           Cancel <i class="fa fa-remove"></i></a>

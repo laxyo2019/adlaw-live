@@ -8,13 +8,13 @@
      <div class="row">
        <div class="col-sm-9">
          <ul class="list-inline">
-           <li class="pl-4 text-center d-inline-block"><a href="{{url('/about_us')}}">About Us</a></li>
-           <li class="pl-4 text-center d-inline-block"><a href="{{url('/tos')}}">Terms of Services</a></li>
+           <li class="pl-4 text-center d-inline-block"><a href="{{url('/about_us')}}">About</a></li>
+           <li class="pl-4 text-center d-inline-block"><a href="{{url('/tos')}}">Terms</a></li>
           {{--  <li class="pl-4 text-center d-inline-block"><a href="#">EULA</a></li> --}}
            <li class="pl-4 text-center d-inline-block"><a href="{{url('privacy_policy')}}">Privacy Policy</a></li>
           
            <li class="pl-4 text-center d-inline-block"><a href="{{url('disclaimer')}}">Disclaimer</a></li>
-           <li class="pl-4 text-center d-inline-block"><a href="{{route('contact.index')}}">Contact Us</a></li>
+           <li class="pl-4 text-center d-inline-block"><a href="{{route('contact.index')}}">Contact</a></li>
          </ul>
        </div>
        <div class="col-sm-3">

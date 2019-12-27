@@ -72,6 +72,11 @@ Route::group(['prefix' => 'features/lawfirms'] ,function(){
 	Route::view('/appointment_schedule','pages.features.subpages.lawfirms.appointment_schedule')->name('features.appointment_schedule');
 	Route::view('/schedule_management','pages.features.subpages.lawfirms.schedule_management')->name('features.schedule_management');
 	Route::view('/agenda_management','pages.features.subpages.lawfirms.agenda_management')->name('features.agenda_management');
+	Route::view('/chat_or_messanger','pages.features.subpages.lawfirms.chat_or_messanger')->name('features.chat_or_messanger');
+	Route::view('/team_management','pages.features.subpages.lawfirms.team_management')->name('features.team_management');
+	Route::view('/profile_management','pages.features.subpages.lawfirms.profile_management')->name('features.profile_management');
+	Route::view('/todo_management','pages.features.subpages.lawfirms.todo_management')->name('features.todo_management');
+	Route::view('/hearing_management','pages.features.subpages.lawfirms.hearing_management')->name('features.hearing_management');
 
 });	
 

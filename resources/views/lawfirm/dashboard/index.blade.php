@@ -165,7 +165,7 @@
           <a href="{{route('case_diary.index',['caseBtn' =>'ca'])}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div> --}}
-    </div>'
+    </div>
 @endif
       <div class="row">
         <div class="col-md-6" >

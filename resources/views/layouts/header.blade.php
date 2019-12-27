@@ -76,7 +76,7 @@
                 <a class="nav-link p-4" href="{{route('lawschools')}}">LAW SCHOOLS</a>
             </li>
             <li class="nav-item {{Request()->segment(1) == 'contact' ? 'active_class' : '' }}">
-                <a href="{{route('contact.index')}}" class="nav-link p-4">CONTACT US</a>
+                <a href="{{route('contact.index')}}" class="nav-link p-4">CONTACT</a>
             </li> 
             @guest
             <li class="nav-item">

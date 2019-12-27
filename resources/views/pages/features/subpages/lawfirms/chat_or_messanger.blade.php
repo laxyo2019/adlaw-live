@@ -3,7 +3,7 @@
 <div class="container py-4">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-xl-12 text-center mb-2">
-            <h2 class="h1-responsive font-weight-bold text-center text-uppercase my-4">Agenda Management</h2>          
+            <h2 class="h1-responsive font-weight-bold text-center text-uppercase my-4">Chat Or Messanger</h2>          
         </div>
         <div class="col-sm-12 col-lg-12 col-xs-12 feature-p-text">
         	{{-- <h4 class="text-uppercase font-weight-bold">CASE MANAGEMENT</h4> --}}
@@ -49,7 +49,7 @@
         </div>
         <div class="col-sm-12 col-lg-12 col-xs-12 mt-4 ">
             <a href="{{route('features.schedule_management')}}" class="btn btn-md bg-info pull-left text-white"><i class="fa fa-angle-left"></i></a>
-            <a href="{{route('features.team_management')}}" class="btn btn-md bg-info pull-right text-white"><i class="fa fa-angle-right"></i></a>
+            <a href="{{route('features.agenda_management')}}" class="btn btn-md bg-info pull-right text-white"><i class="fa fa-angle-right"></i></a>
         </div>
     </div>
 </div>

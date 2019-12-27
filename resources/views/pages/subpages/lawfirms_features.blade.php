@@ -26,10 +26,16 @@
 	<div class="row mb-1" >
 		<div class="col-md-8 col-xm-12 col-sm-12">
 			<p class="mb-1" style="font-size: 18px; font-weight: 550">Filter</p>
+			<div class="row mb-4">
+					<div class="col-md-6 col-xm-12 col-sm-12"  id="spect1">
+					<input type="text" class="form-control" name="user_name" placeholder="serach name here">
+				</div>
+			</div>
 			<div class="row ">
 			{{-- 		<div class="col-md-1 col-sm-12 col-xm-12">
 			<a href="#" class="btn btn-md btn-light border">All</a>
 			</div> --}}
+			
 				<div class="col-md-3 col-xm-12 col-sm-12"  id="spect1">
 					<select class="form-control select2" id='specialist_lawyer' >
 					<option value="0">Select Specialization</option>
@@ -247,13 +253,13 @@ $(".filteBtn").on('click',function(e){
 	var gender = $("input[name='gender']:checked").val();
 	var searchfield = $("input[name='searchfield']:checked").val();
 	var court_id = $('#court_id').val();
-
-	console.log(searchfield);
+	var user_name = $("input[name='user_name']").val();
+	console.log(user_name);
 // alert(searchfield);
 
 	$.ajax({
 	    type:"get",
-	    url:"{{ route('lawfirms.search') }}?speciality="+specialist+'&state_code='+state_code+'&city_code='+city_code+'&gender='+gender+'&searchfield='+searchfield+'&court_id='+court_id,
+	    url:"{{ route('lawfirms.search') }}?speciality="+specialist+'&state_code='+state_code+'&city_code='+city_code+'&gender='+gender+'&searchfield='+searchfield+'&court_id='+court_id+'&user_name='+user_name,
 		   // success:function(data){ 
 		   // 		$("#tablediv").empty().html(data);
 		   // }

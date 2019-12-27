@@ -125,20 +125,20 @@
 			<div class="row">
 				<div class="col-md-12" >
 					<div class="left">
-					<button class="btn btn-sm  border-info left-button">
+					<button class="btn btn-sm left-button">
 					<i class="fa fa-caret-left" style="font-size:27px"></i>
 					</button>
 					</div>
-					<div class="center  border-info" id="content" >
+					<div class="center " id="content" >
 						@foreach($days as $key => $value) 
 						<div class="internal text-center">
 						<p class="m-0">{{$key}}</p>
 						<p class="m-0">{{$value}}</p>
-					</div>
-					@endforeach
+						</div>
+						@endforeach
 					</div>
 					<div class="right">
-					<button  class="btn btn-sm  border-info right-button">
+					<button  class="btn btn-sm right-button">
 					<i class="fa fa-caret-right" style="font-size:27px"></i>
 					</button>
 					</div>
@@ -152,7 +152,7 @@
 					
 						<tr class="list-group list-group-horizontal center1" >
 							@foreach($days as $key => $value)
-							<td class="list-group-item  internal1 p-1" style="font-size: 12px"><a href="javascript:void(0)" class="btn btn-sm bg-aqua m-0 bookingBtn" style="background-color: lightgreen" id="{{$slot->id}}" >{{ date('h:i A', strtotime($slot->slot)) }}
+							<td class="list-group-item  internal1 p-1" style="font-size: 12px"><a href="javascript:void(0)" class="btn btn-sm m-0 bookingBtn" style="background-color: #f3f3f3" id="{{$slot->id}}" >{{ date('h:i A', strtotime($slot->slot)) }}
 								<input type="hidden" name="user_id" value="{{$lawyer->id}}">
 								<input type="hidden" name="b_date" value="{{$value}}">
 							</a></td> 
